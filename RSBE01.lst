@@ -120,6 +120,8 @@
 
 // mem
 803f602c:memmove
+80204768:MEMAllocFromExpHeapEx
+
 
 // NW4R
 8018d2a4:GetResMdlNumEntries__Q34nw4r3g3d7ResFileFv
