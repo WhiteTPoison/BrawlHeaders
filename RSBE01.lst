@@ -80,6 +80,16 @@
 801e1364:OSResumeThread__FP8OSThread
 801e1224:OSJoinThread__FP8OSThreadPPv
 
+// EXI
+801e4b7c:EXIAttach
+801e4c94:EXIDetach
+801e54e0:EXILock
+801e4c94:EXIUnlock
+801e4d4c:EXISelect
+801e4e7c:EXIDeselect
+801e4604:EXIDma
+801e46fc:EXISync
+
 // string
 803fa3fc:strcmp__FPCcPCc
 803fa340:strncpy__6StringF6StringPcUl
@@ -107,6 +117,9 @@
 // __mem
 803f0640:strlen__FPc
 8000443c:__memfill__FPvUcUl
+
+// mem
+803f602c:memmove
 
 // NW4R
 8018d2a4:GetResMdlNumEntries__Q34nw4r3g3d7ResFileFv
