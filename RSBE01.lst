@@ -76,9 +76,12 @@
 
 // OS
 801d8600:OSReport
-801e0cfc:OSCreateThread__FP8OSThreadPFPv_PvPvPvUii14OS_THREAD_ATTR
-801e1364:OSResumeThread__FP8OSThread
-801e1224:OSJoinThread__FP8OSThreadPPv
+801e0cfc:OSCreateThread
+801e1364:OSResumeThread
+801e1224:OSJoinThread
+801dcf10:OSDisableInterrupts
+801dcf24:OSEnableInterrupts
+801dcf38:OSRestoreInterrupts
 
 // EXI
 801e4b7c:EXIAttach
@@ -120,8 +123,8 @@
 
 // mem
 803f602c:memmove
-80204768:MEMAllocFromExpHeapEx
-
+80204e5c:MEMAllocFromAllocator
+80204e6c:MEMFreeToAllocator
 
 // NW4R
 8018d2a4:GetResMdlNumEntries__Q34nw4r3g3d7ResFileFv

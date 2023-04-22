@@ -1,3 +1,5 @@
+#pragma once
+
 typedef unsigned long long u64;
 typedef signed long long s64;
 
