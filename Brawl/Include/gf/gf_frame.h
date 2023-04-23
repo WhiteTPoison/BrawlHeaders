@@ -1,6 +1,6 @@
 #pragma once
 #include <types.h>
-
+#include <StaticAssert.h>
 
 class GameFrame {
 public:

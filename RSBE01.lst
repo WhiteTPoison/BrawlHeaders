@@ -85,6 +85,8 @@
 801e0cfc:OSCreateThread
 801e1364:OSResumeThread
 801e1224:OSJoinThread
+801dcf24:OSEnableInterrupts
+801dcf10:OSDisableInterrupts
 
 // string
 803fa3fc:strcmp__FPCcPCc
@@ -103,6 +105,7 @@
 803fa798:strstr__FPcPc
 803f87a8:vprintf
 803f8820:vsnprintf
+803fa798:strstr
 
 // module
 80043b18:moUnResolvedMessage__FPCc
@@ -127,6 +130,18 @@
 80204818:MEMFreeToExpHeap
 802048e4:MEMGetAllocatableSizeForExpHeapEx
 80204688:MEMCreateExpHeapEx
+80281bbc:memCpy__FPvPvUx
+
+// EXI
+801e4604:EXIDma
+801e46fc:EXISync
+801e4c94:EXIDetach
+801e4b7c:EXIAttach
+801e54e0:EXILock
+801e55dc:EXIUnlock
+801e4d4c:EXISelect
+801e4e7c:EXIDeselect
+
 // NW4R
 8018d2a4:GetResMdlNumEntries__Q34nw4r3g3d7ResFileFv
 8018d770:GetResAnmChrNumEntries__Q34nw4r3g3d7ResFileFv

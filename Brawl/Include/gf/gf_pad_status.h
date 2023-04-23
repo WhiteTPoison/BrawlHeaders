@@ -1,6 +1,6 @@
 #pragma once
 
-#include <PAD/PADButtons.h>
+#include <PAD/PADStatus.h>
 enum controllerType {
     GAMECUBE = 0,
     CLASSIC = 1,
