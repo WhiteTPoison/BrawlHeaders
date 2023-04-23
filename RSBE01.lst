@@ -113,6 +113,7 @@
 803fa5d0:strcspn__FPcPc
 803fa674:strtok__FPcPc
 803fa798:strstr__FPCcPCc
+80281bbc:memCpy__FPvPvUx
 
 // module
 80043b18:moUnResolvedMessage__FPCc
