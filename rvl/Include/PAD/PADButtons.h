@@ -1,7 +1,8 @@
 #pragma once
-#include "types.h"
+#include <types.h>
+#include <StaticAssert.h>
 
-enum PADButtonBits : u16 {
+enum PADButtonBits {
     Start = 0x1000,
     Y = 0x800,
     X = 0x400,

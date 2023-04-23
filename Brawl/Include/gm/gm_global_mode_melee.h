@@ -71,11 +71,14 @@ public:
     float m_damageRatio;       // 0x30
     float m_attackReactionMul; // 0x34
     float m_damageReactionMul; // 0x38
-    char _7[0x04];             // 0x3C
+    char _7[0x01];             // 0x3C
+    u8 unk1;
+    u8 unk2;
+    char _8[0x1];
     float m_scale;             // 0x40
     float m_visibilityScale;   // 0x44
     float m_gravity;           // 0x48
-    char _8[0x10];             // 0x4C
+    char _9[0x10];             // 0x4C
 };
 static_assert(sizeof(gmPlayerInitData) == 0x5C, "Class is wrong size!");
 
@@ -87,3 +90,5 @@ public:
     char _1[4];
 };
 static_assert(sizeof(gmGlobalModeMelee) == 0x320, "Class is wrong size!");
+
+extern gmGlobalModeMelee* g_gmGlobalModeMelee;

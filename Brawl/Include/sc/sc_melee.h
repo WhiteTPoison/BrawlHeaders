@@ -44,3 +44,5 @@ public:
     virtual int getEndNum();
 };
 static_assert(sizeof(scMelee) == 256, "Class is wrong size!");
+
+extern scMelee* g_scMelee;

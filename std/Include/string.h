@@ -50,3 +50,4 @@ int strncmp(const char* str1, const char* str2, size_t num);
 char* strcpy(char* destination, const char* source);
 char* strncpy(char* destination, const char* source, size_t num);
 char* strcat(char* output, char* append);
+char* strstr(const char * haystack, const char * needle);

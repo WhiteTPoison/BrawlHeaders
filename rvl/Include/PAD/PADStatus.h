@@ -1,6 +1,6 @@
 #pragma once
-#include "types.h"
-#include "PADButtons.h"
+#include <types.h>
+#include <PAD/PADButtons.h>
 
 struct PADStatus {
     PADButtons button;

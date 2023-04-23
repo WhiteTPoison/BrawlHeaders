@@ -8,11 +8,12 @@
 #include <gm/gm_sel_char_data.h>
 #include <gm/gm_set_rule.h>
 #include <gm/gm_tournament_data.h>
-
+#include <gf/gf_frame.h>
 class GameGlobal {
 public:
     /* data */
-    char _0[0x8];                       // 0x00
+    GameFrame* g_GameFrame;
+    char _0[0x4];                       // 0x00
     gmGlobalModeMelee* m_modeMelee;     // 0x08
     char _1[0x04];                      // 0x0C
     gmSelCharData* m_selCharData;       // 0x10

@@ -99,7 +99,7 @@ public:
     int getEntryIdFromTaskId(int taskId, int* unk);
     int getPlayerNo(int entryId);
     bool isFighterActivate(int entryId, int);
-    Fighter* getFighter(int entryId, int unk);
+    Fighter* getFighter(int entryId, bool getFollower=false);
     ftOwner* getOwner(int entryId);
     int getTeam(int entryId, bool unk2, bool unk3);
     Fighter* searchNearFighter(float unk1, float radius, Vec3f* pos, int team, bool unk4);
