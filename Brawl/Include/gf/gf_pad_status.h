@@ -40,4 +40,4 @@ public:
 	controllerType type;
 };
 #pragma pack(pop)
-static_assert(sizeof(gfPadStatus) == 0x40, "gfPadGamecube is wrong size");
+static_assert(sizeof(gfPadStatus) == 0x40, "gfPadStatus is wrong size");

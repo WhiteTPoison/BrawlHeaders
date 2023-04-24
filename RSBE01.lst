@@ -131,6 +131,8 @@
 802048e4:MEMGetAllocatableSizeForExpHeapEx
 80204688:MEMCreateExpHeapEx
 80281bbc:memCpy__FPvPvUx
+80281bbc:memCpy__FPvPCvUx
+80281bbc:memCpy
 
 // EXI
 801e4604:EXIDma
