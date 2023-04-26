@@ -33,8 +33,6 @@ public:
     gmGlobalRecord1::MenuData* getGlobalRecordMenuDatap();
 
     static int getLanguage();
-
-    STATIC_CHECK(sizeof(GameGlobal) == 0x50);
 };
-
+STATIC_CHECK(sizeof(GameGlobal) == 0x50);
 extern GameGlobal* g_GameGlobal;

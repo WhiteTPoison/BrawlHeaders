@@ -71,7 +71,7 @@ public:
     float m_damageRatio;       // 0x30
     float m_attackReactionMul; // 0x34
     float m_damageReactionMul; // 0x38
-    char _7[0x01];             // 0x3C
+    char _7[0x1];              // 0x3C
     u8 unk1;
     u8 unk2;
     char _8[0x1];

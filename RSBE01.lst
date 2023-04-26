@@ -1,22 +1,21 @@
 // global variables
-805a0148: g_ecMgr
+805A0148: g_ecMgr
 8059FFAC: g_gfGameApplication
 805A01D0: g_sndSystem
-805a0140: g_efScreen
+805A0140: g_efScreen
 805A02D0: g_IfMngr
 27,6,58D8: g_stTriggerMng
-805a00e0:g_GameGlobal
 27,6,2E68: g_ftManager
 27,6,2E70: g_ftAudienceManager
 27,6,5518: g_aiMgr
 27,6,E8: g_soWorld
-8059FF80:g_gfSceneRoot
-805a00b8:g_mtRandDefault
-805a0420:g_mtRandOther
-901812a0:g_GameFrame
-805bacc0:g_PadSystem
-90ff50c0:g_scMelee
-90180f20:g_gmGlobalModeMelee
+8059FF80: g_gfSceneRoot
+805A00B8: g_mtRandDefault
+805A0420: g_mtRandOther
+901812A0: g_GameFrame
+805BACC0: g_PadSystem
+90FF50C0: g_scMelee
+90180F20: g_gmGlobalModeMelee
 
 // System
 803f1254:__save_fpr
@@ -1000,3 +999,6 @@
 8035c2a4:closesocket
 8035cefc:CanReceiveOnSocket
 8035cf44:CanSendOnSocket
+
+//casts
+803f0f44:__dynamic_cast
