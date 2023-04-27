@@ -11,9 +11,9 @@ public:
     char _144[2];
     u8 m_146;
     char _147[13];
-    u32 m_remainingFrameTime;
-    u32 m_time;
-    u32 m_frameCounter;
+    unsigned int m_remainingFrameTime;
+    unsigned int m_time;
+    unsigned int m_frameCounter;
     char _172[368];
 
     virtual void processBegin();

@@ -4,7 +4,7 @@
 class mtRand {
 public:
     char _spacer[4];
-    u32 seed;
+    unsigned int seed;
 };
 
 extern mtRand* g_mtRandDefault;

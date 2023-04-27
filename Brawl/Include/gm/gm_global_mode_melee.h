@@ -30,7 +30,7 @@ public:
     short m_stageID;             // 0x12
     u8 m_subStageID;             // 0x14
     char _0x15[0x3];             // 0x15
-    s32 m_timeLimitFrames;       // 0x18
+    signed int m_timeLimitFrames;// 0x18
     char _0x1c[0x0C];            // 0x1C
     gmItSwitch m_itSwitchData;   // 0x28
     char _0x38[0x08];            // 0x38
@@ -71,10 +71,8 @@ public:
     float m_damageRatio;       // 0x30
     float m_attackReactionMul; // 0x34
     float m_damageReactionMul; // 0x38
-    char _7[0x1];              // 0x3C
-    u8 unk1;
-    u8 unk2;
-    char _8[0x1];
+    char _7[0x3];              // 0x3C
+    u8 unk1;                   // 0x3F
     float m_scale;             // 0x40
     float m_visibilityScale;   // 0x44
     float m_gravity;           // 0x48
