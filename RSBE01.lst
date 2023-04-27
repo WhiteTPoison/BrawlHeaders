@@ -13,7 +13,7 @@
 805A00B8: g_mtRandDefault
 805A0420: g_mtRandOther
 901812A0: g_GameFrame
-805BACC0: g_PadSystem
+805bacc0: g_PadSystem
 90FF50C0: g_scMelee
 90180F20: g_gmGlobalModeMelee
 
