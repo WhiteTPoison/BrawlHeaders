@@ -88,5 +88,3 @@ public:
     char _1[4];
 };
 static_assert(sizeof(gmGlobalModeMelee) == 0x320, "Class is wrong size!");
-
-extern gmGlobalModeMelee* g_gmGlobalModeMelee;

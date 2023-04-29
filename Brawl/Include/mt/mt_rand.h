@@ -7,5 +7,5 @@ public:
     unsigned int seed;
 };
 
-extern mtRand* g_mtRandDefault;
-extern mtRand* g_mtRandOther;
+#define g_mtRandDefault ((mtRand*) 0x805a00b8)
+#define g_mtRandOther ((mtRand*) 0x805a0420)

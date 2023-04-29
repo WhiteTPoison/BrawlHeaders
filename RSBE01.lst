@@ -10,12 +10,8 @@
 27,6,5518: g_aiMgr
 27,6,E8: g_soWorld
 8059FF80: g_gfSceneRoot
-805A00B8: g_mtRandDefault
-805A0420: g_mtRandOther
 901812A0: g_GameFrame
-805bacc0: g_PadSystem
 90FF50C0: g_scMelee
-90180F20: g_gmGlobalModeMelee
 
 // System
 803f1254:__save_fpr
@@ -78,7 +74,7 @@
 801e892c:VIWaitForRetrace
 801d76e8:DCFlushRange
 801d77cc:ICInvalidateRange
-
+80028b20:_alarmCallback
 // OS
 801d8600:OSReport
 801e0cfc:OSCreateThread

@@ -13,42 +13,6 @@ public:
 	gfPadStatus gcSysPads[4];
 	//0x0244 seems like where inputmask starts (during SystemPadStatus checks)
 	//0x0444 seems like where inputmask starts (during GamePadStatus checks)
-	gfPadSystem()
-	{
-		for(int i = 0 ; i < 4; i++)
-		{
-			gcSysPads[i] = gfPadStatus();
-		}
-		for(int i = 0 ; i < 4; i++)
-		{
-			gcSysPads[i] = gfPadStatus();
-		}
-	}
-	gfPadSystem(const gfPadSystem &D)
-	{
-		for(int i = 0 ; i < 4; i++)
-		{
-			gcSysPads[i] = gfPadStatus(D.gcPads[i]);
-		}
-		for(int i = 0 ; i < 4; i++)
-		{
-			gcSysPads[i] = gfPadStatus(D.gcSysPads[i]);
-		}
-	}
-	gfPadSystem& operator = (const gfPadSystem &D ) 
-	{
-		if( this != &D ) {
-			for(int i = 0 ; i < 4; i++)
-			{
-				gcSysPads[i] = gfPadStatus(D.gcPads[i]);
-			}
-			for(int i = 0 ; i < 4; i++)
-			{
-				gcSysPads[i] = gfPadStatus(D.gcSysPads[i]);
-			}
-		}
-		return *this;
-	}
 };
 
-extern gfPadSystem* const g_PadSystem;
+#define g_PadSystem ((gfPadSystem* const) 0x805bacc0) 

@@ -35,4 +35,5 @@ public:
     static int getLanguage();
 };
 STATIC_CHECK(sizeof(GameGlobal) == 0x50);
+
 extern GameGlobal* g_GameGlobal;
