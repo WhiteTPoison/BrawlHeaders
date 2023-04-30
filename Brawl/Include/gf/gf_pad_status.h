@@ -12,19 +12,19 @@ namespace controllerType {
 
 class gfPadStatus {
 public:
-	PADButtons _buttons;
-	PADButtons buttons;
-	PADButtons holdButtons;
-	PADButtons rapidFireButtons;
-	PADButtons releasedButtons;
-	PADButtons newPressedButtons;
+	unsigned int _buttons;
+	unsigned int buttons;
+	unsigned int holdButtons;
+	unsigned int rapidFireButtons;
+	unsigned int releasedButtons;
+	unsigned int newPressedButtons;
 	char _spacer2[0x18];
 	//0x30
 	// TODO: calculate new offset
-	unsigned char stickX;
-	unsigned char stickY;
-	unsigned char cStickX;
-	unsigned char cStickY;
+	signed char stickX;
+	signed char stickY;
+	signed char cStickX;
+	signed char cStickY;
 	unsigned char LAnalogue;
 	unsigned char RAnalogue;
 	char _spacer5[0x2];
