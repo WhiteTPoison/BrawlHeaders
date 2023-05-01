@@ -89,4 +89,4 @@ public:
 };
 static_assert(sizeof(gmGlobalModeMelee) == 0x320, "Class is wrong size!");
 
-#define g_globalMelee ((gmGlobalModeMelee*) 0x90180f20)
+extern gmGlobalModeMelee g_globalMelee;

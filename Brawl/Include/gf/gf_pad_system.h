@@ -15,4 +15,4 @@ public:
 	//0x0444 seems like where inputmask starts (during GamePadStatus checks)
 };
 
-#define g_PadSystem ((gfPadSystem* const) 0x805bacc0) 
+extern gfPadSystem g_PadSystem;

@@ -12,6 +12,10 @@
 8059FF80: g_gfSceneRoot
 901812A0: g_GameFrame
 90FF50C0: g_scMelee
+805bacc0: g_PadSystem
+90180f20: g_globalMelee
+805a00b8: g_mtRandDefault
+805a0420: g_mtRandOther
 
 // System
 803f1254:__save_fpr

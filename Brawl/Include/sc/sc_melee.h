@@ -46,4 +46,4 @@ public:
 };
 static_assert(sizeof(scMelee) == 256, "Class is wrong size!");
 
-extern scMelee* g_scMelee;
+extern scMelee g_scMelee;
