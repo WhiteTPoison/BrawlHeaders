@@ -79,6 +79,11 @@
 801d76e8:DCFlushRange
 801d77cc:ICInvalidateRange
 80028b20:_alarmCallback
+// IOS
+802123a8:IOS_Open
+80212d40:IOS_Ioctl
+80212588:IOS_Close
+80213090:IOS_Ioctlv
 // OS
 801d8600:OSReport
 801e0cfc:OSCreateThread
@@ -999,6 +1004,16 @@
 8035c2a4:closesocket
 8035cefc:CanReceiveOnSocket
 8035cf44:CanSendOnSocket
+8035c3e8:listen
+8035c478:recv
+8035c41c:accept
+8035c510:send
+8035c5c4:getsockname
+8035c384:connect
 
 //casts
 803f0f44:__dynamic_cast
+
+//ticks
+801e1a80:OSSleepTicks
+801e1b4c:OSGetTick
