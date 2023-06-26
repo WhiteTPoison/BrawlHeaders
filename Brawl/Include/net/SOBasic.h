@@ -10,15 +10,24 @@ struct SOInitInfo {
     free_t dealloc;
 };
 
+struct pollsd {
+	s32 socket;
+	u32 events;
+	u32 revents;
+};
+
 void SOFree(int, void*);
 void* SOAlloc(int, size_t);
 
+void SOSetSockOpt(int socket, u32 level, u32 optname, void *optval, u32 optlen);
+void SOPoll(int socket, u32 bufferOut, struct pollsd*, s64 timeout);
 int SOInit(SOInitInfo* info);
 int SOStartupEx(u32);
 int SOSocket(int domain, int type, int protocal);
 int SOBind(int socket, const struct sockaddr* address, int address_len);
 int SOConnect(int socket, const struct sockaddr* address, int address_len);
 int SOClose(int socket);
+u32 SOGetHostID();
 u32 SORecvFrom(int socket, void* buffer, u32 length, int flags, struct sockaddr* address, u32* address_len);
 u32 SOSendTo(int socket, const void* message, u32 length, int flags, const struct sockaddr* dest_addr, u32 dest_len);
 char* SOInetNtoA(struct in_addr in);

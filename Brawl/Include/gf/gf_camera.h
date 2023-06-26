@@ -1,6 +1,7 @@
 #pragma once
 
 #include <StaticAssert.h>
+#include <mt/mt_vector.h>
 #include <types.h>
 
 struct OrthographicParameters {
@@ -28,7 +29,10 @@ public:
     char _spacer3[8];
     CameraProjection m_projection;
     char _spacer4[48];
+
+    void calcProjection3Dto2D(Vec3f*, Vec2f*);
 };
+void setGX(gfCamera* camera);
 static_assert(sizeof(gfCamera) == 308, "Class is wrong size!");
 
 class gfCameraManager {

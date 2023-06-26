@@ -83,6 +83,13 @@ public:
             current++;
         }
     }
+    void erase(int index) {
+        delete arr[index];
+        for (int i = index; i <= current; i++) {
+            arr[i] = arr[i + 1];
+        }
+        current--;
+    }
 
     // function to extract element at any index
     T get(int index)

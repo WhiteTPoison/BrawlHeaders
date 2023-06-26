@@ -94,6 +94,7 @@
 
 // string
 803fa3fc:strcmp__FPCcPCc
+803fa3fc:strcmp
 803fa340:strncpy
 803fa280:strcpy__FPcPCc
 803fa280:strcpy
@@ -995,6 +996,9 @@
 803a7608:SOSendTo
 80151098:SOAlloc
 801510c4:SOFree
+803a7ff0:SOGetHostID
+803a7838:SOPoll
+803a85f4:SOSetSockOpt
 
 // more socket stuff (nonport.h)
 8035c26c:socket
@@ -1017,3 +1021,27 @@
 //ticks
 801e1a80:OSSleepTicks
 801e1b4c:OSGetTick
+
+//message
+805a0174:_FONT_THING1
+805a0178:_FONT_THING2
+8006a964:setDefaultEnv__FP7Messageii
+80497e44:MELEE_FONT
+8006fe50:Print__FP7MessageUs
+801f136c:GXSetCullMode
+80069AF0:setMessageLocation__F7Messagedddd
+8006A550:setFace__F7Messagei
+8006A600:setColor__F7Messagei
+80069970:setCursorX__F7Messaged
+80069A30:setCursorY__F7Messaged
+8006ffdc:setCursorZ__F7Messaged
+8006A018:setScale__F7Messagedd
+80069D40:printf__F7MessagePce
+8006B360:static_std2DView__Fv
+8006AB48:printMsgBuf__F7Messagei
+8006b674:clearMsgBuff__F7Message
+8001a5c0:gfDrawSetVtxPosColorPrimEnviroment
+801f4774:GXSetZMode
+801f3fd8:GXSetAlphaCompare
+801f1088:GXBegin
+8001abbc:gfDrawSetupCoord2D
