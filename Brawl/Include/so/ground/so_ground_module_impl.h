@@ -176,7 +176,7 @@ public:
     virtual void setIgnoreFriction(bool);
     virtual void setDetachChangeStatus(bool);
 };
-static_assert(sizeof(soGroundModule) == 12, "Class is wrong size!");
+CHECK_SIZE(soGroundModule, 12);
 
 class soGroundModuleImpl : public soGroundModule, public soStatusEventObserver, public soAnimCmdEventObserver, public grCollStatusEventReceiver {
     soArray<soGroundShapeImpl>* m_groundShapeArray;

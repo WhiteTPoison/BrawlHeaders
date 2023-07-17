@@ -73,7 +73,7 @@ public:
     void* m_paramCustomizeModule;
     void* m_glowModule;
 };
-static_assert(sizeof(soModuleEnumeration) == 204, "Class is wrong size!");
+CHECK_SIZE(soModuleEnumeration, 204);
 
 class soModuleAccesser {
 public:

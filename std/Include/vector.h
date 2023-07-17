@@ -84,9 +84,15 @@ public:
         }
     }
     void erase(int index) {
-        delete arr[index];
-        for (int i = index; i <= current; i++) {
+        if(index < 0 || index >= current)
+        {
+            return;
+        }
+        arr[index] = NULL;
+        for (int i = index; i < current - 1; ++i)
+        {
             arr[i] = arr[i + 1];
+            arr[i + 1] = NULL;
         }
         current--;
     }
@@ -94,7 +100,6 @@ public:
     // function to extract element at any index
     T get(int index)
     {
-
         // if index is within the range
         if (index < current)
             return arr[index];
