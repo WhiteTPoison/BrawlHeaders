@@ -5,9 +5,52 @@
 #include <memory.h>
 #include <types.h>
 
+// Documentation from Brawllib
+
+class gfModuleHeader {
+public:
+    u32 id;
+    u32 linkNext;
+    u32 linkPrev;
+    u32 numSections;
+    u32 sectionInfoOffset;
+    u32 nameOffset;
+    u32 nameSize;
+    u32 version;
+
+    u32 bssSize;
+    u32 relOffset;
+    u32 impOffset;
+    u32 impSize;
+
+    char prologSection;
+    char epilogSection;
+    char unresolvedSection;
+    char bssSection;
+
+    u32 prologOffset;
+    u32 epilogOffset;
+    u32 unresolvedOffset;
+
+    u32 moduleAlign;
+    u32 bssAlign;
+
+    u32 commandOffset;
+
+    u32 getTextSectionAddr();
+};
+
+class gfModule {
+public:
+    gfModuleHeader* header;
+    char unk[0x27];
+
+    static gfModule* create(void* heap, void* buffer, size_t size);
+};
+
 class gfModuleInfo {
 public:
-    void* m_module;
+    gfModule* m_module;
     int m_buffer;
     int m_size;
     char _12[4];
@@ -21,8 +64,8 @@ static_assert(sizeof(gfModuleInfo) == 60, "Class is wrong size!");
 
 class gfModuleManager {
 
-    HeapType m_heapType;
-    void* _4;
+    HeapType m_loadHeap;
+    void* m_loadHeapAddr;
     gfModuleInfo m_moduleInfos[16];
 
 public:

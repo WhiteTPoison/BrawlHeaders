@@ -6,20 +6,23 @@
 #include <mt/mt_vector.h>
 #include <so/damage/so_damage_attacker_info.h>
 #include <so/so_dispose_instance_manager.h>
-#include <so/so_event_observer.h>
+#include <so/event/so_event_observer.h>
 #include <so/so_log_event_presenter.h>
 #include <so/so_null.h>
 #include <types.h>
 
 class ftOutsideEventObserver : public soEventObserver<ftOutsideEventObserver> {
 public:
+    ftOutsideEventObserver(short unitID) : soEventObserver<ftOutsideEventObserver>(unitID) {};
+
+    virtual void addObserver(int param1, int param2);
     // TODO: Verify params
-    virtual void notifyEventOnDamage(int entryId, bool, void*);
+    virtual void notifyEventOnDamage(int entryId, u32 hp, soDamage* damage);
     virtual void notifyEventSetDamage(int entryId, float, int, bool, bool);
     virtual void notifyEventRecover(int entryId, int);
-    virtual void notifyEventOutsideDeadArea(int entryId, int, int*);
+    virtual void notifyEventOutsideDeadArea(int entryId, int, bool*);
     virtual void notifyEventAppeal(int entryId, int);
-    virtual void notifyEventDead(int entryId, int, int, u32);
+    virtual void notifyEventDead(int entryId, int deadCount, int, int);
     virtual void notifyEventBeat(int entryId1, int entryId2);
     virtual void notifyEventSuicide(int entryId);
     virtual void notifyEventChangeStart(int, int playerNo);
@@ -43,7 +46,7 @@ public:
     virtual void notifyEventEntryEnd(int entryId);
     virtual void notifyEventResultEnd(int entryId);
     virtual void notifyEventGetItem(int, int, int, int, int);
-    virtual void notifyEventSucceedHit(int entryId, float, u32);
+    virtual void notifyEventSucceedHit(int entryId, u32 consecutiveHits, float totalDamage);
     virtual void notifyEventResultWin(int entryId, int);
     virtual void notifyEventYoshiEggStart(int entryId);
     virtual void notifyEventYoshiEggEnd(int entryId);
@@ -70,7 +73,11 @@ public:
     GameRule m_gameRule : 8;
     char _107[2];
     bool m_isStamina;
-    char _110[242];
+    char _110[70];
+    soEventManageModuleImpl m_eventManageModule;
+    char m_200[4];
+    short m_manageID;
+    char _206[146];
 
     virtual ~ftManager();
 

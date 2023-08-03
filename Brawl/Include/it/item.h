@@ -103,7 +103,7 @@ enum itKind {
     Item_SuperScope = 0x3D,
     Item_SuperScope_Shot = 0x3E,
     Item_Star = 0x3F,
-    Item_SuperStar = 0x3f,
+    Item_Starman = 0x3f,
     Item_Food = 0x40,
     Item_Tabemono = 0x40,
     Item_TeamHealer = 0x41,
@@ -126,9 +126,9 @@ enum itKind {
     Item_GreenGreens_Apple = 0x4A,
     Item_DxGreens_Apple = 0x4A,
     Item_MarioBros_Sidestepper = 0x4B,
-    Item_Famicom_MbShell = 0x4b,
+    Item_Famicom_Clab = 0x4b,
     Item_MarioBros_Shellcreeper = 0x4C,
-    Item_Famicom_MbClab = 0x4c,
+    Item_Famicom_Shell = 0x4c,
     Item_DistantPlanet_Pellet = 0x4D,
     Item_Earth_Pellet = 0x4D,
     Item_Summit_Vegetable = 0x4E,
@@ -297,7 +297,7 @@ enum itKind {
 
 struct itCreate {
     int m_index;
-    int m_emitterItemTaskId;
+    int m_emitterTaskId;
     int m_8;
     itKind m_kind;
     u32 m_variation;
@@ -326,7 +326,7 @@ public:
     int m_instanceId;
     itKind m_kind;
     int m_variation;
-    int m_emitterItemTaskId;
+    int m_emitterTaskId;
     itKind m_lotCreateKind;
     itCustomizerInterface* m_customizer;
     u8 m_2260;
@@ -375,15 +375,15 @@ public:
     virtual void action(int);
     virtual void setGlowAttack(int glowAttack);
     virtual int getGlowAttack();
-    virtual void notifyEventChangeStatus(int unk1, int unk2, void* unk3, soModuleAccesser* moduleAccesser);
+    virtual void notifyEventChangeStatus(int statusKind, int prevStatusKind, soStatusData* statusData, soModuleAccesser* moduleAccesser);
     virtual void notifyEventChangeSituation(int unk1, int unk2, soModuleAccesser* moduleAccesser);
     virtual void notifyEventCollisionAttack(void* unk1, void* unk2, soModuleAccesser* moduleAccesser);
     virtual bool notifyEventCollisionAttackCheck(u32 flags);
-    virtual void notifyEventCollisionShield(float, float, float, void*, void*, int, soModuleAccesser* moduleAccesser);
-    virtual void notifyEventCollisionShieldSearch(void*, void*);
+    virtual void notifyEventCollisionShield(soCollisionAttackModule* attackModule, soCollisionLog* collisionLog, u32 groupIndex, soModuleAccesser* moduleAccesser, float power, float posX, float);
+    virtual void notifyEventCollisionShieldSearch(soCollisionSearchModule* searchModule, soCollisionLog* collisionLog, u32 groupIndex, soModuleAccesser* moduleAccesser);
     virtual bool notifyEventCollisionShieldCheck();
-    virtual void notifyEventCollisionReflector(float, float, float, void*, void*, int, soModuleAccesser* moduleAccesser); // TODO: This is a guess based on above
-    virtual void notifyEventCollisionReflectorSearch(int, int, int);
+    virtual void notifyEventCollisionReflector(soCollisionAttackModule* attackModule, soCollisionLog* collisionLog, u32 groupIndex, soModuleAccesser* moduleAccesser, float power, float posX, float);
+    virtual void notifyEventCollisionReflectorSearch(soCollisionSearchModule* searchModule, soCollisionLog* collisionLog, u32 groupIndex, soModuleAccesser* moduleAccesser);
     virtual bool notifyEventCollisionReflectorCheck();
     virtual void notifyEventCollisionSearch(void*, soModuleAccesser* moduleAccesser);
     virtual bool notifyEventCollisionSearchCheck();
@@ -418,7 +418,7 @@ public:
     virtual void onProcessGameProc(BaseItem* item);
     virtual void onRenderPre(BaseItem* item);
     virtual void onRenderDebug(BaseItem* item);
-    virtual void onNotifyEventChangeStatus(BaseItem* item, int unk1, int unk2, void* unk3, soModuleAccesser* moduleAccesser); // TODO: Verify observer parameters
+    virtual void onNotifyEventChangeStatus(BaseItem* item, int statusKind, int prevStatusKind, soStatusData* statusData, soModuleAccesser* moduleAccesser);
     virtual void onNotifyEventAnimCmd(BaseItem* item, acAnimCmd* acmd, soModuleAccesser* moduleAccesser, int unk3);
     virtual void onNotifyEventCollisionAttackCheck(BaseItem* item, int);
     virtual void onNotifyEventCollisionSearch(BaseItem* item, void*);

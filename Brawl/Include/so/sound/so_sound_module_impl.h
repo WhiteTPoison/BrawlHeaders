@@ -2,7 +2,7 @@
 
 #include <StaticAssert.h>
 #include <mt/mt_vector.h>
-#include <so/so_event_observer.h>
+#include <so/event/so_event_observer.h>
 #include <so/so_null.h>
 #include <so/sound/so_sound_3d_generator_accesser_impl.h>
 #include <types.h>
@@ -111,7 +111,7 @@ public:
 
     virtual u32 isObserv(char unk1);
     virtual bool notifyEventAnimCmd(acAnimCmd* acmd, soModuleAccesser* moduleAccesser, int unk3);
-    virtual void notifyEventChangeStatus(int unk1, int unk2, void* unk3, soModuleAccesser* moduleAccesser);
+    virtual void notifyEventChangeStatus(int statusKind, int prevStatusKind, soStatusData* statusData, soModuleAccesser* moduleAccesser);
     virtual void notifyEventCollisionHit(float, int, int index, int, soModuleAccesser* moduleAccesser, void*);
     virtual void notifyEventChangeSituation(int unk1, int unk2, soModuleAccesser* moduleAccesser);
 };

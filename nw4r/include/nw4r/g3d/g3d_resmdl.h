@@ -11,10 +11,15 @@ namespace nw4r {
         struct ResMdlData; // TODO
 
         class ResMdl : public ResCommon<ResMdlData> {
+
             /* data */
         public:
+            inline ResMdl() : ResCommon() {}
+            inline ResMdl(void* data) : ResCommon(data) {}
+
             ResMat GetResMat(const char* name) const;
             u32 GetResNodeNumEntries();
+            ResNode GetResNode(const int nodeIndex) const;
             ResNode GetResNode(const u64 nodeIndex) const;
             ResNode GetResNode(const char* nodeName) const;
         };

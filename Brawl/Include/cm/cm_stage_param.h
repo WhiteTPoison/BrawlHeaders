@@ -10,10 +10,8 @@ struct cmStageParam {
     float m_horizontalRotationFactor;
     float m_minZ;
     float m_maxZ;
-    float m_32;
-    float m_36;
-    float m_40;
-    float m_characterBubbleBufferMultiplier;
+    Vec3f m_centerPos;
+    float m_fighterBubbleBufferMultiplier;
     float m_48;
     float m_speed;
     float m_tiltThreshold;
@@ -22,7 +20,7 @@ struct cmStageParam {
 static_assert(sizeof(cmStageParam) == 0x40, "Class is wrong size!");
 
 struct cmStageParamFixed {
-    Vec3f m_pos;
+    Vec3f m_centerPos;
     float m_fov;
     float m_verticalAngle;
     float m_horizontalAngle;
@@ -46,7 +44,7 @@ struct cmStageParamPaused {
     float m_rotYMax;
     float m_rotXMin;
     float m_rotXMax;
-    Vec3f m_pos;
+    Vec3f m_centerPos;
     cmStageParamPausedOffsetRange m_offsetRange;
     char _60[16];
 };

@@ -4,8 +4,8 @@
 #include <so/collision/so_collision.h>
 #include <so/collision/so_collision_hit_group.h>
 #include <so/so_array.h>
-#include <so/so_event_observer.h>
-#include <so/so_event_presenter.h>
+#include <so/event/so_event_observer.h>
+#include <so/event/so_event_presenter.h>
 #include <so/so_null.h>
 #include <types.h>
 
@@ -135,6 +135,6 @@ public:
 
     virtual u32 isObserv(char unk1);
     virtual bool notifyEventAnimCmd(acAnimCmd* acmd, soModuleAccesser* moduleAccesser, int unk3);
-    virtual void notifyEventChangeStatus(int unk1, int unk2, void* unk3, soModuleAccesser* moduleAccesser);
+    virtual void notifyEventChangeStatus(int statusKind, int prevStatusKind, soStatusData* statusData, soModuleAccesser* moduleAccesser);
 };
 static_assert(sizeof(soCollisionHitModuleImpl) == 104, "Class is wrong size!");

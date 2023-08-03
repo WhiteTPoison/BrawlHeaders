@@ -10,7 +10,8 @@
 
 class itManager : public gfTask, public soDisposeInstanceEventObserver {
 public:
-    char _76[120];
+    char _76[116];
+    u32 m_framesIntoCurrentGame;
     int m_numItems;
     soArrayList<itArchive*, 128> m_itArchiveArrayList;
     bool m_drawDone;
@@ -23,14 +24,14 @@ public:
     char _4283[1];
     itKind m_nextAssistItKind;
     int m_numAssists;
-    char _4292[4];
+    int m_preloadAssistTimer;
     soArrayList<itKind, 12> m_pokemonItKindArrayList;
-    char _4448[4];
+    u32 m_nextPokemonIndex;
     int m_numPokemon;
     int m_numPokeballs;
-    char _4460[4];
+    int m_preloadPokemonTimer;
     soArrayList<itGenArchive*, 3> m_itGenArchiveArrayList;
-    char _4508[24];
+    u8 m_itKindSwitch[24];
     float m_itKindLotRates[178];
     int m_crateVariation;
     int m_smashBallDropTimer;
@@ -57,7 +58,7 @@ public:
 
     bool isCompItemKindArchive(itKind kind, u32 variation, bool);
     itArchive* preloadItemKindArchive(itKind kind, u32 variation, itArchive::Type archiveType, bool);
-    BaseItem* createItem(itKind kind, u32 variation, int emitterItemTaskId, int, u8, int, int, int);
+    BaseItem* createItem(itKind kind, u32 variation, int emitterTaskId, int, u8, int, int, int);
     BaseItem* createItemInstance(itCreate* create);
     u32 getItemNum(itKind kind);
     void removeItem(BaseItem*);

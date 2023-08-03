@@ -8,6 +8,7 @@
 #include <gf/gf_task.h>
 #include <gm/gm_lib.h>
 #include <gr/gr_yakumono.h>
+#include <if/if_smash_appear.h>
 #include <it/item.h>
 #include <memory.h>
 #include <mt/mt_matrix.h>
@@ -19,27 +20,7 @@
 #include <st/st_trigger.h>
 #include <types.h>
 
-namespace StSeUtil {
-    class SeSeq {
-    public:
-        virtual ~SeSeq();
-
-    public:
-        char _1[0x10];                  // 0x00
-        snd3DGenerator* m_sndGenerator; // 0x14
-        char _2[0x8];                   // 0x18
-
-    public:
-        SeSeq(void* unk, int unk2, void* unk3, int unk4);
-        void playFrame(float frame, u32 unk);
-        void playFrame(float frame, float unk1, u32 unk2);
-        void registId(SndID* ID, int unk1);
-        void registSeq(int unk1, SndID* ID, int unk2, Heaps::HeapType heapType);
-    };
-    static_assert(sizeof(SeSeq) == 0x20, "Class is wrong size!");
-}
-
-class StageParam {
+class StageParam { // STPM
 public:
     u8 m_echo;
     u8 m_id1;
@@ -56,21 +37,21 @@ public:
     float m_shadowPitch;
     float m_shadowYaw;
     char _26[8];
-    float m_cameraFOV;
-    float m_minZ;
-    float m_maxZ;
-    float m_minTilt;
-    float m_maxTilt;
-    float m_horizontalRotationFactor;
-    float m_verticalRotationFactor;
-    float m_characterBubbleBufferMultiplier;
+    float m_camFOV;
+    float m_camMinZ;
+    float m_camMaxZ;
+    float m_camMinTilt;
+    float m_camMaxTilt;
+    float m_camHorizontalRotationFactor;
+    float m_camVerticalRotationFactor;
+    float m_fighterBubbleBufferMultiplier;
     float _72;
     float m_cameraSpeed;
     float m_starKOCamTilt;
     float m_finalSmashCamTilt;
-    float m_cameraRight;
-    float m_cameraLeft;
-    Vec3f m_pauseCamPos;
+    float m_camRight;
+    float m_camLeft;
+    Vec3f m_pauseCamCenterPos;
     float m_pauseCamAngle;
     float m_pauseCamZoomIn;
     float m_pauseCamZoomDefault;
@@ -79,17 +60,15 @@ public:
     float m_pauseCamRotYMax;
     float m_pauseCamRotXMin;
     float m_pauseCamRotXMax;
-    Vec3f m_fixedCamPos;
+    Vec3f m_fixedCamCenterPos;
     float m_fixedCamFOV;
     float m_fixedHorizontalAngle;
     float m_fixedVerticalAngle;
     char _164[4];
     float m_olimarFinalCamAngle;
     Vec3f m_iceClimbersFinalPos;
-    float m_iceClimbersFinalScaleX;
-    float m_iceClimbersFinalScaleYl;
-    float m_pitFinalPalutenaScaleX;
-    float m_pitFinalPalutenaScaleY;
+    Vec2f m_iceClimbersFinalScale;
+    Vec2f m_pitFinalPalutenaScale;
     u8 m_kirifudaModelType;
     bool m_characterWindEnabled;
     char _202[2];
@@ -182,11 +161,12 @@ public:
     u32 getGroundNum();
     grCollision* createCollision(gfArchive* archive, int index, Ground* ground);
     void createStagePositions();
-    void createStagePositions(void* stgPosMdl);
+    void createStagePositions(nw4r::g3d::ResFile* resFile);
     void loadStageAttrParam(gfArchive* filedata, int fileIndex);
     void registScnAnim(nw4r::g3d::ResFileData* scnData, u32 index);
     void initPosPokeTrainer(int unk1, int unk2);
     void setStageAttackData(grGimmickDamageFloor* attackData, u32 index);
+    void removeGround(Ground*);
 
     Stage(char* name, srStageKind stageKind);
     virtual void processBegin();
@@ -238,21 +218,21 @@ public:
     virtual void getFighterStartPos(Vec3f* startPos, int fighterIndex);
     virtual void getFighterReStartPos(Vec3f* startPos, int fighterIndex);
     virtual bool isReStartSamePoint();
-    virtual void getPokeTrainerStartPos(int unk1, int unk2);      // TODO
-    virtual int getItemPosCount();                                // TODO
-    virtual void getItemPos(int unk1, int unk2, int unk3);        // TODO
-    virtual void getRandItemPos(int unk1);                        // TODO
-    virtual void getKirifudaPos(int unk1, int unk2);              // TODO
-    virtual float getKirifudaAngle(int unk1);                     // TODO
-    virtual float getKirifudaScale(int unk1, int unk2);           // TODO
-    virtual int getKirifudaModelType(int unk1);                   // TODO
-    virtual int getPokeTrainerPosCount();                         // TODO
-    virtual void getPokeTrainerPos(int unk1, int unk2, int unk3); // TODO
+    virtual void getPokeTrainerStartPos(Vec3f* pos, u32);
+    virtual u8 getItemPosCount();
+    virtual void getItemPos(Vec3f*, Vec3f*, u32 index);
+    virtual void getRandItemPos(Vec3f* pos);
+    virtual void getKirifudaPos(Vec3f* pos, u32);
+    virtual float getKirifudaAngle(u32);
+    virtual void getKirifudaScale(Vec3f* scale, u32);
+    virtual u8 getKirifudaModelType(u32);
+    virtual u8 getPokeTrainerPosCount();
+    virtual void getPokeTrainerPos(Vec3f*, Vec3f*, u32 index);
     virtual float getFighterDeadEffectSizeRate();
     virtual float getEnemyDeadEffectSizeRate();
     virtual float getEnableZ();
-    virtual int getBgmID();
-    virtual int getBgmIDOverload() { return 0; }
+    virtual int getBgmID() { return 0; }
+    virtual int getBgmID() const { return 0; }
     virtual int getNowStepBgmID() { return 0; }
     virtual int getBgmOptionID() { return 0; }
     virtual bool isBgmChange() { return m_unk2; }
@@ -280,10 +260,10 @@ public:
     virtual bool isDevil();
     virtual void setDevilScrool(float unk1, float unk2);     // TODO
     virtual void getLucarioFinalTechniquePosition(int unk1); // TODO
-    virtual int startAppear();                               // TODO
-    virtual void setAppearKind();                            // TODO
+    virtual bool startAppear();                              // TODO
+    virtual void setAppearKind(u8 kind);                     // TODO
     virtual void endAppear();                                // TODO
-    virtual int getAppearTask();                             // TODO
+    virtual IfSmashAppearTask* getAppearTask();              // TODO
     virtual void forceStopAppear();                          // TODO
     virtual int getFinalTechniqColor();                      // TODO
     virtual void setMotionRatio(float unk1, float unk2);     // TODO
@@ -296,7 +276,7 @@ public:
     virtual bool isBossBattleMode() { return false; }
     virtual bool isSimpleBossBattleMode() { return false; }
     virtual bool isAppear();             // TODO
-    virtual bool isStartAppearTimming(); // TODO
+    virtual s32 isStartAppearTimming();  // TODO
     virtual void getMadeinAiData();      // TODO
     virtual bool isBamperVector();       // TODO
     virtual void getBamperVector(int unk1);
@@ -317,5 +297,101 @@ public:
     virtual bool createWind2ndOnly();
     virtual grGimmickWindData2nd* getWind2ndOnlyData(); // TODO
     virtual void updateWind2ndOnly();                   // TODO
-    virtual void setVision();                           // TODO
+    virtual void setVision(u8);
+};
+
+enum ItemOverrideSetting {
+    ItemOverride_None = 0x0,
+    ItemOverride_Brres = 0x1,
+    ItemOverride_Param = 0x2,
+    ItemOverride_Both = 0x3,
+};
+
+struct ItemOverride { // Custom Misc Data node
+    char _header[4];
+    char m_itmOverrideName[12];
+    char m_pkmOverrideName[12];
+    s8 m_pokemonOverload;
+    ItemOverrideSetting m_overrideCommon : 8;
+    ItemOverrideSetting m_overrideTorchic : 8;
+    ItemOverrideSetting m_overrideCelebi : 8;
+    ItemOverrideSetting m_overrideChikorita : 8;
+    ItemOverrideSetting m_overrideChikoritaShot : 8;
+    ItemOverrideSetting m_overrideEntei : 8;
+    ItemOverrideSetting m_overrideMoltres : 8;
+    ItemOverrideSetting m_overrideMunchlax : 8;
+    ItemOverrideSetting m_overrideDeoxys : 8;
+    ItemOverrideSetting m_overrideGroudon : 8;
+    ItemOverrideSetting m_overrideGulpin : 8;
+    ItemOverrideSetting m_overrideStaryu: 8;
+    ItemOverrideSetting m_overrideStaryuShot : 8;
+    ItemOverrideSetting m_overrideHoOh : 8;
+    ItemOverrideSetting m_overrideHoOhShot : 8;
+    ItemOverrideSetting m_overrideJirachi : 8;
+    ItemOverrideSetting m_overrideSnorlax : 8;
+    ItemOverrideSetting m_overrideBellosom : 8;
+    ItemOverrideSetting m_overrideKyogre : 8;
+    ItemOverrideSetting m_overrideKyogreShot : 8;
+    ItemOverrideSetting m_overrideLatiasLatios : 8;
+    ItemOverrideSetting m_overrideLugia : 8;
+    ItemOverrideSetting m_overrideLugiaShot : 8;
+    ItemOverrideSetting m_overrideManaphy : 8;
+    ItemOverrideSetting m_overrideWeavile : 8;
+    ItemOverrideSetting m_overrideElectrode : 8;
+    ItemOverrideSetting m_overrideMetagross : 8;
+    ItemOverrideSetting m_overrideMew : 8;
+    ItemOverrideSetting m_overrideMeowth : 8;
+    ItemOverrideSetting m_overrideMeowthShot : 8;
+    ItemOverrideSetting m_overridePiplup : 8;
+    ItemOverrideSetting m_overrideTogepi : 8;
+    ItemOverrideSetting m_overrideGoldeen : 8;
+    ItemOverrideSetting m_overrideGardevoir : 8;
+    ItemOverrideSetting m_overrideWobbuffet : 8;
+    ItemOverrideSetting m_overrideSuicune : 8;
+    ItemOverrideSetting m_overrideBonsly : 8;
+    ItemOverrideSetting m_overrideAndross : 8;
+    ItemOverrideSetting m_overrideAndrossShot : 8;
+    ItemOverrideSetting m_overrideBarbara : 8;
+    ItemOverrideSetting m_overrideGrayFox : 8;
+    ItemOverrideSetting m_overrideRayMKII : 8;
+    ItemOverrideSetting m_overrideRayMKIIBomb : 8;
+    ItemOverrideSetting m_overrideRayMKIIGun : 8;
+    ItemOverrideSetting m_overrideSamuraiGoroh : 8;
+    ItemOverrideSetting m_overrideDevil : 8;
+    ItemOverrideSetting m_overrideExcitebike : 8;
+    ItemOverrideSetting m_overrideJeff : 8;
+    ItemOverrideSetting m_overrideJeffPencilBullet : 8;
+    ItemOverrideSetting m_overrideJeffPencilRocket : 8;
+    ItemOverrideSetting m_overrideLakitu : 8;
+    ItemOverrideSetting m_overrideKnuckleJoe : 8;
+    ItemOverrideSetting m_overrideKnuckleJoeShot : 8;
+    ItemOverrideSetting m_overrideHammerBro : 8;
+    ItemOverrideSetting m_overrideHammerBroHammer : 8;
+    ItemOverrideSetting m_overrideHelirin : 8;
+    ItemOverrideSetting m_overrideKat : 8;
+    ItemOverrideSetting m_overrideAna : 8;
+    ItemOverrideSetting m_overrideJillDozer : 8;
+    ItemOverrideSetting m_overrideLyn : 8;
+    ItemOverrideSetting m_overrideLittleMac : 8;
+    ItemOverrideSetting m_overrideMetroid : 8;
+    ItemOverrideSetting m_overrideNintendog : 8;
+    ItemOverrideSetting m_overrideNintendogFull : 8;
+    ItemOverrideSetting m_overrideMrResetti : 8;
+    ItemOverrideSetting m_overrideIsaac : 8;
+    ItemOverrideSetting m_overrideIsaacShot : 8;
+    ItemOverrideSetting m_overrideSaki : 8;
+    ItemOverrideSetting m_overrideSakiShot1 : 8;
+    ItemOverrideSetting m_overrideSakiShot2 : 8;
+    ItemOverrideSetting m_overrideShadow : 8;
+    ItemOverrideSetting m_overrideWarInfantry : 8;
+    ItemOverrideSetting m_overrideWarInfantryShot : 8;
+    ItemOverrideSetting m_overrideStarfy : 8;
+    ItemOverrideSetting m_overrideWarTank : 8;
+    ItemOverrideSetting m_overrideWarTankShot : 8;
+    ItemOverrideSetting m_overrideTingle : 8;
+    ItemOverrideSetting m_overrideLakituSpiny : 8;
+    ItemOverrideSetting m_overrideWaluigi : 8;
+    ItemOverrideSetting m_overrideDrWright : 8;
+    ItemOverrideSetting m_overrideDrWrightBuilding : 8;
+    char m_stageItemFolder[12];
 };

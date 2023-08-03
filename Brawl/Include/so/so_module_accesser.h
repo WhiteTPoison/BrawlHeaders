@@ -1,7 +1,9 @@
 #pragma once
 
 #include <StaticAssert.h>
+#include <so/collision/so_collision_attack_module_impl.h>
 #include <so/collision/so_collision_hit_module_impl.h>
+#include <so/collision/so_collision_search_module_impl.h>
 #include <so/controller/so_controller_module_impl.h>
 #include <so/damage/so_damage_module_impl.h>
 #include <so/effect/so_effect_module_impl.h>
@@ -14,6 +16,7 @@
 #include <so/slow/so_slow_module_impl.h>
 #include <so/sound/so_sound_module_impl.h>
 #include <so/status/so_status_module_impl.h>
+#include <so/event/so_event_manage_module_impl.h>
 #include <so/work/so_work_manage_module_impl.h>
 #include <types.h>
 
@@ -28,13 +31,13 @@ public:
     soGroundModule* m_groundModule;
     soSituationModule* m_situationModule;
     void* m_teamModule;
-    void* m_collisionAttackModule;
+    soCollisionAttackModule* m_collisionAttackModule;
     soCollisionHitModule* m_collisionHitModule;
     void* m_collisionShieldModule;
     void* m_collisionReflectorModule;
     void* m_collisionShieldModule2;
     void* m_collisionCatchModule;
-    void* m_collisionSearchModule;
+    soCollisionSearchModule* m_collisionSearchModule;
     soDamageModule* m_damageModule;
     void* m_catchModule;
     void* m_captureModule;
@@ -53,7 +56,7 @@ public:
     void* m_generalTermDisideModule;
     void* m_switchDecideModule;
     void* m_kineticModule;
-    void* m_eventManageModule;
+    soEventManageModule* m_eventManageModule;
     void* m_generateArticleManageModule;
     soEffectModule* m_effectModule;
     void* m_comboModule;
@@ -104,9 +107,19 @@ public:
         return this->m_enumerationStart->m_situationModule;
     }
 
+    inline soCollisionAttackModule* getCollisionAttackModule()
+    {
+        return this->m_enumerationStart->m_collisionAttackModule;
+    }
+
     inline soCollisionHitModule* getCollisionHitModule()
     {
         return this->m_enumerationStart->m_collisionHitModule;
+    }
+
+    inline soCollisionSearchModule* getCollisionSearchModule()
+    {
+        return this->m_enumerationStart->m_collisionSearchModule;
     }
 
     inline soDamageModule* getDamageModule()
@@ -132,6 +145,11 @@ public:
     inline soStatusModule* getStatusModule()
     {
         return this->m_enumerationStart->m_statusModule;
+    }
+
+    inline soEventManageModule* getEventManageModule()
+    {
+        return this->m_enumerationStart->m_eventManageModule;
     }
 
     inline soEffectModule* getEffectModule()

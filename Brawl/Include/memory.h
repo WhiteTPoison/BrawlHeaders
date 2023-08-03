@@ -61,7 +61,10 @@ namespace Heaps {
         OverlayFighter4 = 0x38,
         OverlayEnemy = 0x39,
         Thread = 0x3a,
-        Syringe = 0x3C
+
+        // NON-STANDARD
+        BrawlEx = 0x3b,
+        Syringe = 0x3C,
     };
 } // namespace HeapType
 
@@ -71,6 +74,7 @@ typedef Heaps::HeapType HeapType;
 void* operator new(size_t size, HeapType heap);
 void* operator new[](size_t size, HeapType heap);
 void* operator new[](size_t size);
+void* free(void* ptr);
 
 void* __memfill(void* dest, u8 value, size_t count);
 void* memset(void* dest, u8 value, size_t count);
