@@ -1,3 +1,4 @@
 [submodule "OpenRVL"]
 	path = OpenRVL
 	url = https://github.com/JaredWhiteOne/open_rvl.git
+	branch = main
