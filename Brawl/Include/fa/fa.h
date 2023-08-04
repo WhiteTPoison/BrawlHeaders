@@ -10,7 +10,7 @@
 #include "fa/FAFstat.h"
 #include "fa/FAFwrite.h"
 #include "fa/FAOpendir.h"
-#include "fa/FAremove.h"
+#include "fa/FARemove.h"
 
 struct FAEntryInfo {
     char _0x0[0x224];
