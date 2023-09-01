@@ -14,3 +14,5 @@ struct ipPadConfig {
     u8 playerNum2PadNum[4];
 };
 static_assert(sizeof(ipPadConfig) == 0xB9, "Class is wrong size!");
+
+extern ipPadConfig g_PadConfig;

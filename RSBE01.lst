@@ -17,6 +17,7 @@
 805a00b8: g_mtRandDefault
 805a0420: g_mtRandOther
 805a00e0:g_GameGlobal
+805b7480:g_PadConfig
 80406920:MOD_PATCH_DIR
 
 // System
