@@ -90,7 +90,8 @@ struct gmGlobalRecord1 {
         u8 m_itemFrequency;
         char _1[7];
         gmItSwitch::ItemSwitch m_itemSwitch;
-        char _16[10];
+        bool rumble[4];
+        char _16[6];
         u8 m_language;
         char _27[5];
         StageSwitch m_stageSwitch;
@@ -118,10 +119,28 @@ struct gmGlobalRecord1 {
     char _spacer[0x34B4];
 };
 static_assert(sizeof(gmGlobalRecord1) == 0x3cf0, "Class is wrong size!");
-struct gmGlobalRecord2 {
-    char _spacer[0x88e0]; // 0x00
+struct PlayerTag {
+    //name is in UTF-16
+    //0x0
+    char name[0xC];
+    //0xC
+    bool rumble;
+
+    char _spacer[0x10 - 0xD];
+    //0x10
+    unsigned int creationTime;
+    //0x14
+    char GCSettings[0xC];
+
+    char _spacer2[0x124 - 0x20];
 };
-static_assert(sizeof(gmGlobalRecord2) == 0x88e0, "Class is wrong size!");
+struct gmGlobalRecord2 {
+    char _spacer[0xE0];
+
+    //0xE0
+    PlayerTag tags[120];
+};
+static_assert(sizeof(gmGlobalRecord2) == 0x89C0, "Class is wrong size!");
 struct nteGlobalData {
     char _spacer[0x88]; // 0x00
 };
