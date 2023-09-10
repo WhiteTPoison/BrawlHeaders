@@ -40,5 +40,7 @@ public:
 
     gfScene* searchScene(char* sceneName);
     static gfSceneManager* getInstance();
+    void setNextScene(gfSceneManager* gfSceneManager, const char* name, int unk);
+    void changeNextScene(gfSceneManager* gfSceneManager);
 };
 static_assert(sizeof(gfSceneManager) == 800, "Class is wrong size!");
