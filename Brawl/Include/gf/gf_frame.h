@@ -15,4 +15,4 @@ public:
     unsigned int persistentFrameCounter;
 };
 static_assert(sizeof(GameFrame) == 0x18, "GameFrame is wrong size!");
-extern GameFrame* g_GameFrame;
+extern GameFrame g_GameFrame;
