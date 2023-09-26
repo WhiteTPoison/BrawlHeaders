@@ -295,7 +295,8 @@
 8002d640:setNextSequence__14gfSceneManagerFv
 8002d6d4:setLoadModuleName__14gfSceneManagerFv
 8002d73c:loadModule__14gfSceneManagerFv
-
+8002d5ac:setNextScene__14gfSceneManagerFP14gfSceneManagerPCci
+8002d020:changeNextScene__14gfSceneManagerFP14gfSceneManager
 // gfSceneRoot
 8000d818:setCurrentFrame__11gfSceneRootFf
 8000d56c:removeResAnmScn__11gfSceneRootFv
