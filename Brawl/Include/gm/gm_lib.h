@@ -1,5 +1,4 @@
 #pragma once
-
 enum gmCharacterKind {
     Character_Mario = 0x0,
     Character_DonkeyKong = 0x1, Character_Donkey = 0x1,

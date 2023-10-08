@@ -236,4 +236,6 @@ public:
 };
 static_assert(sizeof(gmGlobalModeMelee) == 0x320, "Class is wrong size!");
 
+void gmSetRuleToGlobalModeMelee(gmGlobalModeMelee *globalModeMelee);
+
 extern gmGlobalModeMelee g_globalMelee;
