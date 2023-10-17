@@ -20,6 +20,9 @@
 805b7480:g_PadConfig
 80406920:MOD_PATCH_DIR
 
+// Pad Config
+80048548:getInstance__11ipPadConfigFv
+
 // System
 803f1254:__save_fpr
 803f1278:_savefpr_23

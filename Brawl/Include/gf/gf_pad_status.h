@@ -8,8 +8,6 @@ namespace controllerType {
     const int WIICHUCK = 3;
 }
 
-#pragma pack(push, 2)
-
 class gfPadStatus {
 public:
 	unsigned int _buttons;
@@ -18,7 +16,7 @@ public:
 	unsigned int rapidFireButtons;
 	unsigned int releasedButtons;
 	unsigned int newPressedButtons;
-	char _spacer2[0x18];
+	char _spacer2[0x30 - 6 * sizeof(unsigned int)];
 	//0x30
 	// TODO: calculate new offset
 	signed char stickX;
@@ -27,20 +25,15 @@ public:
 	signed char cStickY;
 	unsigned char LAnalogue;
 	unsigned char RAnalogue;
-	char _spacer5[0x2];
+	char _spacer5[0x38 - 0x30 - 6 * sizeof(char)];
 
 	//0x38
 	//0xFF if not connected, else 0
 	bool isNotConnected;
 
-    char _spacer4[0x3];
+    char _spacer4[0x3C - 0x38 - 1];
 
 	//0x3C
 	int type;
-
-	gfPadStatus();
-	gfPadStatus(const gfPadStatus& D);
-	gfPadStatus& operator=(const gfPadStatus &D );
-};
-#pragma pack(pop)
+}__attribute__((packed, aligned(4)));
 static_assert(sizeof(gfPadStatus) == 0x40, "gfPadStatus is wrong size");
