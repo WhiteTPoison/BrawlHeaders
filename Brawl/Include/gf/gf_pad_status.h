@@ -25,7 +25,8 @@ public:
 	signed char cStickY;
 	unsigned char LAnalogue;
 	unsigned char RAnalogue;
-	char _spacer5[0x38 - 0x30 - 6 * sizeof(char)];
+	unsigned char LTrigger;
+	unsigned char RTrigger;
 
 	//0x38
 	//0xFF if not connected, else 0
