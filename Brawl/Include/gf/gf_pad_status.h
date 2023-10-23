@@ -23,10 +23,10 @@ public:
 	signed char stickY;
 	signed char cStickX;
 	signed char cStickY;
-	unsigned char LAnalogue;
-	unsigned char RAnalogue;
-	unsigned char LTrigger;
-	unsigned char RTrigger;
+	signed char LAnalogue;
+	signed char RAnalogue;
+	signed char LTrigger;
+	signed char RTrigger;
 
 	//0x38
 	//0xFF if not connected, else 0
