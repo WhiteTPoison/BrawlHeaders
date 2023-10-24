@@ -19,14 +19,14 @@ public:
 	char _spacer2[0x30 - 6 * sizeof(unsigned int)];
 	//0x30
 	// TODO: calculate new offset
-	char stickX;
-	char stickY;
-	char cStickX;
-	char cStickY;
-	char LAnalogue;
-	char RAnalogue;
-	char LTrigger;
-	char RTrigger;
+	s8 stickX;
+	s8 stickY;
+	s8 cStickX;
+	s8 cStickY;
+	s8 LAnalogue;
+	s8 RAnalogue;
+	s8 LTrigger;
+	s8 RTrigger;
 
 	//0x38
 	//0xFF if not connected, else 0
