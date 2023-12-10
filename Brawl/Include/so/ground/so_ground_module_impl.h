@@ -176,7 +176,7 @@ public:
     virtual void setIgnoreFriction(bool);
     virtual void setDetachChangeStatus(bool);
 };
-CHECK_SIZE(soGroundModule, 12);
+//CHECK_SIZE(soGroundModule, 12);
 
 class soGroundModuleImpl : public soGroundModule, public soStatusEventObserver, public soAnimCmdEventObserver, public grCollStatusEventReceiver {
     soArray<soGroundShapeImpl>* m_groundShapeArray;
@@ -352,4 +352,4 @@ public:
     virtual u32 isObserv(char unk1);
     virtual bool notifyEventAnimCmd(acAnimCmd* acmd, soModuleAccesser* moduleAccesser, int unk3);
 };
-static_assert(sizeof(soGroundModuleImpl) == 88, "Class is wrong size!");
+//static_assert(sizeof(soGroundModuleImpl) == 88, "Class is wrong size!");

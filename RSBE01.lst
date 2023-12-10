@@ -282,6 +282,9 @@
 80026c78:setTempolaryLoadHeap__15gfModuleManagerFQ25Heaps8HeapType
 8002737c:destroy__15gfModuleManagerFPc
 
+//stOperatorReadyGo
+809514c0:isEnd__17stOperatorReadyGoFv
+
 // gfSceneManager
 8002cc14:__ct__14gfSceneManagerFv
 8002cfd0:create__14gfSceneManagerFv
