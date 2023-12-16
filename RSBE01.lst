@@ -20,6 +20,10 @@
 805b7480:g_PadConfig
 80406920:MOD_PATCH_DIR
 
+//gfPadSystem
+800293dc:consumeFrameCounter__11gfPadSystemFi
+80029438:updateLow__11gfPadSystemFv
+
 // Pad Config
 80048548:getInstance__11ipPadConfigFv
 
@@ -96,6 +100,7 @@
 801d8600:OSReport
 801e0cfc:OSCreateThread
 801e1364:OSResumeThread
+801e15fc:OSSuspendThread
 801e1224:OSJoinThread
 801dcf24:OSEnableInterrupts
 801dcf10:OSDisableInterrupts
