@@ -1384,6 +1384,10 @@
 10,1,00015238:isTeamBattle__19muSelCharPlayerAreaFv
 8006a964:setDefaultEnv__FP7Messageii
 80497e44:MELEE_FONT
+CC008000:WGPIPE
+8006fe50:printChar__7MessageFCUs
+8006b400:allocMsgBuffer__7MessageFiiQ25Heaps8HeapType
+8006B360:std2DView__Fv
 // CUSTOM
 8006fe50:Print__FP7MessageUs
 27,5,73648:g_commonSndGroupOverrideName

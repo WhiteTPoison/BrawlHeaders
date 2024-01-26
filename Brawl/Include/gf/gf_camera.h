@@ -17,8 +17,8 @@ public:
         Projection_Orthogonal = 0x0,
         Projection_Perspective = 0x1,
     };
-
-    char _spacer[96];
+    Mtx modelView;
+    char _spacer[96 - sizeof(modelView)];
     Vec3f m_targetPos;
     Vec3f m_centerPos;
     char _spacer1[100];
