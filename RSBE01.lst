@@ -1265,6 +1265,7 @@
 80069970:setCursorX__7MessageFf
 80069a30:setCursorY__7MessageFf
 80069d40:printf__7MessageFPCce
+800b9230:printf__5MuMsgFUlPCce
 // grTenganEvent
 27,1,0027BBD8:__ct__13grTenganEventFv
 27,1,0027BBF8:__dt__13grTenganEventFv

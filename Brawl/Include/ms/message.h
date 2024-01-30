@@ -24,33 +24,11 @@ typedef u16 UTF16;
 
 typedef f32	Mtx[3][4];
 
-struct Message {
+class Message {
+public:
     //run each frame before printing
     void setup();
-    Message() {
-        _colorMap = 0;
-        _mightAlsoBeColor = 0xFFFFFFFF;
-        _mightAlsoBeColor2 = 0xFFFFFFFF;
-        fontScaleX = 1;
-        fontScaleY = 1;
-        int _thingEqualToOne1 = 1;
-        int _thingEqualToOne2 = 1;
-        enableFixedWidth = 0;
-        fixedWidth = -1;
-        _flagThing = true;
-        scale = 1;
-        _fontWidthThing = 1;
-        _edge = 0;
-        _fontThing = 1;
-        screenStartX = 0;
-        screenStartY = 0;
-        screenEndX = 640;
-        screenEndY = 480;
-        _lineSpace = 0;
-        _drawFlag = 0;
-    }
     static void std2DView();
-
     //null terminated
     void printString(const char* characters);
     //null terminated
