@@ -23,6 +23,7 @@
 //gfPadSystem
 800293dc:consumeFrameCounter__11gfPadSystemFi
 80029438:updateLow__11gfPadSystemFv
+8002a210:updateSystem__11gfPadSystemFv
 
 // Pad Config
 80048548:getInstance__11ipPadConfigFv

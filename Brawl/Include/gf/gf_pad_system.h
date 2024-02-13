@@ -15,6 +15,8 @@ public:
 	//0x0444 seems like where inputmask starts (during GamePadStatus checks)
 	void consumeFrameCounter(int dec);
 	void updateLow();
+	void updateSystem();
+	void clearPadQueue();
 };
 
 extern gfPadSystem g_PadSystem;
