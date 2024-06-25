@@ -1,7 +1,7 @@
 #pragma once
 
 #include <ms/message.h>
-
+#include <nw4r/g3d/g3d_scnmdlsmpl.h>
 class MuMsg {
 public:
     enum AlignMode {

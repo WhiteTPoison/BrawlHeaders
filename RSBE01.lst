@@ -107,7 +107,8 @@ CC008000:WGPIPE
 802123a8:IOS_Open
 80212d40:IOS_Ioctl
 80212588:IOS_Close
-80213090:IOS_Ioctlv803f0e38:__ptmf_scall
+80213090:IOS_Ioctlv
+803f0e38:__ptmf_scall
 
 // OS
 801d8600:OSReport
@@ -1495,7 +1496,8 @@ CC008000:WGPIPE
 80069970:setCursorX__7MessageFf
 80069a30:setCursorY__7MessageFf
 80069d40:printf__7MessageFPCce
-800b9230:printf__5MuMsgFUlPCce8006b134:getPrintIndexData__7MessageFPvUlPPcPUl
+800b9230:printf__5MuMsgFUlPCce
+8006b134:getPrintIndexData__7MessageFPvUlPPcPUl
 
 // grTenganEvent
 27,1,0027BBD8:__ct__13grTenganEventFv

@@ -249,7 +249,7 @@ struct gmGlobalRecord {
 
     char _spacer[0x34B4];
 };
-static_assert(sizeof(gmGlobalRecord1) == 0x3cf0, "Class is wrong size!");
+static_assert(sizeof(gmGlobalRecord) == 0x3cf0, "Class is wrong size!");
 struct PlayerTag {
     //name is in UTF-16
     //0x0

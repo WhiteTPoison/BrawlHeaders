@@ -102,7 +102,6 @@ class soAnimCmdModule: public soNullable {
     virtual void getCmdAddressPack();
     virtual void setAddressPackList();
     virtual void getInterpreterNum();
-    virtual ~soAnimCmdModule();
     virtual void activate();
     virtual void deactivate();
 };
