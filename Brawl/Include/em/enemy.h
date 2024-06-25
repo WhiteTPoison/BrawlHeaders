@@ -10,9 +10,10 @@ class Enemy : public StageObject, public soStatusEventObserver, public soCollisi
 
     EnemyKind m_enemyKind;
     char _176[4];
-    EnemyKind m_connectedEnemyKind;
-    u32 m_difficultyLevel;
-    char _188[12];
+    int m_connectedTriggerId;
+    u32 m_difficulty;
+    u32 m_level;
+    char _192[8];
     grGimmickMotionPath* m_motionPath;
     char _204[16];
     soModuleAccesser moduleAccesser;

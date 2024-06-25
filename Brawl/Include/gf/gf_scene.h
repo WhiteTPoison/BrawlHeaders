@@ -4,7 +4,7 @@
 
 class gfScene {
 public:
-    char* m_sceneName;
+    const char* m_sceneName;
     virtual void start();
     virtual void process();
     virtual void exit();
@@ -14,7 +14,7 @@ static_assert(sizeof(gfScene) == 8, "Class is wrong size!");
 
 class gfSequence {
 public:
-    char* m_sequenceName;
+    const char* m_sequenceName;
     virtual void start();
     virtual void setNext();
     virtual void exit();
@@ -38,7 +38,7 @@ public:
     int processStep;
     char _spacer4[148];
 
-    gfScene* searchScene(char* sceneName);
+    gfScene* searchScene(const char* sceneName);
     static gfSceneManager* getInstance();
     void setNextScene(gfSceneManager* gfSceneManager, const char* name, int unk);
     void changeNextScene(gfSceneManager* gfSceneManager);

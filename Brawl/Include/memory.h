@@ -13,6 +13,7 @@ namespace Heaps {
         Network = 0x6,
         WiiPad = 0x7,
         IteamResource = 0x8,
+        ItemResource = 0x8,
         InfoResource = 0x9,
         CommonResource = 0xa,
         Replay = 0xb,
@@ -64,7 +65,11 @@ namespace Heaps {
 
         // NON-STANDARD
         BrawlEx = 0x3b,
-        Syringe = 0x3C,
+        Syringe = 0x3c,
+        CodeMenu = 0x3d,
+        FudgeAI = 0x3e,
+        StockFaceResource = 0x3f,
+        RetroMode = 0x40
     };
 } // namespace HeapType
 
@@ -78,3 +83,4 @@ void* free(void* ptr);
 
 void* __memfill(void* dest, u8 value, size_t count);
 void* memset(void* dest, u8 value, size_t count);
+void memcpy(void* dest, void* src, size_t count);

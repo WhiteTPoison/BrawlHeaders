@@ -20,7 +20,7 @@ struct ykData {
 };
 
 struct ykAreaData : ykData {
-    soAreaInit* m_init;
+    soAreaInit* m_areaInit;
 };
 
 class Yakumono : public StageObject, public soCollisionAttackEventObserver {
@@ -37,7 +37,7 @@ public:
     virtual void processPreCollision();
     virtual void renderDebug();
     virtual ~Yakumono();
-    virtual void updatePosture(u32 unk1);
+    virtual void updatePosture(bool);
     virtual soKind soGetKind();
     virtual int soGetSubKind();
     virtual void updateNodeSRT();
@@ -48,7 +48,7 @@ public:
     virtual void initHitPosXWork(int unk1, int unk2);
     virtual void presentEventGimmick(soGimmickEventInfo* eventInfo, int sendID);
 
-    virtual void notifyEventCollisionAttack(void* unk1, void* unk2, soModuleAccesser* moduleAccesser);
+    virtual void notifyEventCollisionAttack(float power, soCollisionLog* collisionLog, soModuleAccesser* moduleAccesser);
     virtual bool notifyEventCollisionAttackCheck(u32 flags);
 
     grYakumono* m_ground;

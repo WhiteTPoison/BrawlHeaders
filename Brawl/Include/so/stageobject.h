@@ -18,7 +18,7 @@ class soActivatable {
 class StageObject : public gfTask, public soActivatable, public soAnimCmdEventObserver, public soLinkEventObserver {
 public:
     soModuleAccesser* m_moduleAccesser;
-    StageObject(char* name, int unk1, int unk2, int unk3, int unk4, soModuleAccesser* moduleAccesser);
+    StageObject(const char* name, int unk1, int unk2, int unk3, int unk4, soModuleAccesser* moduleAccesser);
     virtual void processAnim();
     virtual void processUpdate();
     virtual void processPreMapCorrection();
@@ -37,7 +37,7 @@ public:
     virtual ~StageObject();
 
     // TODO: Verify params?
-    virtual void updatePosture(u32 unk1);
+    virtual void updatePosture(bool);
     virtual void processFixPositionPreAnimCmd();
     virtual int* getInput();
     virtual double getCollisionLr(int* unk1);

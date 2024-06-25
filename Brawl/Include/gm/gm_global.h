@@ -11,6 +11,7 @@
 #include <gm/gm_tournament_data.h>
 #include <gf/gf_frame.h>
 #include <gm/gm_stage_data.h>
+#include <gm/gm_stage_edit_data.h>
 
 class GameGlobal {
 public:
@@ -24,18 +25,18 @@ public:
     gmResultInfo* m_resultInfo;         // 0x18
     gmSetRule* m_setRule;               // 0x1C
     char _3[0x04];                      // 0x20
-    gmGlobalRecord1* m_record1;         // 0x24
-    gmGlobalRecord2* m_record2;         // 0x28
+    gmGlobalRecord* m_record;         // 0x24
+    gmGlobalRecord::NameData* m_nameRecords;         // 0x28
     gmTournamentData* m_tournamentData; // 0x2C
-    adKeep* m_adKeep;                   // 0x30
+    gmAdventure* m_adventure;           // 0x30
     nteGlobalData* m_nteData;           // 0x34
     char _4[0x04];                      // 0x38
     gmGlobalCorps* m_corps;             // 0x3C
-    char _5[0x4];                       // 0x40
+    gmStageEditData* m_stageEditData;   // 0x40
     gmStageData* m_stageData;           // 0x44
     char _6[0x8];                       // 0x48
 
-    gmGlobalRecord1::MenuData* getGlobalRecordMenuDatap();
+    gmGlobalRecord::MenuData* getGlobalRecordMenuDatap();
 
     static int getLanguage();
 };

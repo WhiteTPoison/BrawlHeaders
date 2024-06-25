@@ -36,6 +36,7 @@ public:
     void setMsgData(void* msgBinData);
     int getMsgData(u32, void** outUnk);
     void initWindowSetting(WindowSetting* windowSetting);
+    void attachScnMdlSimple(u32 msgIndex, nw4r::g3d::ScnMdlSimple* sceneModel, u32 boneTextIndex, float fontSize);
     void setFontWidthModeAuto(u32 msgIndex);
     void setAlignMode(u32 msgIndex, AlignMode alignMode);
     void setFontColor(u32 msgIndex, u8 r, u8 g, u8 b, u8 a);
@@ -51,6 +52,7 @@ public:
     void beginPrint(u32 msgIndex);
     void printf(u32 msgIndex, const char* format, ...);
     bool printIndex(u32 msgIndex, u32 lineIndex, void* msgBinData);
+    void setWindowRectVisible(u32 msgIndex, bool isVisible);
 
 
 

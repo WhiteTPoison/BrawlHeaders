@@ -116,7 +116,7 @@ public:
     virtual bool notifyEventCollisionAttackCheck(u32 flags);
     virtual u32 isObserv(char unk1);
     virtual bool notifyEventAnimCmd(acAnimCmd* acmd, soModuleAccesser* moduleAccesser, int unk3);
-    virtual void notifyEventCollisionAttack(void* unk1, void* unk2, soModuleAccesser* moduleAccesser);
+    virtual void notifyEventCollisionAttack(float power, soCollisionLog* collisionLog, soModuleAccesser* moduleAccesser);;
 };
 static_assert(sizeof(soStatusModuleImpl) == 144, "Class is wrong size!");
 
@@ -255,7 +255,7 @@ namespace ftStatus {
         Land_On_Ground_Hard = 0x7E,
         Freeze_Game_1 = 0x7F,
         Landing_Effect = 0x80,
-        TPose_Center_Stage_Rear_End_Subspace_Teleport = 0x81,
+        Tether_Hang = 0x81,
         Freeze_Game_2 = 0x82,
         Big_Smoke_Cloud_Landing_Effect = 0x83,
         Flop_On_Ground_Land_On_Stomach = 0x84,

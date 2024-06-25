@@ -8,6 +8,8 @@
 #include <so/so_dispose_instance_manager.h>
 #include <so/event/so_event_observer.h>
 #include <so/so_log_event_presenter.h>
+#include <ft/ft_entry_manager.h>
+#include <ft/ft_slot_manager.h>
 #include <so/so_null.h>
 #include <types.h>
 
@@ -77,7 +79,10 @@ public:
     soEventManageModuleImpl m_eventManageModule;
     char m_200[4];
     short m_manageID;
-    char _206[146];
+    char _206[132];
+    ftEntryManager* m_entryManager;
+    ftSlotManager* m_slotManager;
+    void* m_dataProvider;
 
     virtual ~ftManager();
 
@@ -103,12 +108,17 @@ public:
     int getEntryCount();
     int getEntryId(int playerNo);
     int getEntryIdFromIndex(int index);
-    int getEntryIdFromTaskId(int taskId, int* unk);
+    int getEntryIdFromTaskId(int taskId, int* outInstanceIndex);
     int getPlayerNo(int entryId);
     bool isFighterActivate(int entryId, int);
-    Fighter* getFighter(int entryId, bool getFollower=false);
+    Fighter* getFighter(int entryId, int instanceIndex);
+    Fighter* getSubFighter(int entryId);
     ftOwner* getOwner(int entryId);
     int getTeam(int entryId, bool unk2, bool unk3);
+    Vec3f getFighterCenterPos(int entryId, int unk);
+    float getFighterLr(int entryId, int unk);
+    int getFighterOperationType(int entryId);
+    int getFighterOperationStatus(int entryId);
     Fighter* searchNearFighter(float unk1, float radius, Vec3f* pos, int team, bool unk4);
     void setHeal(int entryId, float heal);
     void setCurry(int entryId);
@@ -119,6 +129,7 @@ public:
     void setInfiniteScaling(int entryId, int unk1, int unk2);
     void setThunder(int inflictingEntryId, int unk2);
     void setWarpFighter(int entryId, Vec3f* pos, float lr, bool showEffect);
+    void setFighterOperationStatus(int entryId, int fighterOperationStatus);
 
     void pickupCoin(int entryId, int amount);
     void setDead(int entryId, int unk1, int unk2);

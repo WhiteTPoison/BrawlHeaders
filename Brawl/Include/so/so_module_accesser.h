@@ -1,9 +1,11 @@
 #pragma once
 
 #include <StaticAssert.h>
+#include <so/anim/so_anim_cmd_module_impl.h>
 #include <so/collision/so_collision_attack_module_impl.h>
 #include <so/collision/so_collision_hit_module_impl.h>
 #include <so/collision/so_collision_search_module_impl.h>
+#include <so/color/so_color_blend_module_impl.h>
 #include <so/controller/so_controller_module_impl.h>
 #include <so/damage/so_damage_module_impl.h>
 #include <so/effect/so_effect_module_impl.h>
@@ -16,8 +18,10 @@
 #include <so/slow/so_slow_module_impl.h>
 #include <so/sound/so_sound_module_impl.h>
 #include <so/status/so_status_module_impl.h>
+#include <so/kinetic/so_kinetic_module_impl.h>
 #include <so/event/so_event_manage_module_impl.h>
 #include <so/work/so_work_manage_module_impl.h>
+#include <so/param/so_param_customize_module_impl.h>
 #include <types.h>
 
 class StageObject;
@@ -51,11 +55,11 @@ public:
     void* m_cameraModule;
     soWorkManageModule* m_workManageModule;
     void* m_debugModule;
-    void* m_animCmdModule;
+    soAnimCmdModule* m_animCmdModule;
     soStatusModule* m_statusModule;
     void* m_generalTermDisideModule;
     void* m_switchDecideModule;
-    void* m_kineticModule;
+    soKineticModule* m_kineticModule;
     soEventManageModule* m_eventManageModule;
     void* m_generateArticleManageModule;
     soEffectModule* m_effectModule;
@@ -67,13 +71,13 @@ public:
     void* m_slopeModule;
     void* m_shadowModule;
     void* m_itemManageModule;
-    void* m_colorBlendModule;
+    soColorBlendModule* m_colorBlendModule;
     void* m_jostleModule;
     void* m_abnormalModule;
     soSlowModule* m_slowModule;
     void* m_reflectModule;
     void* m_heapModule;
-    void* m_paramCustomizeModule;
+    soParamCustomizeModule* m_paramCustomizeModule;
     void* m_glowModule;
 };
 CHECK_SIZE(soModuleEnumeration, 204);
@@ -86,6 +90,11 @@ public:
     soModuleEnumeration m_moduleEnumeration;
     soModuleEnumeration* m_enumerationStart;
     void* vtable1;
+
+    inline soModelModule* getModelModule()
+    {
+        return this->m_enumerationStart->m_modelModule;
+    }
 
     inline soMotionModule* getMotionModule()
     {
@@ -142,9 +151,19 @@ public:
         return this->m_enumerationStart->m_workManageModule;
     }
 
+    inline soAnimCmdModule* getAnimCmdModule() 
+    {
+        return this->m_enumerationStart->m_animCmdModule;
+    }
+
     inline soStatusModule* getStatusModule()
     {
         return this->m_enumerationStart->m_statusModule;
+    }
+
+    inline soKineticModule* getKineticModule()
+    {
+        return this->m_enumerationStart->m_kineticModule;
     }
 
     inline soEventManageModule* getEventManageModule()
@@ -161,5 +180,21 @@ public:
     {
         return this->m_enumerationStart->m_slowModule;
     }
+
+    inline soColorBlendModule* getColorBlendModule()
+    {
+        return this->m_enumerationStart->m_colorBlendModule;
+    }
+
+    inline soParamCustomizeModule* getParamCustomizeModule()
+    {
+        return this->m_enumerationStart->m_paramCustomizeModule;
+    }
 };
 static_assert(sizeof(soModuleAccesser) == 224, "Class is wrong size!");
+
+
+template <class T>
+class soModuleAccesserBuilder {
+    T t;
+};

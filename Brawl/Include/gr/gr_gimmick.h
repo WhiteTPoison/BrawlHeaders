@@ -17,14 +17,29 @@ struct grGimmickMotionPathData {
     char m_index;
     MotionPathMode m_pathMode : 8;
     char m_mdlIndex;
-    char _padding;
+    char m_7;
 };
 static_assert(sizeof(grGimmickMotionPathData) == 8, "Class is wrong size!");
 
 struct grGimmickMotionPathInfo {
     gfArchive* m_archive;
     grGimmickMotionPathData* m_motionPathData;
-    int m_0x8;
+    union {
+        struct {
+            union {
+                struct {
+                    u8 : 6;
+                    bool m_isMotionPathRotate : 1;
+                    bool m_isMotionPathTranslate : 1;
+                    u32 : 24;
+                };
+                struct {
+                    u32 m_motionPathFlags;
+                };
+            };
+        };
+    };
+
     int m_0xc;
     int m_0x10;
     int m_0x14;
@@ -147,9 +162,9 @@ public:
     };
 
     // 5C
-    int m_numSndGenerators;
+    int m_numSoundGenerators;
     // 60
-    snd3DGenerator* m_snd3DGenerators;
+    snd3DGenerator* m_soundGenerators;
     // 64
     int m_numSoundEffects;
     // 68
@@ -175,7 +190,15 @@ public:
     // 90
     grCalcWorldCallBack m_calcWorldCallBack;
     // A0
-    char m_unk5;
+    union {
+        struct {
+            u8 m_motionPathFlagPadding : 6;
+            bool m_isMotionPathRotate : 1;
+            bool m_isMotionPathTranslate : 1;
+        };
+        u8 m_motionPathFlags;
+    };
+
     // A1
     bool m_transparencyFlag;
     // A2
@@ -199,7 +222,7 @@ public:
     // CC
     char _spacer9[0x40];
 
-    grGimmick(char* taskName);
+    grGimmick(const char* taskName);
 
     virtual void processUpdate();
     virtual void renderDebug();
@@ -215,7 +238,7 @@ public:
     virtual void setTransparencyFlag(char flag);
     virtual void updateCallback(u32 index);
     virtual void fixedPosition(float unk1);
-    virtual void setTgtNode(char* unk1);
+    virtual void setTgtNode(const char* unk1);
     virtual u32 getTgtNode();
     virtual void setGimmickData(void* gimmickData);
     virtual void* getGimmickData();
@@ -233,20 +256,20 @@ public:
     void changeTexAnim(u32 patIndex, u32 modelAnimIndex);
     void changeTexSrtAnim(u32 srtIndex, u32 modelAnimIndex);
     void changeVisibleAnim(u32 visIndex, u32 modelAnimIndex);
-    void createAttachMotionPath(grGimmickMotionPathInfo* motionPathInfo, stTriggerData* triggerData, char* nodeName);
+    void createAttachMotionPath(grGimmickMotionPathInfo* motionPathInfo, stTriggerData* triggerData, const char* nodeName);
     void createEffectWork(int numEffects);
     void createIsValidTrigger(stTriggerData* triggerData);
-    void createSimpleEffectData(SimpleEffectData* simpleEffectData, u32 unk2, char* nodeName);
+    void createSimpleEffectData(SimpleEffectData* simpleEffectData, u32 unk2, const char* nodeName);
     void createSoundWork(u32 unk1, u32 unk2);
-    u32 getMaterialColor(int* unk1, char* unk2, u32* sceneModelIndex);
-    u32 getMaterialTevColor(int* unk1, char* unk2, u32* sceneModelIndex);
+    u32 getMaterialColor(int* unk1, const char* unk2, u32* sceneModelIndex);
+    u32 getMaterialTevColor(int* unk1, const char* unk2, u32* sceneModelIndex);
     void getMatrix(Matrix* matrix);
     void makeCalcuCallback(u32 numCallbackData, HeapType heapType);
     void setAttachPathdataFrame(float frame);
     void setCalcuCallbackRoot(u32 unk1);
-    void setMaterialAlpha(char* unk1, u32 unk2);
-    void setMaterialColor(u32* unk1, char* unk2, u32* unk3, u32* sceneModelIndex);
-    void setMaterialTevColor(u32* unk1, char* unk2, u32* unk3, u32* sceneModelIndex);
+    void setMaterialAlpha(const char* unk1, u32 unk2);
+    void setMaterialColor(u32* unk1, const char* unk2, u32* unk3, u32* sceneModelIndex);
+    void setMaterialTevColor(u32* unk1, const char* unk2, u32* unk3, u32* sceneModelIndex);
     void setMatrix(Matrix* matrix);
     void setPos(Matrix* matrix);
     void setPos(Vec3f* pos);

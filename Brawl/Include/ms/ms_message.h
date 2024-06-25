@@ -7,13 +7,14 @@
 
 class Message : public ms::TextWriterBase<char> {
 public:
+
     Message(u32, HeapType heapType);
     virtual ~Message();
 
     char _164[316];
 
     bool allocMsgBuf(u32 msgSizes, u32 numMsgs, HeapType heapType);
-    bool attachMsgBuf(u32 index, nw4r::g3d::ScnMdl* sceneModel, char* nodeName, u8, int, float);
+    bool attachMsgBuf(u32 index, nw4r::g3d::ScnMdlSimple* sceneModel, const char* nodeName, u8, int, float);
     bool changeMsgBuf(int index);
     void clearMsgBuf();
     void setWindow(float, float, float, float);
@@ -24,6 +25,9 @@ public:
     void setCursorX(float);
     void setCursorY(float);
     void printf(const char* format, ...);
+
+    static void getPrintIndexData(void* msgbin, u32 index, char** outStr, u32* outLen);
+
 
 };
 static_assert(sizeof(Message) == 480, "Class is wrong size!");

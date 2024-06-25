@@ -6,6 +6,7 @@
 #include <so/collision/so_collision_attack_part.h>
 #include <so/damage/so_damage.h>
 #include <so/event/so_event_system.h>
+#include <so/so_null.h>
 #include <types.h>
 
 class soModuleAccesser;
@@ -100,16 +101,6 @@ public:
 };
 static_assert(sizeof(soEventObserver<void>) == 0xC, "Class is wrong size!");
 
-class soAnimCmdEventObserver : public soEventObserver<soAnimCmdEventObserver> {
-public:
-    soAnimCmdEventObserver(short unitID) : soEventObserver<soAnimCmdEventObserver>(unitID) {};
-
-    virtual void addObserver(int param1, int param2);
-    virtual u32 isObserv(char unk1);
-    virtual bool notifyEventAnimCmd(acAnimCmd* acmd, soModuleAccesser* moduleAccesser, int unk3);
-};
-static_assert(sizeof(soAnimCmdEventObserver) == 12, "Class is wrong size!");
-
 class soLinkEventObserver : public soEventObserver<soLinkEventObserver> {
 public:
     soLinkEventObserver(short unitID) : soEventObserver<soLinkEventObserver>(unitID) {};
@@ -121,7 +112,6 @@ static_assert(sizeof(soLinkEventObserver) == 12, "Class is wrong size!");
 
 struct soStatusData {
 };
-
 class soStatusEventObserver : public soEventObserver<soStatusEventObserver> {
 public:
     soStatusEventObserver(short unitID) : soEventObserver<soStatusEventObserver>(unitID) {};
@@ -145,7 +135,7 @@ public:
     soCollisionAttackEventObserver(short unitID) : soEventObserver<soCollisionAttackEventObserver>(unitID) {};
 
     virtual void addObserver(int param1, int param2);
-    virtual void notifyEventCollisionAttack(void* unk1, void* unk2, soModuleAccesser* moduleAccesser);
+    virtual void notifyEventCollisionAttack(float power, soCollisionLog* collisionLog, soModuleAccesser* moduleAccesser);;
     virtual bool notifyEventCollisionAttackCheck(u32 flags);
 };
 static_assert(sizeof(soCollisionAttackEventObserver) == 12, "Class is wrong size!");
@@ -198,7 +188,7 @@ public:
     soCollisionSearchEventObserver(short unitID) : soEventObserver<soCollisionSearchEventObserver>(unitID) {};
 
     virtual void addObserver(int param1, int param2);
-    virtual void notifyEventCollisionSearch(void*, soModuleAccesser* moduleAccesser);
+    virtual void notifyEventCollisionSearch(soCollisionLog* collisionLog, soModuleAccesser* moduleAccesser);
     virtual bool notifyEventCollisionSearchCheck();
 };
 static_assert(sizeof(soCollisionSearchEventObserver) == 12, "Class is wrong size!");
@@ -323,3 +313,37 @@ public:
     virtual void notifyEventDestructInstance(soModuleAccesser* moduleAccesser);
 };
 static_assert(sizeof(soModelEventObserver) == 12, "Class is wrong size!");
+
+class soAnimCmdEventObserver : public soEventObserver<soAnimCmdEventObserver> {
+public:
+    soAnimCmdEventObserver(short unitID) : soEventObserver<soAnimCmdEventObserver>(unitID) {};
+
+    virtual void addObserver(int param1, int param2);
+    virtual u32 isObserv(char unk1);
+    virtual bool notifyEventAnimCmd(acAnimCmd* acmd, soModuleAccesser* moduleAccesser, int unk3);
+};
+static_assert(sizeof(soAnimCmdEventObserver) == 12, "Class is wrong size!");
+
+class soEventObserverRegistrationDesc : public soNullable {
+    virtual ~soEventObserverRegistrationDesc();
+    virtual bool checkCollisionHit();
+    virtual bool checkCollisionAttack();
+    virtual bool checkCollisionCatch();
+    virtual bool checkGimmick();
+    virtual bool checkStatus();
+    virtual bool checkAnimCmd();
+    virtual bool checkDamage();
+    virtual bool checkLink();
+    virtual bool checkSituation();
+    virtual bool checkModel();
+    virtual bool checkMotion();
+    virtual bool checkArticle();
+    virtual bool checkItemManage();
+    virtual bool checkCapture();
+    virtual bool checkCollisionShield();
+    virtual bool checkCollisionReflector();
+    virtual bool checkCollisionAbsorber();
+    virtual bool checkCollisionSearch();
+    virtual bool checkTurn();
+
+};

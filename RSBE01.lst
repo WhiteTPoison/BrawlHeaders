@@ -1,4 +1,5 @@
 // global variables
+805a00d0:g_ipSwitch
 805A0148: g_ecMgr
 8059FFAC: g_gfGameApplication
 805A01D0: g_sndSystem
@@ -6,9 +7,13 @@
 805A02D0: g_IfMngr
 27,6,58D8: g_stTriggerMng
 27,6,2E68: g_ftManager
+27,6,2E88: g_ftEntryManager
+27,6,2E90: g_ftSlotManager
+27,6,2EB4: g_ftInstanceManager
 27,6,2E70: g_ftAudienceManager
 27,6,5518: g_aiMgr
 27,6,E8: g_soWorld
+80494958:g_HeapInfos
 8059FF80: g_gfSceneRoot
 901812A0: g_GameFrame
 90FF50C0: g_scMelee
@@ -27,6 +32,12 @@
 
 // Pad Config
 80048548:getInstance__11ipPadConfigFv
+
+// Hardware
+CC008000:WGPIPE
+// CD006C00:AI_HW_REGS
+// CC005000:DSP_HW_REGS
+// CD000000:IPC_HW_REGS
 
 // System
 803f1254:__save_fpr
@@ -96,7 +107,8 @@
 802123a8:IOS_Open
 80212d40:IOS_Ioctl
 80212588:IOS_Close
-80213090:IOS_Ioctlv
+80213090:IOS_Ioctlv803f0e38:__ptmf_scall
+
 // OS
 801d8600:OSReport
 801e0cfc:OSCreateThread
@@ -105,15 +117,20 @@
 801e1224:OSJoinThread
 801dcf24:OSEnableInterrupts
 801dcf10:OSDisableInterrupts
+801debb4:OSLockMutex
+801dec90:OSUnlockMutex
+801deb7c:OSInitMutex
 
 // string
 803fa340:strncpy__6StringF6StringPcUl
 803fa3fc:strcmp__FPCcPCc
 803fa3fc:strcmp
 803fa340:strncpy
+803fa340:strncpy__6StringF6StringPCcUl
 803fa280:strcpy__FPcPCc
 803fa280:strcpy
 803f89fc:sprintf
+803f8924:snprintf
 803fa384:strcat__FPcPc
 803fa3b0:strncat__FPcPc
 803fa518:strncmp__FPcPc
@@ -127,6 +144,7 @@
 803f8820:vsnprintf
 803fa798:strstr
 803fa3b0:strncat
+803fa108:sscanf
 
 // module
 80043b18:moUnResolvedMessage__FPCc
@@ -168,14 +186,32 @@
 801e55dc:EXIUnlock
 801e4d4c:EXISelect
 801e4e7c:EXIDeselect
+80004338:memcpy__FPvPvUl
 
-// NW4R
+// math
+804009e0:sin
+804004d8:cos
+80400b38:atan2
+802a0bcc:fabsf
+
+
+// nw4r::g3d::ResFile
 8018d2a4:GetResMdlNumEntries__Q34nw4r3g3d7ResFileFv
 8018d770:GetResAnmChrNumEntries__Q34nw4r3g3d7ResFileFv
+8018d978:GetResAnmVisNumEntries__Q34nw4r3g3d7ResFileFv
+8018dd88:GetResAnmTexPatNumEntries__Q34nw4r3g3d7ResFileFv
+8018df90:GetResAnmTexSrtNumEntries__Q34nw4r3g3d7ResFileFv
+8018db80:GetResAnmClrNumEntries__Q34nw4r3g3d7ResFileFv
+8018d640:GetResAnmChr__Q34nw4r3g3d7ResFileFi
+8018d848:GetResAnmVis__Q34nw4r3g3d7ResFileFi
+8018dc58:GetResAnmTexPat__Q34nw4r3g3d7ResFileFi
+8018de60:GetResAnmTexSrt__Q34nw4r3g3d7ResFileFi
+8018da50:GetResAnmClr__Q34nw4r3g3d7ResFileFi
+8018e270:GetResAnmScn__Q34nw4r3g3d7ResFileFi
+
+// NW4R
 8018ee4c:GetResNodeNumEntries__Q34nw4r3g3d6ResMdlFv
 801b0520:__ct__Q44nw4r3g3d6ScnMdl15CopiedMatAccessFPQ34nw4r3g3d6ScnMdlUl
-8018d640:GetResAnmChr__Q34nw4r3g3d7ResFileFi
-8018e270:GetResAnmScn__Q34nw4r3g3d7ResFileFi
 8018f258:GetResMat__Q34nw4r3g3d6ResMdlCFPCc
 801b00b4:GetResMatTevColor__Q44nw4r3g3d6ScnMdl15CopiedMatAccessFb
 801913d0:GXSetTevColor__Q34nw4r3g3d14ResMatTevColorFUl8_GXColor
@@ -198,8 +234,20 @@
 8005f7b8:setEffect__5ecMgrFUlP5Vec3f
 8005f7e0:setEffect__5ecMgrFUlP5Vec3fP5Vec3fP5Vec3f
 80060c54:endEffect__5ecMgrFUl
-8005fc5c:setParent__5ecMgrFUlPQ34nw4r3g3d6ScnMdlPci
+8005fc5c:setParent__5ecMgrFUlPQ34nw4r3g3d6ScnMdlPCci
 80060d8c:killEffect__5ecMgrFUlUlUl
+800606a8:preSetAnmIdx__5ecMgrFiiiiii
+8006001c:setGroundAttach__5ecMgrFUlP14soGroundModule
+800600ec:setGroundAttach__5ecMgrFUlP19grCollisionLineWork
+8006017c:setVisible__5ecMgrFUlb
+8006020c:setVisibleGroup__5ecMgrFUlbUlUl
+800602b0:setPos__5ecMgrFUlP5Vec3f
+80060340:setRot__5ecMgrFUlP5Vec3f
+800603d0:setScl__5ecMgrFUlP5Vec3f
+80060460:setMdlTexpat__5ecMgrFUlUl
+800604f0:setMdlAnmIdx__5ecMgrFUlUlSc
+80060584:setMdlEnableUpdate__5ecMgrFUlbSc
+80060618:setMdlFrame__5ecMgrFUlfSc
 
 // efScreen
 8005e0fc:requestFill__8efScreenFfiiP8_GXColor
@@ -210,6 +258,8 @@
 80073c98:freeGroup__9sndSystemFii
 800742b0:playSE__9sndSystemFiiiii
 80073b68:loadSoundGroup__9sndSystemF10SndGroupIDib
+80073fe8:getBGMId__9sndSystemFv
+80073db0:playBGM__9sndSystemFiUlb
 
 // snd3DGenerator
 80079550:__ct__14snd3DGeneratorFv
@@ -221,7 +271,7 @@
 80079758:prepareSE__14snd3DGeneratorF5SndIDl
 
 // gfTask
-8002d8b8:__ct__6gfTaskFPciiii
+8002d8b8:__ct__6gfTaskFPCciiii
 8002ddc8:processDefault__6gfTaskFv
 8002ddd8:processBegin__6gfTaskFv
 8002dde8:processAnim__6gfTaskFv
@@ -248,9 +298,6 @@
 8002dc40:getTask__6gfTaskFi
 8002df34:exit__6gfTaskFv
 
-// gfHeapManager
-80024a50:dumpAll__13gfHeapManagerFv
-80024b08:dumpList__13gfHeapManagerFv
 
 // gfArchive
 8001370c:__ct__9gfArchiveFv
@@ -271,8 +318,29 @@
 800278b0:unbindNodeAnim__16gfModelAnimationFPQ34nw4r3g3d6ScnMdl
 80014890:setFileImage__9gfArchiveFPviQ25Heaps8HeapType
 80027ba8:unbindShapeAnim__16gfModelAnimationFPQ34nw4r3g3d6ScnMdl
+80027c40:__ct__16gfModelAnimationFPQ34nw4r3g3d7ResFilePQ34nw4r3g3d6ResMdlbUlQ25Heaps8HeapType
+80027fa4:__ct__16gfModelAnimationFPQ34nw4r3g3d7ResFilePQ34nw4r3g3d6ResMdlbPCcQ25Heaps8HeapType
+80028744:getUpdateRate__16gfModelAnimationFv
+800282f4:setLoopNode__16gfModelAnimationFb
+8002831c:setLoopVisible__16gfModelAnimationFb
+80028344:setLoopTex__16gfModelAnimationFb
+8002836c:setLoopTexSrt__16gfModelAnimationFb
+80028394:setLoopMatCol__16gfModelAnimationFb
+80027948:unbindVisibleAnim__16gfModelAnimationFPQ34nw4r3g3d6ScnMdl
+800279e0:unbindTexAnim__16gfModelAnimationFPQ34nw4r3g3d6ScnMdl
+80027a78:unbindTexSrtAnim__16gfModelAnimationFPQ34nw4r3g3d6ScnMdl
+80027b10:unbindMatColAnim__16gfModelAnimationFPQ34nw4r3g3d6ScnMdl
+8002771c:bindNodeAnim__16gfModelAnimationFPQ34nw4r3g3d6ScnMdl
+80027748:bindVisibleAnim__16gfModelAnimationFPQ34nw4r3g3d6ScnMdl
+80027774:bindTexAnim__16gfModelAnimationFPQ34nw4r3g3d6ScnMdl
+800277a0:bindTexSrtAnim__16gfModelAnimationFPQ34nw4r3g3d6ScnMdl
+800277cc:bindMatColAnim__16gfModelAnimationFPQ34nw4r3g3d6ScnMdl
+800277f8:bindShapeAnim__16gfModelAnimationFPQ34nw4r3g3d6ScnMdl
+80027824:unbind__16gfModelAnimationFPQ34nw4r3g3d6ScnMdl
+80027610:bind__16gfModelAnimationFPQ34nw4r3g3d6ScnMdlP16gfModelAnimation
 
 // gfCamera
+80018de4:setGX__gfCameraManagerFV
 80019fa4:getManager__15gfCameraManagerFv
 80019a2c:calcProjection3Dto2D__8gfCameraFP5Vec3fP5Vec2f
 
@@ -284,9 +352,10 @@
 
 // gfModuleManager
 27,1,00143B14:getInstance__15gfModuleManagerFv
-80026e00:loadModuleRequest__15gfModuleManagerFPQ215gfModuleManager17LoadRequestResultP15gfModuleManagerPcQ25Heaps8HeapTypebb
+80027060:loadModuleRequestOnImage__15gfModuleManagerFPCcQ25Heaps8HeapTypeP14gfModuleHeaderPi
+80026e00:loadModuleRequest__15gfModuleManagerFPQ215gfModuleManager17LoadRequestResultP15gfModuleManagerPCcQ25Heaps8HeapTypebb
 80026c78:setTempolaryLoadHeap__15gfModuleManagerFQ25Heaps8HeapType
-8002737c:destroy__15gfModuleManagerFPc
+8002737c:destroy__15gfModuleManagerFPCc
 
 //stOperatorReadyGo
 809514c0:isEnd__17stOperatorReadyGoFv
@@ -300,7 +369,7 @@
 8002d180:registSequence__14gfSceneManagerFv
 8002d1a0:process__14gfSceneManagerFv
 8002d32c:postProcess__14gfSceneManagerFv
-8002d3f4:searchScene__14gfSceneManagerFPc
+8002d3f4:searchScene__14gfSceneManagerFPCc
 8002d474:searchSequence__14gfSceneManagerFv
 8002d4f4:startSequence__14gfSceneManagerFv
 8002d5ac:setNextScene__14gfSceneManagerFv
@@ -326,9 +395,12 @@
 27,1,00000EF8:__pl__5Vec3fFRC5Vec3f
 27,1,00000F1C:__ml__5Vec3fFf
 27,1,00000F1C:__ml__FfRC5Vec3f
+27,1,00000F38:length__5Vec3fFv
 
 // Matrix
 8003ee18:getRotate__6MatrixFP5Vec3f
+8003eb48:rotY__6MatrixFf
+8003e35c:setIdentity__6MatrixFv
 
 // mtCommon
 8003db08:mtSqrtf__Ff
@@ -352,21 +424,77 @@
 // hkMath
 802a0bcc:fabs__6hkMathFf
 80291dd8:max2f__6hkMathFff
+802a0bf8:sqrt__6hkMathFf
+8032ca40:acos__6hkMathFf
 
 // CameraController
 8009c69c:changeInput__16CameraControllerFQ216CameraController4Kind
 8009be74:getInstance__16CameraControllerFv
 
 // cmAnimationController
-800a624c:setScnAnmRes__21cmAnimationControllerFPPQ34nw4r3g3d4SCN0Ul
+800a624c:setScnAnmRes__21cmAnimationControllerFQ34nw4r3g3d9ResAnmScnUl
 800a6348:releaseScnAnmRes__21cmAnimationControllerFv
 
 // cmSubjectList
 8009ece8:getSubjectByPlayerNo__13cmSubjectListFUl
 
+// clTarget
+27,1,00038C68:__ct__8clTargetFv
+27,1,00038C78:__dt__8clTargetFv
+
+// soArrayVectorCalculator
+27,1,000C275C:erase__23soArrayVectorCalculatorFP26soArrayVectorCalcInterfaceUlUlUlUlUl
+27,1,000C261C:insert__23soArrayVectorCalculatorFP26soArrayVectorCalcInterfaceUlbUlUlUlUl
+27,1,000C2954:push__23soArrayVectorCalculatorFP26soArrayVectorCalcInterfacebUlUlUl
+27,1,000C285C:unshift__23soArrayVectorCalculatorFP26soArrayVectorCalcInterfacebUlUlUl
+27,1,000C2A88:clear__23soArrayVectorCalculatorFP26soArrayVectorCalcInterface
+27,1,000C29F4:pop__23soArrayVectorCalculatorFP26soArrayVectorCalcInterfacebUlUl
+27,1,000C28EC:shift__23soArrayVectorCalculatorFP26soArrayVectorCalcInterfacebUlUl
+27,1,000C2AF0:postInitialize__23soArrayVectorCalculatorFP26soArrayVectorCalcInterfaceUlUl
+27,1,000C2B5C:resize__23soArrayVectorCalculatorFP26soArrayVectorCalcInterfaceUlbbUlUlUl
+
 // soEventSystem
 27,1,0008F064:getInstance__13soEventSystemFv
 27,1,0008F1BC:getManager__13soEventSystemFs
+
+// soGroundShapeImpl
+27,1,0002F9A4:updateRhombus__17soGroundShapeImplFP16soModuleAccesser
+27,1,0002FC10:updateRhombusFollowNode__17soGroundShapeImplFP16soModuleAccesser
+27,1,0002F190:updateRhombusModify__17soGroundShapeImplFP16soModuleAccesser
+
+// soPostureModuleImpl
+27,1,00023364:__ct__19soPostureModuleImplFP16soModuleAccesserP34soArray<23soInterpolation<5Vec3f>>P31soEventObserverRegistrationDesc
+27,1,000234F0:__dt__19soPostureModuleImplFv
+
+// soCollisionGroup
+27,1,00037C80:__ct__16soCollisionGroupFv
+27,1,00037B04:__dt__16soCollisionGroupFv
+
+// soCollisionAttackModuleImpl
+27,1,00039590:__ct__27soCollisionAttackModuleImplFP16soModuleAccesseriUcP32soArray<21soCollisionAttackPart>P27soArray<16soCollisionGroup>P36soArray<25soCollisionAttackAbsolute>P31soEventObserverRegistrationDescb
+27,1,00039968:__dt__27soCollisionAttackModuleImplFv
+
+// soCollisionAttackAbsolute
+27,1,000C94BC:__ct__25soCollisionAttackAbsoluteFv
+27,1,00086D0C:__dt__25soCollisionAttackAbsoluteFv
+
+// soCollisionAttackPart
+27,1,00038550:__ct__21soCollisionAttackPartFUcb
+27,1,000CCDA8:__ct__21soCollisionAttackPartFv
+27,1,000386B4:__dt__21soCollisionAttackPartFv
+
+// soCollisionHitGroup
+27,1,00041B00:__dt__19soCollisionHitGroupFv
+27,1,00041AE0:__ct__19soCollisionHitGroupFv
+
+// soCollisionHitPart
+27,1,000415E4:__dt__18soCollisionHitPartFv
+27,1,0004148C:__ct__18soCollisionHitPartFUcUl
+27,1,000CC22C:__ct__18soCollisionHitPartFv
+
+// soCollisionHitModule
+27,1,00042E4C:__dt__24soCollisionHitModuleImplFv
+27,1,00042AA4:__ct__24soCollisionHitModuleImplFP16soModuleAccesseriUcP29soArray<18soCollisionHitPart>P27soArray<16soCollisionGroup>P30soArray<19soCollisionHitGroup>P31soEventObserverRegistrationDescb
 
 // Stage
 27,1,002225A8:createObj__5StageFv
@@ -665,6 +793,14 @@
 27,1,00238EB0:setGravityHalf__7stMeleeFv
 27,1,00238E90:setGravityNormal__7stMeleeFv
 
+// stUtility
+27,1,00227BEC:stRayCheck__FP5Vec3fP5Vec3fbP11grCollisionbUc
+27,1,00227CC4:stRayCheck__FP5Vec3fP5Vec3fP5Vec3fP5Vec3fbP11grCollisionbUc
+27,1,00227DD8:stRayCheck__FP5Vec3fP5Vec3fPiP5Vec3fP5Vec3fbbUc
+
+// grCollisionJoint
+80111958:getJoint__11grCollisionFUs
+
 // Ground
 27,1,00261b50:setDontMoveGround__6GroundFv
 27,1,0025f64c:loadGroundData__6GroundFUlUlUl
@@ -682,19 +818,20 @@
 27,1,00228dd8:getModelCount__6GroundFv
 27,1,0025fa34:unloadData__6GroundFv
 27,1,00230728:setMdlIndex__6GroundFi
-27,1,00260B48:getNodeIndex__6GroundFUlPc
+27,1,00260B48:getNodeIndex__6GroundFUlPCc
+27,1,00260BDC:getNodeIndex__6GroundFPUlUlPCc
 27,1,00260c84:getNodePosition__6GroundFP5Vec3fUlUl
-27,1,00260d78:getNodePosition__6GroundFP5Vec3fUlPc
+27,1,00260d78:getNodePosition__6GroundFP5Vec3fUlPCc
 27,1,00260e88:getNodeMatrix__6GroundFP6MatrixUlUl
-27,1,00260f48:getNodeMatrix__6GroundFP6MatrixUlPc
+27,1,00260f48:getNodeMatrix__6GroundFP6MatrixUlPCc
 27,1,0026102c:setNodeVisibility__6GroundFbUlUlbb
-27,1,002611dc:setNodeVisibility__6GroundFbUlPcbb
+27,1,002611dc:setNodeVisibility__6GroundFbUlPCcbb
 27,1,002612ac:setNodeVisibilityAll__6GroundFbUl
 27,1,002613ac:isNodeVisible__6GroundFUlUl
 27,1,00261434:setNodeCollision__6GroundFbUlUlb
-27,1,002615ec:setNodeCollision__6GroundFbUlPcb
+27,1,002615ec:setNodeCollision__6GroundFbUlPCcb
 27,1,00261718:getNodeScale__6GroundFP5Vec3fUlUl
-27,1,002617d8:getNodeScale__6GroundFP5Vec3fUlPc
+27,1,002617d8:getNodeScale__6GroundFP5Vec3fUlPCc
 27,1,00231b80:setInitializeInfo__6GroundFi
 27,1,00231b78:getInitializeInfo__6GroundFi
 27,1,0025fd1c:setMotionFrame__6GroundFfUl
@@ -720,7 +857,7 @@
 27,1,00260924:startup__6GroundFP9gfArchiveUlUl
 
 // grGimmick
-27,1,0026A314:__ct__9grGimmickFPc
+27,1,0026A314:__ct__9grGimmickFPCc
 27,1,0026A450:__dt__9grGimmickFv
 27,1,0026A790:processUpdate__9grGimmickFv
 27,1,0026A804:update__9grGimmickFf
@@ -730,7 +867,7 @@
 27,1,0026C8C8:bindData__9grGimmickFP9gfArchive
 27,1,0026D798:setVisibilityAttachedEffect__9grGimmickFUl
 27,1,0026b25c:setNode__9grGimmickFv
-27,1,0026b1c0:setTgtNode__9grGimmickFPc
+27,1,0026b1c0:setTgtNode__9grGimmickFPCc
 27,1,0026c2f8:setMotionRatio__9grGimmickFf
 27,1,0026d940:invalidatedByCameraClipping__9grGimmickFv
 27,1,0026DAF4:setTransparency__9grGimmickFUlUl
@@ -740,6 +877,8 @@
 27,1,0026b254:getTgtNode__9grGimmickFv
 27,1,00231bcc:getGimmickData__9grGimmickFv
 27,1,0026bcc0:changeNodeAnim__9grGimmickFUlUl
+27,1,0026BFBC:changeTexSrtAnim__9grGimmickFUlUl
+27,1,0026BDC0:changeVisibleAnim__9grGimmickFUlUl
 27,1,0026a5e8:createFadeVisibleProduction__9grGimmickFf
 27,1,0026a664:createSoundEffectVisibleProductionForExcel__9grGimmickFUlUlUl
 27,1,0026a6b8:createEffectVisibleProductionForExcel__9grGimmickFPQ29grGimmick16SimpleEffectDataPUlPP19grVisibleProduction
@@ -758,19 +897,21 @@
 27,1,0026DD00:getScale__9grGimmickFv
 27,1,0026DCBC:setScale__9grGimmickFP5Vec3f
 27,1,0026DCE4:setScale__9grGimmickFfff
-27,1,0026B34C:createAttachMotionPath__9grGimmickFP23grGimmickMotionPathInfoP13stTriggerDataPc
-27,1,0026DA8C:createSimpleEffectData__9grGimmickFPQ29grGimmick16SimpleEffectDataUlPc
+27,1,0026B34C:createAttachMotionPath__9grGimmickFP23grGimmickMotionPathInfoP13stTriggerDataPCc
+27,1,0026DA8C:createSimpleEffectData__9grGimmickFPQ29grGimmick16SimpleEffectDataUlPCc
 27,1,0026CB94:createIsValidTrigger__9grGimmickFP13stTriggerData
 27,1,0026D124:createEffectWork__9grGimmickFi
 27,1,0026D22C:startGimmickEffect__9grGimmickFUl
 27,1,0026CE10:startGimmickSE__9grGimmickFUl
 27,1,0026D264:stopGimmickEffect__9grGimmickFUl
 27,1,0026D08C:stopGimmickSE__9grGimmickFUl
+27,1,0026ACA8:updataGimmickEffect__9grGimmickFf
 27,1,0026CCA0:createSoundWork__9grGimmickFUlUl
 27,1,0026C1BC:changeShapeAnim__9grGimmickFUlUl
+27,1,0026C0BC:changeMatColAnim__9grGimmickFUlUl
 
 // grYakumono
-27,1,00264c80:__ct__10grYakumonoFPc
+27,1,00264c80:__ct__10grYakumonoFPCc
 27,1,00264cc4:__dt__10grYakumonoFv
 27,1,00264d1c:processUpdate__10grYakumonoFv
 27,1,00264f58:startup__10grYakumonoFP9gfArchiveUlUl
@@ -808,7 +949,7 @@
 27,1,00264E5C:isSubFighter__10grYakumonoFPi
 
 // grGimmickSpring
-27,1,0026FC6C:__ct__15grGimmickSpringFPc
+27,1,0026FC6C:__ct__15grGimmickSpringFPCc
 27,1,0026FCC8:__dt__15grGimmickSpringFv
 27,1,0026FD20:update__15grGimmickSpringFf
 27,1,0026FFC4:startup__15grGimmickSpringFP9gfArchiveUlUl
@@ -821,7 +962,7 @@
 27,1,0026FF18:setMotionOff__15grGimmickSpringFv
 
 // grGimmickLadder
-27,1,0026F6C4:__ct__15grGimmickLadderFPc
+27,1,0026F6C4:__ct__15grGimmickLadderFPCc
 27,1,0026F734:__dt__15grGimmickLadderFv
 27,1,0026F940:setInitializeFlag__15grGimmickLadderFv
 27,1,0026F78C:startup__15grGimmickLadderFP9gfArchiveUlUl
@@ -840,7 +981,7 @@
 27,5,58B78:__vt__17grGimmickCatapult
 
 // grGimmickWarpZone
-27,1,00274078:__ct__17grGimmickWarpZoneFPc
+27,1,00274078:__ct__17grGimmickWarpZoneFPCc
 27,1,002740EC:__dt__17grGimmickWarpZoneFv
 27,1,0027455C:update__17grGimmickWarpZoneFf
 27,1,00274168:startup__17grGimmickWarpZoneFP9gfArchiveUlUl
@@ -849,7 +990,7 @@
 27,1,00274144:setWarpAttrData__17grGimmickWarpZoneFP5Vec3fUcb
 
 // grYakumonoPunchSlider
-27,1,00268B18:__ct__21grYakumonoPunchSliderFPc
+27,1,00268B18:__ct__21grYakumonoPunchSliderFPCc
 27,1,00268BCC:__dt__21grYakumonoPunchSliderFv
 27,1,00268C24:update__21grYakumonoPunchSliderFf
 27,1,0026907C:startup__21grYakumonoPunchSliderFP9gfArchiveUlUl
@@ -860,15 +1001,15 @@
 27,1,00269830:setCulcCallback__21grYakumonoPunchSliderFP9gfArchive
 
 // grMadein
-27,1,0027583C:__ct__8grMadeinFPc
+27,1,0027583C:__ct__8grMadeinFPCc
 27,1,00275928:__dt__8grMadeinFv
 27,1,00275A98:startup__8grMadeinFP9gfArchiveUlUl
 27,1,00279D50:onDamage__8grMadeinFiP8soDamageP20soDamageAttackerInfo
 27,1,00279E04:onInflictEach__8grMadeinFP14soCollisionLogf
 27,1,00278c54:update__8grMadeinFf
-27,1,00275778:create__8grMadeinFiPcPcQ25Heaps8HeapType
+27,1,00275778:create__8grMadeinFiPCcPCcQ25Heaps8HeapType
 27,1,00279f14:receiveCollMsg_Landing__8grMadeinFP12grCollStatusP16grCollisionJointb
-27,1,00278DC4:setTgtNode__8grMadeinFPc
+27,1,00278DC4:setTgtNode__8grMadeinFPCc
 27,1,00278DC8:getTgtNode__8grMadeinFv
 27,1,00278494:setHitPoint__8grMadeinFfP5Vec3fP5Vec3fbi
 27,1,00278584:setAttack__8grMadeinFfP5Vec3f
@@ -887,16 +1028,18 @@
 
 // grGimmickMotionPath
 27,1,0026EB3C:setFrameUpdate__19grGimmickMotionPathFf
-27,1,0026E13C:create__19grGimmickMotionPathFiPcPc
+27,1,0026E13C:create__19grGimmickMotionPathFiPCcPCc
 27,1,0026EB5C:setFrame__19grGimmickMotionPathFf
 27,1,0026EB64:getFrame__19grGimmickMotionPathFv
 27,1,0026EC24:startMove__19grGimmickMotionPathFv
 27,1,0026EFF4:isEndFrame__19grGimmickMotionPathFv
 27,1,0026EFD8:isStartFrame__19grGimmickMotionPathFv
 27,1,0026EFA0:applyEndFrame__19grGimmickMotionPathFv
+27,1,0026EB6C:getTRS__19grGimmickMotionPathFP5Vec3fP5Vec3fP5Vec3f
+27,1,0026EDF0:stopStartSE__19grGimmickMotionPathFv
 
 // grStadiumVision
-27,1,0027AAF8:create__15grStadiumVisionFiPcPc
+27,1,0027AAF8:create__15grStadiumVisionFiPCcPCc
 27,1,0027ADF8:setDisplay__15grStadiumVisionFb
 
 // StageObject
@@ -906,18 +1049,35 @@
 27,1,000426AC:setInvincibleGlobal__19soCollisionHitGroupFv
 
 // soValueAccesser
+27,1,0008C0D8:getVariableFloat__15soValueAccesserFP16soModuleAccesserUlUl
+27,1,0008C158:getVariableInt__15soValueAccesserFP16soModuleAccesserUlUl
+27,1,0008C1D8:getVariableIndefinite__15soValueAccesserFP16soModuleAccesserUlUl
+27,1,0008C258:getConstantFloat__15soValueAccesserFP16soModuleAccesserUlUl
 27,1,0008C338:getConstantInt__15soValueAccesserFP16soModuleAccesserUlUl
+27,1,0008C418:getConstantIndefinite__15soValueAccesserFP16soModuleAccesserUlUl
+27,1,0008C500:getValueFloat__15soValueAccesserFP16soModuleAccesserUlUl
+27,1,0008C6F0:getValueInt__15soValueAccesserFP16soModuleAccesserUlUl
 
 // soExternalValueAccesser
 27,1,0008CB0C:getTeamNo__23soExternalValueAccesserFP11StageObject
+27,1,0008C9CC:getModuleAccesser__23soExternalValueAccesserFP11StageObject
 27,1,0008C9D4:getPos__23soExternalValueAccesserFP11StageObject
 27,1,0008CAB4:getLr__23soExternalValueAccesserFP11StageObject
+27,1,0008CBF4:getStatusKind__23soExternalValueAccesserFP11StageObject
+27,1,0008CC4C:getSituationKind__23soExternalValueAccesserFP11StageObject
+27,1,0008CCFC:getWorkFlag__23soExternalValueAccesserFP11StageObjectUl
 
 // ftExternalValueAccesser
 27,1,0014d4b8:getWeight__23ftExternalValueAccesserFP7Fighter
 27,1,0014D19C:getHipPos__23ftExternalValueAccesserFP7Fighter
 
+// soAnimCmdEventObserver 
+27,5,00000358:__vt__22soAnimCmdEventObserver
+27,5,00000494:__vt__41soEventObserver<22soAnimCmdEventObserver>Fii
+27,1,000077B8:addObserver__41soEventObserver<22soAnimCmdEventObserver>Fii
+
 // soStatusEventObserver
+27,5,00000F98:__vt__21soStatusEventObserver
 27,1,000133C8:addObserver__21soStatusEventObserverFii
 27,1,00013628:notifyEventChangeStatus__21soStatusEventObserverFiiP12soStatusDataP16soModuleAccesser
 27,1,000136E4:addObserver__40soEventObserver<21soStatusEventObserver>Fii
@@ -970,11 +1130,23 @@
 27,1,0010E030:addObserver__41soEventObserver<22ftOutsideEventObserver>Fii
 27,5,26540:__vt__22ftOutsideEventObserver
 
+// soColorBlendModuleImpl
+27,1,000c0ef0:setSubColor__soColorBlendModuleImplFQ17GXColorUc
+27,1,000c0ee8:isEnableSubColor__soColorBlendModuleImplFv
+27,1,000c0ee0:getSubColor__soColorBlendModuleImplFv
+
+// ftEntryManager
+27,1,00119110:getEntity__14ftEntryManagerFUl
+
+// ftSlotManager
+27,1,001248C0:create__17ftInstanceManagerFP8ftCreate
+
 // ftManager
 27,1,00109BCC:isValidEntryId__9ftManagerFi
 27,1,0010B1E4:getEntryIdFromIndex__9ftManagerFi
 27,1,0010A50C:getFighter__9ftManagerFii
 80814f20:getFighter__9ftManagerFib
+27,1,0010A5A4:getSubFighter__9ftManagerFi
 27,1,0010B1D0:getEntryCount__9ftManagerFv
 27,1,0010B22C:getEntryId__9ftManagerFi
 27,1,0010B29C:getEntryIdFromTaskId__9ftManagerFiPi
@@ -993,10 +1165,15 @@
 27,1,0010BCF4:setSUlcide__9ftManagerFi
 27,1,0010BF4C:pickupCoin__9ftManagerFii
 27,1,00109E14:setWarpFighter__9ftManagerFiP5Vec3ffb
+27,1,0010ADE8:getFighterCenterPos__9ftManagerFii
+27,1,0010AF34:getFighterLr__9ftManagerFii
+27,1,0010a164:getFighterOperationStatus__9ftManagerFi
+27,1,0010a248:getFighterOperationType__9ftManagerFi
 
 // Fighter
 27,1,00138900:setCurry__7FighterFbi
 27,1,0013C860:warp__7FighterFP5Vec3ffb
+27,1,0012B4F0:start__7FighterFP5Vec3fffib
 
 // ftOwner
 27,1,00111B2C:getStockCount__7ftOwnerFv
@@ -1013,6 +1190,7 @@
 27,1,002A3F4C:preloadItemKindArchive__9itManagerF6itKindUlQ29itArchive4Typeb
 27,1,002A7070:createItem__9itManagerF6itKindUliiUciii
 27,1,002A8124:createItemInstance__9itManagerFP8itCreate
+27,1,002A8550:getItemNum__9itManagerF6itKindiii
 27,1,002A8640:getItemNum__9itManagerF6itKind
 27,1,002A7BA0:removeItem__9itManagerFP8BaseItem
 
@@ -1051,8 +1229,12 @@
 27,1,00234040:setAreaSleep__9stTriggerFUl
 27,1,00233A48:setWindParam__9stTriggerFP20grGimmickWindData2ndl
 
+// stDataContainer
+8015bacc:__dt__15stDataContainerFv
+
 // stDataMultiContainer
 8015bbf4:create__20stDataMultiContainerFPvQ25Heaps8HeapType
+
 
 // SeSeq
 27,1,00224e44:__ct__Q28StSeUtil5SeSeqFPQ28StSeUtil10UnkStruct2UlPQ28StSeUtil10UnkStruct3Ul
@@ -1076,6 +1258,8 @@
 41,1,0000CCE4:removeEnemyAll__9emManagerFv
 41,1,0000D528:removeArchiveAll__9emManagerFv
 41,1,0000C7B4:remove__9emManagerFv
+41,1,0000CF18:getEnemyCount__9emManagerFv
+41,1,0000CF8C:getEnemyCountFromKind__9emManagerF9EnemyKind
 
 // emWeaponManager (Note: addresses are based on abridged sora_enemy_vs)
 41,1,0002A7A4:create__15emWeaponManagerFv
@@ -1106,8 +1290,8 @@
 800212b0:checkFreeSize__14gfFileIOHandleFv
 8002134c:del__14gfFileIOHandleFv
 800213e8:writeNAND__14gfFileIOHandleFv
-800215e0:readRequest__14gfFileIOHandleFPcPvii
-80021498:readRequest__14gfFileIOHandleFPcQ25Heaps8HeapTypeii
+800215e0:readRequest__14gfFileIOHandleFPCcPvii
+80021498:readRequest__14gfFileIOHandleFPCcQ25Heaps8HeapTypeii
 80021540:readRequest1__14gfFileIOHandleFv
 80021680:readRequestCached__14gfFileIOHandleFv
 80021738:readRequestCached1__14gfFileIOHandleFv
@@ -1129,16 +1313,37 @@
 80021fac:release__14gfFileIOHandleFv
 8002239c:setReadParam__15gfFileIORequestFP15gfFileIORequestPcPvii
 800219e0:read__14gfFileIOHandleFPCcQ25Heaps8HeapTypei
-8001be00:gfFACreateDir__8gfFileIOFPc
+8001be00:gfFACreateDir__8gfFileIOFPCc
 
 // gameGlobal
 8004D9DC:getLanguage__10GameGlobalFv
 
-
+// G3dObj
+8019d8d8:Destroy__Q34nw4r3g3d6G3dObjFv
 
 // ScnMdl
 801b4af4:Construct__Q34nw4r3g3d6ScnMdlFPviiPv
 801b4d94:Pushback__Q34nw4r3g3d6ScnMdlFPvPvPc
+
+// AnmObjChrRes
+8019aed4:Construct__Q34nw4r3g3d12AnmObjChrResFP12MEMAllocatorPiQ34nw4r3g3d9ResAnmChrQ34nw4r3g3d6ResMdlb
+
+// AnmObjVisRes
+801976c8:Construct__Q34nw4r3g3d12AnmObjVisResFP12MEMAllocatorPiQ34nw4r3g3d9ResAnmVisQ34nw4r3g3d6ResMdl
+
+// AnmObjTexPatRes
+80198a70:Construct__Q34nw4r3g3d15AnmObjTexPatResFP12MEMAllocatorPiQ34nw4r3g3d12ResAnmTexPatQ34nw4r3g3d6ResMdlb
+
+// AnmObjTexSrtRes
+801993e0:Construct__Q34nw4r3g3d15AnmObjTexSrtResFP12MEMAllocatorPiQ34nw4r3g3d12ResAnmTexSrtQ34nw4r3g3d6ResMdlb
+
+// AnmObjMatClrRes
+80197da8:Construct__Q34nw4r3g3d15AnmObjMatClrResFP12MEMAllocatorPiQ34nw4r3g3d9ResAnmClrQ34nw4r3g3d6ResMdlb
+
+// gfHeapManager
+80024a50:dumpAll__13gfHeapManagerFv
+80024b08:dumpList__13gfHeapManagerFv
+80024544:createHeap__13gfHeapManagerFiPCcii
 80024430:getMEMAllocator__13gfHeapManagerFQ25Heaps8HeapType
 800249cc:getHeap__13gfHeapManagerFQ25Heaps8HeapType
 
@@ -1156,19 +1361,43 @@
 8002ff44:getEFB__12gfCopyEFBMgrFi
 8002ffc8:drawCopyEFB__12gfCopyEFBMgrFiP8_GXColor
 
+// MuMsg
+800b8930:create__5MuMsgFUlQ25Heaps8HeapTypeUl
+800b8b08:allocMsgBuf__5MuMsgFUlUl
+800b8c7c:setMsgData__5MuMsgFPv
+800b8c90:attachScnMdlSimple__5MuMsgFUlPQ34nw4r3g3d12ScnMdlSimpleUlf
+800b93f4:setFontWidthModeAuto__5MuMsgFUl
+800b93c4:setAlignMode__5MuMsgFUlQ25MuMsg9AlignMode
+800b93a4:setFontColor__5MuMsgFUlUcUcUcUc
+800b9448:FUN_800b9448__5MuMsgFUlb
+800b9460:FUN_800b9460__5MuMsgFUlUcUcUcf
+800b9230:printf__5MuMsgFUlPCce
+800b91b8:printIndex__5MuMsgFUlUlPv
+800b9348:getMsgData__5MuMsgFUlPPv
+800b8be0:initWindowSetting__5MuMsgFPQ25MuMsg13WindowSetting
+800b94a0:setHSpace__5MuMsgFUlf
+800b94b4:setWScale__5MuMsgFUlf
+800b94c8:getWScale__5MuMsgFUlf
+800b94dc:setHScale__5MuMsgFUlf
+800b94f0:getHScale__5MuMsgFUlf
+800b9504:setDelayPrint__5MuMsgFUlffff
+800b9524:isEndDelayPrint__5MuMsgFUl
+800b8ee8:beginPrint__5MuMsgFUl
+800b938c:setWindowRectVisible__5MuMsgFUlb
+
 // MuObject
-800b534c:changeAnimN__8MuObjectFPc
-800b45a8:changeNodeAnimN__8MuObjectFPc
-800b46f0:changeNodeAnimNIf__8MuObjectFPc
-800b4844:changeVisAnimN__8MuObjectFPc
-800b4988:changeVisAnimNIf__8MuObjectFPc
-800b4ad8:changeTexPatAnim__8MuObjectFPc
-800b4c14:changeTexPatAnimN__8MuObjectFPc
-800b4d3c:changeTexPatAnimNIf__8MuObjectFPc
-800b4e70:changeTexSrtAnimN__8MuObjectFPc
-800b4f98:changeTexSrtAnimNIf__8MuObjectFPc
-800b50cc:changeClrAnimN__8MuObjectFPc
-800b51f4:changeClrAnimNIf__8MuObjectFPc
+800b534c:changeAnimN__8MuObjectFPCc
+800b45a8:changeNodeAnimN__8MuObjectFPCc
+800b46f0:changeNodeAnimNIf__8MuObjectFPCc
+800b4844:changeVisAnimN__8MuObjectFPCc
+800b4988:changeVisAnimNIf__8MuObjectFPCc
+800b4ad8:changeTexPatAnim__8MuObjectFPCc
+800b4c14:changeTexPatAnimN__8MuObjectFPCc
+800b4d3c:changeTexPatAnimNIf__8MuObjectFPCc
+800b4e70:changeTexSrtAnimN__8MuObjectFPCc
+800b4f98:changeTexSrtAnimNIf__8MuObjectFPCc
+800b50cc:changeClrAnimN__8MuObjectFPCc
+800b51f4:changeClrAnimNIf__8MuObjectFPCc
 800b784c:setFrameVisible__8MuObjectFf
 800b7a18:setFrameMatCol__8MuObjectFf
 800b7900:setFrameTex__8MuObjectFf
@@ -1255,7 +1484,7 @@
 80069860:__dt__7MessageFv
 800696b4:__ct__7MessageFUlQ25Heaps8HeapType
 8006b400:allocMsgBuf__7MessageFUlUlQ25Heaps8HeapType
-8006b518:attachMsgBuf__7MessageFUlPQ34nw4r3g3d6ScnMdlPcUcif
+8006b518:attachMsgBuf__7MessageFUlPQ34nw4r3g3d12ScnMdlSimplePCcUcif
 8006a674:changeMsgBuf__7MessageFi
 8006b674:clearMsgBuf__7MessageFv
 80069af0:setWindow__7MessageFffff
@@ -1266,7 +1495,8 @@
 80069970:setCursorX__7MessageFf
 80069a30:setCursorY__7MessageFf
 80069d40:printf__7MessageFPCce
-800b9230:printf__5MuMsgFUlPCce
+800b9230:printf__5MuMsgFUlPCce8006b134:getPrintIndexData__7MessageFPvUlPPcPUl
+
 // grTenganEvent
 27,1,0027BBD8:__ct__13grTenganEventFv
 27,1,0027BBF8:__dt__13grTenganEventFv
@@ -1396,3 +1626,63 @@ CC008000:WGPIPE
 801f136c:GXSetCullMode
 27,5,736B0:g_commonSndGroupHeapLevels
 80069AF0:setMessageLocation__F7Messagedddd
+// gfMemoryPool
+80025c58:alloc__12gfMemoryPoolFPvUli
+800259a4:create__12gfMemoryPoolFPvUlPCc
+8002606c:getMaxFreeBlockSize__12gfMemoryPoolFv
+
+// Compression
+80206018:CXUncompressLZ__FPvPv
+
+// OpenRVL GX functions.
+801f1088:GXBegin
+801f4774:GXSetZMode
+801f136c:GXSetCullMode
+801f3fd8:GXSetAlphaCompare
+801f12fc:GXSetPointSize
+801f12ac:GXSetLineWidth
+80018de4:setGX__8gfCameraFv
+
+// gf/gf_draw
+8001abbc:gfDrawSetupCoord2D__Fv
+8001a5c0:gfDrawSetVtxPosColorPrimEnvironment__Fv
+8001a7b0:gfDrawSetVtxPosColorTexPrimEnvironment__Fv
+8001a980:gfDrawResetLight__Fv
+
+
+// ms::CharWriter
+8006ebcc:__ct__Q22ms10CharWriterFv
+8006ee1c:__dt__Q22ms10CharWriterFv
+8006fe50:Print__Q22ms10CharWriterFUs
+8007001c:PrintGlyph__Q22ms10CharWriterFfffCPv
+8006eeec:SetupGX__Q22ms10CharWriterFv
+8006eeec:SetupGXWithColorMapping__Q22ms10CharWriterFQ34nw4r2ut5ColorQ34nw4r2ut5Color
+8006ffb0:SetCursor__Q22ms10CharWriterFff
+8006ffbc:SetCursor__Q22ms10CharWriterFfff
+8006ffcc:SetCursorX__Q22ms10CharWriterFf
+8006ffd4:SetCursorY__Q22ms10CharWriterFf
+8006ffdc:SetCursorZ__Q22ms10CharWriterFf
+8006ab20:SetEdge__Q22ms10CharWriterFfQ34nw4r2ut5Color
+8006fe48:SetFixedWidth__Q22ms10CharWriterFf
+8006fc60:SetScale__Q22ms10CharWriterFff
+8006fc6c:SetScale__Q22ms10CharWriterFf
+8006f988:SetAlpha__Q22ms10CharWriterFUc
+8006f944:SetColorMapping__Q22ms10CharWriterFQ34nw4r2ut5ColorQ34nw4r2ut5Color
+8006fadc:SetTextColor__Q22ms10CharWriterFQ34nw4r2ut5Color
+8006fe38:EnableFixedWidth__Q22ms10CharWriterFb
+8006ffe4:MoveCursorX__Q22ms10CharWriterFf
+8006fff4:MoveCursorY__Q22ms10CharWriterFf
+
+8006fc88:getAdjustFontScale__Q22ms10CharWrifterCFv
+80070004:GetCursorX__Q22ms10CharWriterCFv
+8007000c:GetCursorY__Q22ms10CharWriterCFv
+80070014:GetCursorZ__Q22ms10CharWriterCFv
+8006fe40:GetFixedWidth__Q22ms10CharWriterCfv
+8006eee4:GetFont__Q22ms10CharWriterCFv
+8006fd60:GetFontAscent__Q22ms10CharWriterCFv
+8006fdc8:GetFontDescent_Q22ms10CharWriterCFv
+8006fcf8:GetFontHeight__Q22ms10CharWriterCFv
+8006fc90:GetFontWidth__Q22ms10CharWriterCFv
+8006fc78:GetScaleH__Q22ms10CharWriterCFv
+8006fc80:GetScaleV__Q22ms10CharWriterCFv
+8006fc3c:GetTextColor__Q22ms10CharWriterCFv

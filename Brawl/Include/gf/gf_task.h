@@ -15,12 +15,12 @@ public:
     gfTask* m_connectedTask;
     gfTask* m_attachedTask;
     gfTask* m_nextTask;
-    int m_taskID;
+    int m_taskId;
     u16 m_0x2c;
     u16 m_taskCategory;
     char _unk[0xC];
 
-    gfTask(char* name, int unk1, int unk2, int unk3, int unk4);
+    gfTask(const char* name, int unk1, int unk2, int unk3, int unk4);
     virtual void processDefault();
     virtual void processBegin();
     virtual void processAnim();

@@ -56,7 +56,8 @@ public:
     char _12[4];
     void* m_heap;
     gfFileIOHandle* m_fileHandle;
-    char _24[2];
+    char _24;
+    char m_flags;
     char m_moduleName;
     char _30[33];
 };
@@ -64,18 +65,19 @@ static_assert(sizeof(gfModuleInfo) == 60, "Class is wrong size!");
 
 class gfModuleManager {
 
+public:
     HeapType m_loadHeap;
     void* m_loadHeapAddr;
     gfModuleInfo m_moduleInfos[16];
 
-public:
     struct LoadRequestResult {
         void* _0;
     };
 
     void setTempolaryLoadHeap(HeapType heapType);
-    void destroy(char* moduleName);
-    static void loadModuleRequest(LoadRequestResult*, gfModuleManager*, char* moduleName, HeapType heapType, bool, bool);
+    void destroy(const char* moduleName);
+    void loadModuleRequestOnImage(const char* moduleName, HeapType heapType, gfModuleHeader* moduleHeader, int* nodeSize);
+    static void loadModuleRequest(LoadRequestResult*, gfModuleManager*, const char* moduleName, HeapType heapType, bool, bool);
 
     static gfModuleManager* getInstance();
 };
