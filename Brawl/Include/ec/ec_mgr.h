@@ -19,6 +19,7 @@ public:
     u32 setEffect(u32 effectID, Vec3f* pos, Vec3f* rot, Vec3f* scale);
     void endEffect(u32);
     void killEffect(u32, u32, u32);
+    void killEffectGroup(u32, u32, u32, u32, u32);
     void setParent(u32 unk, nw4r::g3d::ScnMdl*, const char*, int);
     void preSetAnmIdx(int chrIndex, int visIndex, int patIndex, int srtIndex, int clrIndex, int shpIndex);
     void setGroundAttach(u32, soGroundModule* groundModule);
