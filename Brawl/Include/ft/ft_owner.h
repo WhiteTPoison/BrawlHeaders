@@ -2,6 +2,7 @@
 
 #include <StaticAssert.h>
 #include <types.h>
+#include <ft/fighter.h>
 
 class ftOwner {
     void* m_data;
@@ -33,5 +34,15 @@ public:
     virtual void addAttackPattern(void*);
 
     int getStockCount();
+    void setMetal(bool);
+    void setFinal(bool, bool);
+    void setRabbitCap(bool);
+    void setReflector(bool);
+    void setFlower(bool);
+    void setCurry(bool);
+    void setInfiniteScaling(Fighter::ScalingKind, Fighter::ScalingType);
+    void setHitPointMax(float);
+    void setSlipMul(float);
+    void setSlipInterval(bool);
 };
 static_assert(sizeof(ftOwner) == 16, "Class is wrong size!");

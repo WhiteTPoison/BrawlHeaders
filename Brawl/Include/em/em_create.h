@@ -123,22 +123,19 @@ public:
     u8 m_difficulty;
     char _1[3];
     EnemyKind m_enemyKind;
-    int m_8;
+    int m_teamNo;
     float m_startLr;
     Vec3f m_startPos;
     u32 m_startStatusKind;
     u8 m_level;
     char _33[3];
     float m_36;
-    float m_posX1;
-    float m_posX2;
-    float m_posY1;
-    float m_posY2;
+    Rect2D m_territoryRange;
     int m_connectedTriggerId;
     void* m_epbm;
     void* m_epsp;
     grGimmickMotionPath* m_motionPath;
-    int m_72;
+    int m_parentCreateId;
     virtual ~emCreate(){
 
     };

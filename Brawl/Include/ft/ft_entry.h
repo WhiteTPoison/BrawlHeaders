@@ -1,13 +1,15 @@
 #pragma once
 
 #include <StaticAssert.h>
-#include <so/event/so_event_observer.h>
+#include <so/event/so_event_presenter.h>
 #include <types.h>
-#include <ft/ft_owner.h>
 #include <ft/ft_input.h>
 #include <gm/gm_lib.h>
+#include <mt/mt_vector.h>
 
 class Fighter;
+class ftOwner;
+
 enum ftKind {
     Fighter_Mario = 0x0,
     Fighter_DonkeyKong = 0x1,
@@ -41,7 +43,7 @@ enum ftKind {
     Fighter_ZeroSuitSamus = 0x18,
     Fighter_SZeroSuit = 0x18,
     Fighter_Olimar = 0x19,
-    Fighter_Pimin = 0x19,
+    Fighter_Pikmin = 0x19,
     Fighter_Lucas = 0x1a,
     Fighter_DiddyKong = 0x1b,
     Fighter_Diddy = 0x1b,
@@ -90,7 +92,7 @@ enum ftKind {
 
 class ftEntryEventObserver : public soEventObserver<ftEntryEventObserver> {
 public:
-    virtual void addObserver(int param1, int param2);
+    virtual void addObserver(short param1, s8 param2);
     virtual void notifyEventSetDamage(float);
     virtual void notifyEventBeat();
     virtual void notifyEventDeadPartner(int index);

@@ -1,8 +1,11 @@
 #pragma once
 
 #include <StaticAssert.h>
-#include <so/event/so_event_observer.h>
 #include <so/event/so_event_presenter.h>
+#include <so/event/so_event_presenter.h>
+#include <so/situation/so_situation_event_presenter.h>
+#include <so/status/so_status_event_presenter.h>
+#include <so/anim/so_anim_cmd_event_presenter.h>
 #include <types.h>
 
 class soModuleAccesser;
@@ -12,10 +15,10 @@ public:
     virtual ~soSituationModule();
     virtual void activate();
     virtual void deactivate();
-    virtual int getKind();
-    virtual int getPrevKind();
+    virtual SituationKind getKind();
+    virtual SituationKind getPrevKind();
     virtual bool isSituationChanged();
-    virtual void setKind(int kind, bool);
+    virtual void setKind(SituationKind kind, bool);
     virtual void setKeepAir(bool);
     virtual void update();
 };
@@ -31,14 +34,14 @@ public:
     virtual ~soSituationModuleImpl();
     virtual void activate();
     virtual void deactivate();
-    virtual int getKind();
-    virtual int getPrevKind();
+    virtual SituationKind getKind();
+    virtual SituationKind getPrevKind();
     virtual bool isSituationChanged();
-    virtual void setKind(int kind, bool);
+    virtual void setKind(SituationKind kind, bool);
     virtual void setKeepAir(bool);
     virtual void update();
 
-    virtual u32 isObserv(char unk1);
+    virtual bool isObserv(char unk1);
     virtual bool notifyEventAnimCmd(acAnimCmd* acmd, soModuleAccesser* moduleAccesser, int unk3);
     virtual void notifyEventChangeStatus(int statusKind, int prevStatusKind, soStatusData* statusData, soModuleAccesser* moduleAccesser);
 };

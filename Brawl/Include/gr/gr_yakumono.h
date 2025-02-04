@@ -39,7 +39,7 @@ public:
     virtual bool setTeamYakumono(u32 teamId, u32 teamOwnerId);
     virtual bool getTeamYakumono(u32 unk1);
     virtual bool setOffsetAttack(Vec3f* offsetPos, int index);
-    virtual void setAreaGimmick(soAreaData* areaData, soAreaInit* areaInit, ykAreaData* data, bool unk4);
+    virtual void setAreaGimmick(soAreaData* areaData, soSet<soAreaData>* areaInit, ykAreaData* data, bool unk4);
     virtual void setAttackGimmick(int index, int groupIndex, u32 nodeIndex, AttackData* grAttackData,
                                   AttackDetails* grAttackDetails);
     virtual void setSoCollisionAttackData(soCollisionAttackData* attackData, AttackData* grAttackData,
@@ -48,13 +48,13 @@ public:
                                          float hitstopMultiplier, float sdiMultiplier, int power, Vec3f* offsetPos,
                                          int vector, int reactionEffect, int reactionFix, int reactionAdd,
                                          u32 nodeIndex, u32 collisionCategoryMask, u32 collisionSituationMask,
-                                         bool unk1, u32 collisionPartMask, CollisionAttackElementType elementType,
-                                         CollisionAttackHitSoundLevel hitSoundLevel, CollisionAttackHitSoundType hitSoundType,
-                                         bool isClankable, bool unk2, bool unk3, bool isBlockable, bool isReflectable,
+                                         bool unk1, u32 collisionPartMask, soCollisionAttackData::Attribute attribute,
+                                         soCollisionAttackData::SoundLevel soundLevel, soCollisionAttackData::SoundAttribute soundAttr,
+                                         bool isClankable, bool unk2, bool unk3, bool isShieldable, bool isReflectable,
                                          bool isAbsorbable, u32 addedShieldDamage, u32 detectionRate, bool unk5, bool ignoreInvincibility,
-                                         bool ignoreIntangibility, CollisionAttackFacingRestriction facingRestriction,
+                                         bool ignoreIntangibility, soCollisionAttackData::LrCheck lrCheck,
                                          bool unk6, bool unk7, bool disableHitstop, bool disableHitGfx,
-                                         bool disableFlinch, u32 unk8, bool isShapeCapsule);
+                                         bool disableFlinch, soCollisionAttackData::Region region, bool isShapeCapsule);
     virtual bool isEnableAttackPersonAttacked(u32 unk1, u32 unk2, u32 unk3);
     virtual bool isEnableAttackAttribute(u32 unk1, u32 unk2);
 

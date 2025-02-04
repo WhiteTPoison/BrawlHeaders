@@ -14,7 +14,6 @@
 #include <mt/mt_matrix.h>
 #include <mt/mt_vector.h>
 #include <snd/snd_3d_generator.h>
-#include <snd/snd_id.h>
 #include <st/st_collision_attr_param.h>
 #include <st/st_positions.h>
 #include <st/st_trigger.h>
@@ -105,9 +104,9 @@ public:
     // 8
     char _spacer1[0x10];
     // 18
-    stRange m_deadRange;
+    Rect2D m_deadRange;
     // 28
-    stRange m_aiRange;
+    Rect2D m_aiRange;
     // 38
     cmStageParam* m_cameraParam1;
     // 3c
@@ -186,7 +185,11 @@ public:
     virtual float getPokeTrainerPositionZ() { return 0.0f; }
     virtual int getPokeTrainerDrawLayer() { return 0; }
     virtual bool isAdventureStage() { return false; }
+#ifdef MATCHING
+    virtual void getItemPac(gfArchive** brres, gfArchive** param, itKind itemID, int variantID);
+#else
     virtual void getItemPac(gfArchive** brres, gfArchive** param, itKind itemID, int variantID, gfArchive** commonParam = NULL, itCustomizerInterface** customizer = NULL); // Note: Optional parameters for modding purposes to use custom itmParams and customizers
+#endif
     virtual void getItemGenPac(gfArchive** archive);
     virtual void getItemPacEnemyFigure(gfArchive** archive);
     virtual void getEnemyPac(gfArchive** brres, gfArchive** param, gfArchive** enmCommon, gfArchive** primFaceBrres, EnemyKind enemyKind);
@@ -198,7 +201,7 @@ public:
     virtual void process();
     virtual void updateStagePositions();
     virtual void debugCollision();
-    virtual stRange* getAIRange() { return &m_aiRange; }
+    virtual Rect2D* getAIRange() { return &m_aiRange; }
     virtual int getDefaultLightSetIndex() { return 0x14; }
     virtual int getZoneLightSetIndex();
     virtual int getScrollDir(Vec3f* unk1)
@@ -283,7 +286,7 @@ public:
     virtual void notifyEventInfoReady();                           // TODO
     virtual void notifyEventInfoGo();                              // TODO
     virtual void getDestroyBossParamCommon();                      // TODO
-    virtual void stAdventureEventGetItem(int, int, int, int, int); // TODO
+    virtual void stAdventureEventGetItem(int entryId, itKind kind, int itVariation, int genParamId, int instanceId);
     virtual void setStageOutEffectInit();                          // TODO
     virtual void setStageInEffectInit();                           // TODO
     virtual int helperStarWarp() { return 0; }
@@ -293,7 +296,7 @@ public:
     virtual void getZonePos(Vec3f* pos);
     virtual float getMagmaHeight();   // TODO
     virtual float getAcidHeight();    // TODO
-    virtual int getIteamDropStatus(); // TODO
+    virtual u8 getIteamDropStatus();
     virtual bool createWind2ndOnly();
     virtual grGimmickWindData2nd* getWind2ndOnlyData(); // TODO
     virtual void updateWind2ndOnly();                   // TODO

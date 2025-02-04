@@ -4,6 +4,7 @@
 #include <mt/mt_vector.h>
 #include <nw4r/g3d/g3d_scnmdl.h>
 #include <so/ground/so_ground_module_impl.h>
+#include <ef/ef_id.h>
 #include <types.h>
 
 class ecMgr : public gfTask {
@@ -14,9 +15,9 @@ private:
 public:
     ecMgr();
     void setDrawPrio(int prio);
-    u32 setEffect(u32 effectID);
-    u32 setEffect(u32 effectID, Vec3f* pos);
-    u32 setEffect(u32 effectID, Vec3f* pos, Vec3f* rot, Vec3f* scale);
+    u32 setEffect(EfID effectID);
+    u32 setEffect(EfID effectID, Vec3f* pos);
+    u32 setEffect(EfID effectID, Vec3f* pos, Vec3f* rot, Vec3f* scale);
     void endEffect(u32);
     void killEffect(u32, u32, u32);
     void setParent(u32 unk, nw4r::g3d::ScnMdl*, const char*, int);
@@ -32,7 +33,8 @@ public:
     void setMdlAnmIdx(u32, u32, s8);
     void setMdlEnableUpdate(u32, bool, s8);
     void setMdlFrame(u32, float, s8);
-
+    void setSlowRate(u32 effectHandleID, u32 slowMagnitude);
+    u32 searchResourceID(char* resourceName);
     virtual ~ecMgr();
 };
 static_assert(sizeof(ecMgr) == 0xa8, "Class is wrong size!");

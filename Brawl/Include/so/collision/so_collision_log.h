@@ -1,6 +1,7 @@
 #pragma once
 
 #include <types.h>
+#include <gf/gf_task.h>
 #include <mt/mt_vector.h>
 
 class soCollisionLog {
@@ -10,9 +11,9 @@ public:
     Vec3f m_pos;
     short m_life;
     short m_30;
-    s8 m_teamId;
+    s8 m_teamNo;
     char _33;
-    u8 m_category;
+    gfTask::Category m_taskCategory : 8;
     char _35;
     u8 m_collsionIndex;
     u8 m_damageIndex;

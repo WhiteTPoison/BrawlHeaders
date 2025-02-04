@@ -12,6 +12,7 @@
 27,6,2EB4: g_ftInstanceManager
 27,6,2E70: g_ftAudienceManager
 27,6,5518: g_aiMgr
+805A0040: g_gfPadSystem
 27,6,E8: g_soWorld
 80494958:g_HeapInfos
 8059FF80: g_gfSceneRoot
@@ -24,6 +25,10 @@
 805a00e0:g_GameGlobal
 805b7480:g_PadConfig
 80406920:MOD_PATCH_DIR
+8059FF80:g_gfSceneRoot
+8049ebe0:g_Network
+805a02a4:g_muWifiInterfaceTask
+27,6,5910: g_stLoaderManager
 
 //gfPadSystem
 800293dc:consumeFrameCounter__11gfPadSystemFi
@@ -97,6 +102,9 @@ CC008000:WGPIPE
 803f11f8:__cvt_fp2unsigned
 803f0a1c:__construct_new_array
 80403664:__flush_cache
+8002632c:free__FPv
+80004304:__flush_cache
+80403664:TRK_flush_cache
 801e892c:VIWaitForRetrace
 801d76e8:DCFlushRange
 801d77cc:ICInvalidateRange
@@ -121,6 +129,7 @@ CC008000:WGPIPE
 801debb4:OSLockMutex
 801dec90:OSUnlockMutex
 801deb7c:OSInitMutex
+801e1a80:OSSleepTicks__FUlUl
 
 // string
 803fa340:strncpy__6StringF6StringPcUl
@@ -163,6 +172,8 @@ CC008000:WGPIPE
 803f0640:strlen__FPc 
 803f0640:strlen
 8000443c:__memfill__FPvUcUl
+8000443c:__memfill
+8000443c:memset__FPvUcUl
 8000443c:memset
 8000443c:memset__FPvUcUl
 
@@ -195,6 +206,10 @@ CC008000:WGPIPE
 80400b38:atan2
 802a0bcc:fabsf
 
+// crc
+8038ed50:NETCalcCRC16
+8038ee84:NETCalcCRC32
+
 
 // nw4r::g3d::ResFile
 8018d2a4:GetResMdlNumEntries__Q34nw4r3g3d7ResFileFv
@@ -203,6 +218,7 @@ CC008000:WGPIPE
 8018dd88:GetResAnmTexPatNumEntries__Q34nw4r3g3d7ResFileFv
 8018df90:GetResAnmTexSrtNumEntries__Q34nw4r3g3d7ResFileFv
 8018db80:GetResAnmClrNumEntries__Q34nw4r3g3d7ResFileFv
+8018e198:GetResAnmShpNumEntries__Q34nw4r3g3d7ResFileFv
 8018d640:GetResAnmChr__Q34nw4r3g3d7ResFileFi
 8018d848:GetResAnmVis__Q34nw4r3g3d7ResFileFi
 8018dc58:GetResAnmTexPat__Q34nw4r3g3d7ResFileFi
@@ -234,6 +250,10 @@ CC008000:WGPIPE
 8005f7a4:setEffect__5ecMgrFUl
 8005f7b8:setEffect__5ecMgrFUlP5Vec3f
 8005f7e0:setEffect__5ecMgrFUlP5Vec3fP5Vec3fP5Vec3f
+80060d8c:killEffect__5ecMgrFUlUlUl
+8005f7a4:setEffect__5ecMgrF4EfID
+8005f7b8:setEffect__5ecMgrF4EfIDP5Vec3f
+8005f7e0:setEffect__5ecMgrF4EfIDP5Vec3fP5Vec3fP5Vec3f
 80060c54:endEffect__5ecMgrFUl
 8005fc5c:setParent__5ecMgrFUlPQ34nw4r3g3d6ScnMdlPCci
 80060d8c:killEffect__5ecMgrFUlUlUl
@@ -249,6 +269,8 @@ CC008000:WGPIPE
 800604f0:setMdlAnmIdx__5ecMgrFUlUlSc
 80060584:setMdlEnableUpdate__5ecMgrFUlbSc
 80060618:setMdlFrame__5ecMgrFUlfSc
+8006102C:setSlowRate__5ecMgrFUlUl
+8005EC64:searchResourceID__5ecMgrFPc
 
 // efScreen
 8005e0fc:requestFill__8efScreenFfiiP8_GXColor
@@ -357,6 +379,7 @@ CC008000:WGPIPE
 80026e00:loadModuleRequest__15gfModuleManagerFPQ215gfModuleManager17LoadRequestResultP15gfModuleManagerPCcQ25Heaps8HeapTypebb
 80026c78:setTempolaryLoadHeap__15gfModuleManagerFQ25Heaps8HeapType
 8002737c:destroy__15gfModuleManagerFPCc
+80027300:isLoaded__15gfModuleManagerFPCc
 
 //stOperatorReadyGo
 809514c0:isEnd__17stOperatorReadyGoFv
@@ -383,6 +406,39 @@ CC008000:WGPIPE
 // gfSceneRoot
 8000d818:setCurrentFrame__11gfSceneRootFf
 8000d56c:removeResAnmScn__11gfSceneRootFv
+
+// gfPadSystem
+80028c58:__ct__11gfPadSystemFv
+80028c10:create__11gfPadSystemFv
+8002b62c:clearPadEdgeRepert__11gfPadSystemFv
+80029424:clearPadQueue__11gfPadSystemFv
+80029380:createRumbleSystem__11gfPadSystemFv
+800293dc:consumeFrameCounter__11gfPadSystemFi
+8002b480:disconectWiiControler__11gfPadSystemFv
+8002b040:getDebugPadStatus__11gfPadSystemFiP11gfPadStatus
+8002ac54:getGamePadStatus__11gfPadSystemFiP11gfPadStatus
+8002ae48:getSysPadStatus__11gfPadSystemFiP11gfPadStatus
+8002ac2c:getGamePadQueueCount__11gfPadSystemFv
+8002a89c:maskMotor__11gfPadSystemFUs
+8002b470:merge__11gfPadSystemFP11gfPadStatusiP11gfPadStatus
+8002b238:merge__11gfPadSystemFP11gfPadStatusiUlP11gfPadStatus
+8002abd0:pauseNotify__11gfPadSystemFv
+8002b574:readGameDataRequest__11gfPadSystemFiiii
+8002ac4c:setConnectCallback__11gfPadSystemFi
+8002b530:startSimpleSync__11gfPadSystemFv
+8002a948:startMotor__11gfPadSystemFi
+8002a9e8:startMotor__11gfPadSystemFiUs
+8002aa8c:stopMotor__11gfPadSystemFi
+8002ab74:stopMotorAllForce__11gfPadSystemFv
+8002ab00:stopMotorH__11gfPadSystemFi
+8002a4f8:updateGame__11gfPadSystemFv
+80029438:updateLow__11gfPadSystemFv
+80029578:updateLowGC__11gfPadSystemFP11gfPadStatus
+80029750:updateLowWii__11gfPadSystemFP11gfPadStatus
+8002a210:updateSystem__11gfPadSystemFv
+8002b614:wpadGameDataCallback__11gfPadSystemFi
+80026c4c:wpadSimpleSyncCallback__11gfPadSystemFv
+8002b5c4:writeGameDataRequest__11gfPadSystemFiiii
 
 // utList
 800448f8:addTail__6utListFP10utListNode
@@ -458,6 +514,9 @@ CC008000:WGPIPE
 27,1,0008F064:getInstance__13soEventSystemFv
 27,1,0008F1BC:getManager__13soEventSystemFs
 
+// soGroundUtil
+27,1,00030EC8:checkDeadArea__12soGroundUtilFP5Vec3fff
+
 // soGroundShapeImpl
 27,1,0002F9A4:updateRhombus__17soGroundShapeImplFP16soModuleAccesser
 27,1,0002FC10:updateRhombusFollowNode__17soGroundShapeImplFP16soModuleAccesser
@@ -472,7 +531,7 @@ CC008000:WGPIPE
 27,1,00037B04:__dt__16soCollisionGroupFv
 
 // soCollisionAttackModuleImpl
-27,1,00039590:__ct__27soCollisionAttackModuleImplFP16soModuleAccesseriUcP32soArray<21soCollisionAttackPart>P27soArray<16soCollisionGroup>P36soArray<25soCollisionAttackAbsolute>P31soEventObserverRegistrationDescb
+27,1,00039590:__ct__27soCollisionAttackModuleImplFP16soModuleAccesseriQ26gfTask8CategoryP32soArray<21soCollisionAttackPart>P27soArray<16soCollisionGroup>P36soArray<25soCollisionAttackAbsolute>P31soEventObserverRegistrationDescb
 27,1,00039968:__dt__27soCollisionAttackModuleImplFv
 
 // soCollisionAttackAbsolute
@@ -480,7 +539,7 @@ CC008000:WGPIPE
 27,1,00086D0C:__dt__25soCollisionAttackAbsoluteFv
 
 // soCollisionAttackPart
-27,1,00038550:__ct__21soCollisionAttackPartFUcb
+27,1,00038550:__ct__21soCollisionAttackPartFQ211soCollision8Categoryb
 27,1,000CCDA8:__ct__21soCollisionAttackPartFv
 27,1,000386B4:__dt__21soCollisionAttackPartFv
 
@@ -490,12 +549,12 @@ CC008000:WGPIPE
 
 // soCollisionHitPart
 27,1,000415E4:__dt__18soCollisionHitPartFv
-27,1,0004148C:__ct__18soCollisionHitPartFUcUl
+27,1,0004148C:__ct__18soCollisionHitPartFQ211soCollision8CategoryUl
 27,1,000CC22C:__ct__18soCollisionHitPartFv
 
 // soCollisionHitModule
 27,1,00042E4C:__dt__24soCollisionHitModuleImplFv
-27,1,00042AA4:__ct__24soCollisionHitModuleImplFP16soModuleAccesseriUcP29soArray<18soCollisionHitPart>P27soArray<16soCollisionGroup>P30soArray<19soCollisionHitGroup>P31soEventObserverRegistrationDescb
+27,1,00042AA4:__ct__24soCollisionHitModuleImplFP16soModuleAccesseriQ26gfTask8CategoryP29soArray<18soCollisionHitPart>P27soArray<16soCollisionGroup>P30soArray<19soCollisionHitGroup>P31soEventObserverRegistrationDescb
 
 // Stage
 27,1,002225A8:createObj__5StageFv
@@ -697,6 +756,7 @@ CC008000:WGPIPE
 27,1,00224B08:getDestroyBossParamCommon__5StageFv
 27,1,00224B3C:stAdventureEventGetItem__5StageFiiiii
 27,1,00224B3C:stAdventureEventGetItem__5StageFiiiii
+27,1,00224B3C:stAdventureEventGetItem__5StageFi6itKindiii
 27,1,00224D88:setStageOutEffectInit__5StageFv
 27,1,00224D88:setStageOutEffectInit__5StageFv
 27,1,00224D98:setStageInEffectInit__5StageFv
@@ -793,14 +853,23 @@ CC008000:WGPIPE
 27,1,002398C8:getPlayerPosition__7stMeleeFiP5Vec3f
 27,1,00238EB0:setGravityHalf__7stMeleeFv
 27,1,00238E90:setGravityNormal__7stMeleeFv
+27,1,00238ED0:createCollisionSelf__7stMeleeFP15stCollisionWorkP6GroundPCcPCcUs
 
 // stUtility
 27,1,00227BEC:stRayCheck__FP5Vec3fP5Vec3fbP11grCollisionbUc
 27,1,00227CC4:stRayCheck__FP5Vec3fP5Vec3fP5Vec3fP5Vec3fbP11grCollisionbUc
 27,1,00227DD8:stRayCheck__FP5Vec3fP5Vec3fPiP5Vec3fP5Vec3fbbUc
 
-// grCollisionJoint
+// grCollision
 80111958:getJoint__11grCollisionFUs
+80111b50:getLine__11grCollisionFUs
+801119bc:getSegment__11grCollisionFP11clSegment2DP15grCollisionLine
+
+// grCollisionJoint
+80112ea0:getLine__16grCollisionJointFUs
+
+// stCollision
+27,1,00239F50:initialize__15stCollisionWorkFv
 
 // Ground
 27,1,00261b50:setDontMoveGround__6GroundFv
@@ -841,7 +910,7 @@ CC008000:WGPIPE
 27,1,0025fd7c:setMatAlphaMul__6GroundFUlUl
 27,1,0025feec:setMatAlpha__6GroundFUlUl
 27,1,0025ffe0:updateG3dProcCalcWorld__6GroundFv
-27,1,00231b70:adventureEventGetItem__6GroundFiPi
+27,1,00231b70:adventureEventGetItem__6GroundFiP13stTriggerData
 27,1,00231BBC:getStageData__6GroundFv
 27,1,00231BB8:initStageData__6GroundFv
 27,1,00231BB0:getMdlIndex__6GroundFv
@@ -899,7 +968,7 @@ CC008000:WGPIPE
 27,1,0026DCBC:setScale__9grGimmickFP5Vec3f
 27,1,0026DCE4:setScale__9grGimmickFfff
 27,1,0026B34C:createAttachMotionPath__9grGimmickFP23grGimmickMotionPathInfoP13stTriggerDataPCc
-27,1,0026DA8C:createSimpleEffectData__9grGimmickFPQ29grGimmick16SimpleEffectDataUlPCc
+27,1,0026DA8C:createSimpleEffectData__9grGimmickFPQ29grGimmick16SimpleEffectDataiPCc
 27,1,0026CB94:createIsValidTrigger__9grGimmickFP13stTriggerData
 27,1,0026D124:createEffectWork__9grGimmickFi
 27,1,0026D22C:startGimmickEffect__9grGimmickFUl
@@ -936,10 +1005,10 @@ CC008000:WGPIPE
 27,1,002653C8:setTeamYakumono__10grYakumonoFUlUl
 27,1,00265424:getTeamYakumono__10grYakumonoFUl
 27,1,0026546C:setOffsetAttack__10grYakumonoFP5Vec3fi
-27,1,00265480:setAreaGimmick__10grYakumonoFP10soAreaDataP10soAreaInitP10ykAreaDatab
+27,1,00265480:setAreaGimmick__10grYakumonoFP10soAreaDataP19soSet<10soAreaData>P10ykAreaDatab
 27,1,00267548:setAttackGimmick__10grYakumonoFiiUlPQ29grGimmick10AttackDataPQ29grGimmick13AttackDetails
 27,1,002675E0:setSoCollisionAttackData__10grYakumonoFP21soCollisionAttackDataPQ29grGimmick10AttackDataPQ29grGimmick13AttackDetails
-27,1,002677AC:setAttackGimmickDetails__10grYakumonoFP21soCollisionAttackDataffffiP5Vec3fiiiiUlUlUlbUl26CollisionAttackElementType28CollisionAttackHitSoundLevel27CollisionAttackHitSoundTypebbbbbbUlUlbbb32CollisionAttackFacingRestrictionbbbbbUlb
+27,1,002677AC:setAttackGimmickDetails__10grYakumonoFP21soCollisionAttackDataffffiP5Vec3fiiiiUlUlUlbUlQ221soCollisionAttackData9AttributeQ221soCollisionAttackData10SoundLevelQ221soCollisionAttackData14SoundAttributebbbbbbUlUlbbbQ221soCollisionAttackData7LrCheckbbbbbQ221soCollisionAttackData6Regionb
 27,1,00267924:isEnableAttackPersonAttacked__10grYakumonoFUlUlUl
 27,1,002679E8:isEnableAttackAttribute__10grYakumonoFUlUl
 27,1,00267AF4:setSituationODD__10grYakumonoFv
@@ -1022,12 +1091,24 @@ CC008000:WGPIPE
 27,1,00279590:setMotion__8grMadeinFUl
 27,1,00279968:setMotionDetails__8grMadeinFUlUlUlUlUl
 27,1,0027855C:deleteHitPoint__8grMadeinFv
+27,1,00278C30:deleteAttackPoint__8grMadeinFv
 27,1,00279044:endEntity__8grMadeinFv
 27,1,002792C8:isEndEntity__8grMadeinFv
 27,1,002794CC:getEntityFrame__8grMadeinFv
 27,1,002794F0:isFrameOffset__8grMadeinFf
 
 // grGimmickMotionPath
+27,1,0026E1C8:__ct__19grGimmickMotionPathFPCcPCc
+27,1,0026E90C:update__19grGimmickMotionPathFf
+27,1,0026E2A4:__dt__19grGimmickMotionPathFv
+27,1,0026E43C:processAnim__19grGimmickMotionPathFv
+27,1,0026EE70:loadGroundData__19grGimmickMotionPathFUlUlUl
+27,1,0026F064:getModelCount__19grGimmickMotionPathFv
+27,1,0026E2FC:startup__19grGimmickMotionPathFP9gfArchiveUlUl
+27,1,0026EAE4:isMoveEnd__19grGimmickMotionPathFv
+27,1,0026EB00:isReturnEnd__19grGimmickMotionPathFv
+27,1,0026E964:setFrameModelAnim__19grGimmickMotionPathFv
+27,1,0026F03C:clearFrame__19grGimmickMotionPathFv
 27,1,0026EB3C:setFrameUpdate__19grGimmickMotionPathFf
 27,1,0026E13C:create__19grGimmickMotionPathFiPCcPCc
 27,1,0026EB5C:setFrame__19grGimmickMotionPathFf
@@ -1067,6 +1148,7 @@ CC008000:WGPIPE
 27,1,0008CBF4:getStatusKind__23soExternalValueAccesserFP11StageObject
 27,1,0008CC4C:getSituationKind__23soExternalValueAccesserFP11StageObject
 27,1,0008CCFC:getWorkFlag__23soExternalValueAccesserFP11StageObjectUl
+27,1,0008CCC4:getWorkInt__23soExternalValueAccesserFP11StageObjectUl
 
 // ftExternalValueAccesser
 27,1,0014d4b8:getWeight__23ftExternalValueAccesserFP7Fighter
@@ -1079,25 +1161,29 @@ CC008000:WGPIPE
 
 // soStatusEventObserver
 27,5,00000F98:__vt__21soStatusEventObserver
-27,1,000133C8:addObserver__21soStatusEventObserverFii
+27,1,000133C8:addObserver__21soStatusEventObserverFsSc
 27,1,00013628:notifyEventChangeStatus__21soStatusEventObserverFiiP12soStatusDataP16soModuleAccesser
 27,1,000136E4:addObserver__40soEventObserver<21soStatusEventObserver>Fii
+27,1,000136E4:addObserver__40soEventObserver<21soStatusEventObserver>FsSc
+
 // soCollisionReflectorEventObserver
-27,1,00129818:addObserver__33soCollisionReflectorEventObserverFii
+27,1,00129818:addObserver__33soCollisionReflectorEventObserverFsSc
 27,1,0004838C:notifyEventCollisionReflectorCheck__33soCollisionReflectorEventObserverFv
 27,1,000D5460:addObserver__52soEventObserver<33soCollisionReflectorEventObserver>Fii
+27,1,000D5460:addObserver__52soEventObserver<33soCollisionReflectorEventObserver>FsSc
+
 // ftOutsideEventObserver
-27,1,00108BD0:addObserver__22ftOutsideEventObserverFii
+27,1,00108BD0:addObserver__22ftOutsideEventObserverFsSc
 27,1,0010DBFC:notifyEventOnDamage__22ftOutsideEventObserverFiUlP8soDamage
-27,1,0010DBF8:notifyEventSetDamage__22ftOutsideEventObserverFifibb
+27,1,0010DBF8:notifyEventSetDamage__22ftOutsideEventObserverFifUlbb
 27,1,0010DBF4:notifyEventRecover__22ftOutsideEventObserverFii
-27,1,0010DBF0:notifyEventOutsideDeadArea__22ftOutsideEventObserverFiiPb
+27,1,0010DBF0:notifyEventOutsideDeadArea__22ftOutsideEventObserverFiQ212soGroundUtil19DeadAreaCheckResultPb
 27,1,0010DBEC:notifyEventAppeal__22ftOutsideEventObserverFii
 27,1,0010DBE8:notifyEventDead__22ftOutsideEventObserverFiiii
 27,1,0010DBE4:notifyEventBeat__22ftOutsideEventObserverFii
 27,1,0010DBE0:notifyEventSuicide__22ftOutsideEventObserverFi
-27,1,0010DBDC:notifyEventChangeStart__22ftOutsideEventObserverFii
-27,1,0010DBD8:notifyEventChangeEnd__22ftOutsideEventObserverFiUlii
+27,1,0010DBDC:notifyEventChangeStart__22ftOutsideEventObserverFiii6ftKind
+27,1,0010DBD8:notifyEventChangeEnd__22ftOutsideEventObserverFiii6ftKind
 27,1,0010DBD4:notifyEventChangeAppear__22ftOutsideEventObserverFv
 27,1,0010DBD0:notifyEventAddDragoonParts__22ftOutsideEventObserverFii
 27,1,0010DBCC:notifyEventCompDragoonParts__22ftOutsideEventObserverFi
@@ -1107,34 +1193,37 @@ CC008000:WGPIPE
 27,1,0010DBBC:notifyEventSetCursor__22ftOutsideEventObserverFiUl
 27,1,0010DBB8:notifyEventSetNameCursor__22ftOutsideEventObserverFiUl
 27,1,0010DBB4:notifyEventSetLoupe__22ftOutsideEventObserverFiUl
-27,1,0010DBB0:notifyEventStartFinal__22ftOutsideEventObserverFv
-27,1,0010DBAC:notifyEventEndFinal__22ftOutsideEventObserverFv
+27,1,0010DBB0:notifyEventStartFinal__22ftOutsideEventObserverFi
+27,1,0010DBAC:notifyEventEndFinal__22ftOutsideEventObserverFi
 27,1,0010DBA8:notifyEventRemoveEntry__22ftOutsideEventObserverFi
-27,1,0010DBA4:notifyEventFinalSlow__22ftOutsideEventObserverFfiUl
-27,1,0010DBA0:notifyEventFinalSlowCancel__22ftOutsideEventObserverFv
-27,1,0010DB9C:notifyEventFinalStop__22ftOutsideEventObserverFv
-27,1,0010DB98:notifyEventFinalStopCancel__22ftOutsideEventObserverFv
+27,1,0010DBA4:notifyEventFinalSlow__22ftOutsideEventObserverFifi
+27,1,0010DBA0:notifyEventFinalSlowCancel__22ftOutsideEventObserverFi
+27,1,0010DB9C:notifyEventFinalStop__22ftOutsideEventObserverFi
+27,1,0010DB98:notifyEventFinalStopCancel__22ftOutsideEventObserverFi
 27,1,0010DE68:notifyEventEntryEnd__22ftOutsideEventObserverFi
 27,1,0010DE64:notifyEventResultEnd__22ftOutsideEventObserverFi
-27,1,0010DB94:notifyEventGetItem__22ftOutsideEventObserverFiiiii
+27,1,0010DB94:notifyEventGetItem__22ftOutsideEventObserverFi6itKindiii
 27,1,0010DB90:notifyEventSucceedHit__22ftOutsideEventObserverFiUlf
 27,1,0010DB8C:notifyEventResultWin__22ftOutsideEventObserverFii
 27,1,0010DB88:notifyEventYoshiEggStart__22ftOutsideEventObserverFi
 27,1,0010DB84:notifyEventYoshiEggEnd__22ftOutsideEventObserverFi
 27,1,0010DB80:notifyEventOnInput__22ftOutsideEventObserverFi
-27,1,0010DB7C:notifyEventPikminMakeBloomAll__22ftOutsideEventObserverFv
+27,1,0010DB7C:notifyEventPikminMakeBloomAll__22ftOutsideEventObserverFi
 27,1,0010DE60:notifyEventKirbyCopySetup__22ftOutsideEventObserverFii
 27,1,0010DE5C:notifyEventKirbyCopyCancel__22ftOutsideEventObserverFii
 27,1,0010DB78:notifyEventKnockout__22ftOutsideEventObserverFi
 27,1,0010DB74:notifyEventHeartSwapStart__22ftOutsideEventObserverFii
-27,1,0010DB70:notifyEventHeartSwapEnd__22ftOutsideEventObserverFv
-27,1,0010E030:addObserver__41soEventObserver<22ftOutsideEventObserver>Fii
+27,1,0010DB70:notifyEventHeartSwapEnd__22ftOutsideEventObserverFii
+27,1,0010E030:addObserver__41soEventObserver<22ftOutsideEventObserver>FsSc
 27,5,26540:__vt__22ftOutsideEventObserver
 
 // soColorBlendModuleImpl
 27,1,000c0ef0:setSubColor__soColorBlendModuleImplFQ17GXColorUc
 27,1,000c0ee8:isEnableSubColor__soColorBlendModuleImplFv
 27,1,000c0ee0:getSubColor__soColorBlendModuleImplFv
+
+// soController
+27,1,0005AA38:getButtonMask__12soControllerFQ212soController9PadButton
 
 // ftEntryManager
 27,1,00119110:getEntity__14ftEntryManagerFUl
@@ -1165,19 +1254,34 @@ CC008000:WGPIPE
 27,1,0010B8F8:setBeat__9ftManagerFii
 27,1,0010BCF4:setSUlcide__9ftManagerFi
 27,1,0010BF4C:pickupCoin__9ftManagerFii
-27,1,00109E14:setWarpFighter__9ftManagerFiP5Vec3ffb
+27,1,00109E14:setWarpFighter__9ftManagerFiP5Vec3ffUl
 27,1,0010ADE8:getFighterCenterPos__9ftManagerFii
 27,1,0010AF34:getFighterLr__9ftManagerFii
 27,1,0010a164:getFighterOperationStatus__9ftManagerFi
 27,1,0010a248:getFighterOperationType__9ftManagerFi
+27,1,0010D034:setInfiniteScaling__9ftManagerFiQ27Fighter11ScalingKindQ27Fighter11ScalingType
+27,1,0010C2B8:addDragoon__9ftManagerFiUl
 
 // Fighter
 27,1,00138900:setCurry__7FighterFbi
-27,1,0013C860:warp__7FighterFP5Vec3ffb
+27,1,00138F64:setSuperStar__7FighterFbib
+27,1,0013C860:warp__7FighterFP5Vec3ffUl
 27,1,0012B4F0:start__7FighterFP5Vec3fffib
+27,1,001370C0:startScaling__7FighterFQ27Fighter11ScalingKindQ27Fighter11ScalingType
+27,1,0012CD58:setupEquipment__7FighterFv
 
 // ftOwner
 27,1,00111B2C:getStockCount__7ftOwnerFv
+27,1,00111DEC:setMetal__7ftOwnerFb
+27,1,00111EDC:setFinal__7ftOwnerFbb
+27,1,0011204C:setInfiniteScaling__7ftOwnerFQ27Fighter11ScalingKindQ27Fighter11ScalingType
+27,1,00111DBC:setRabbitCap__7ftOwnerFb
+27,1,00111E7C:setReflector__7ftOwnerFb
+27,1,00111EAC:setFlower__7ftOwnerFb
+27,1,00111E4C:setCurry__7ftOwnerFb
+27,1,00111994:setHitPointMax__7ftOwnerFf
+27,1,00112108:setSlipMul__7ftOwnerFf
+27,1,00112128:setSlipInterval__7ftOwnerFb
 
 // ftOutsideEventPresenter
 27,1,0015B0C8:notifyOutsideEventKnockout__23ftOutsideEventPresenterFv
@@ -1189,20 +1293,32 @@ CC008000:WGPIPE
 27,1,002A1718:getInstance__9itManagerFv
 27,1,002A55CC:isCompItemKindArchive__9itManagerF6itKindUlb
 27,1,002A3F4C:preloadItemKindArchive__9itManagerF6itKindUlQ29itArchive4Typeb
-27,1,002A7070:createItem__9itManagerF6itKindUliiUciii
+27,1,002A9E50:getLotOneItemKind__9itManagerFP14itGenSheetKind7itGenIdPQ29itManager10ItemSwitchb
+27,1,002A6FB8:createItem__9itManagerFP5Vec3fP5Vec3ff6itKindUliP16soResourceModuleUciii
+27,1,002A7004:createItem__9itManagerFP5Vec3ff6itKindUliP16soResourceModuleUciii
+27,1,002A7070:createItem__9itManagerF6itKindUliP16soResourceModuleUciii
 27,1,002A8124:createItemInstance__9itManagerFP8itCreate
 27,1,002A8550:getItemNum__9itManagerF6itKindiii
 27,1,002A8640:getItemNum__9itManagerF6itKind
 27,1,002A7BA0:removeItem__9itManagerFP8BaseItem
+27,1,002A8828:getItemFromInstanceId__9itManagerFi
+27,1,0010D878:setFinal__9ftManagerFib
+27,1,002A4FF8:preloadAssist__9itManagerF6itKind
 
 // BaseItem
 27,1,0027F564:__ct__8BaseItemFP8itCreate
-27,1,0028C834:getParam__8BaseItemFUl
-27,1,0028C85C:getParam__8BaseItemFi
-27,1,0028C884:getParamFloat__8BaseItemFUi
+27,1,0028C834:getParam__8BaseItemFQ215itValueAccesser10ParamFloat
+27,1,0028C85C:getParam__8BaseItemFQ215itValueAccesser8ParamInt
+27,1,0028C884:getParamFloat__8BaseItemFUl
 27,1,0028DE00:warp__8BaseItemFP5Vec3f
 27,1,0028C7E8:setVanishMode__8BaseItemFb
 27,1,0028FF6C:setSafePos__8BaseItemFP5Vec2f
+27,1,0028DBA4:isHaved__8BaseItemFv
+27,1,0028F518:getTeamOwnerTaskId__8BaseItemFv
+27,1,0028FE5C:sendTouchMessage__8BaseItemFiP5Vec3ff
+
+// ykData
+27,1,00275FDC:__ct__6ykDataFv
 
 // Yakumono
 27,1,0026383C:setReactionFrame__8YakumonoFi
@@ -1213,21 +1329,25 @@ CC008000:WGPIPE
 27,1,00263C64:setSituationKind__8YakumonoFi
 
 // stPositions
-27,1,00226794:getDeadRange__11stPositionsFP7stRange
-27,1,00226584:getCameraRange__11stPositionsFP7stRange
+27,1,00226794:getDeadRange__11stPositionsFP6Rect2D
+27,1,00226584:getCameraRange__11stPositionsFP6Rect2D
 27,1,00225CE8:loadPositionData__11stPositionsFPQ34nw4r3g3d7ResFile
 27,1,002274dc:getKirifudaPos__11stPositionsFUlP5Vec3f
+27,1,00226494:getCameraCenter__11stPositionsFP5Vec3f
 
 // stTriggerMng
-27,1,00231FDC:createTrigger__12stTriggerMngF11GimmickKindi
-27,1,00232118:createTrigger__12stTriggerMngF11GimmickKindP13stTriggerData
+27,1,00231FDC:createTrigger__12stTriggerMngFQ27Gimmick8AreaKindi
+27,1,00232118:createTrigger__12stTriggerMngFQ27Gimmick8AreaKindP13stTriggerData
 27,1,00232D4C:setTriggerFlag__12stTriggerMngFP13stTriggerData
 27,1,00232F28:getTriggerFlag__12stTriggerMngFP13stTriggerDatab
 
 // stTrigger
 27,1,00233640:setObserveYakumono__9stTriggerFP8Yakumono
 27,1,00233778:setBeltConveyorTrigger__9stTriggerFP25grGimmickBeltConveyorData
-27,1,00234040:setAreaSleep__9stTriggerFUl
+27,1,002339B8:setHitPointEffectTrigger__9stTriggerFP27grGimmickHitPointEffectData
+27,1,00233928:setWaterTrigger__9stTriggerFP18grGimmickWaterData
+27,1,00233658:setWindTrigger__9stTriggerFP17grGimmickWindData
+27,1,00234040:setAreaSleep__9stTriggerFb
 27,1,00233A48:setWindParam__9stTriggerFP20grGimmickWindData2ndl
 
 // stDataContainer
@@ -1261,48 +1381,46 @@ CC008000:WGPIPE
 41,1,0000C7B4:remove__9emManagerFv
 41,1,0000CF18:getEnemyCount__9emManagerFv
 41,1,0000CF8C:getEnemyCountFromKind__9emManagerF9EnemyKind
-
-// emWeaponManager (Note: addresses are based on abridged sora_enemy_vs)
-41,1,0002A7A4:create__15emWeaponManagerFv
-41,1,0002A798:getInstance__15emWeaponManagerFv
-41,1,0002A744:remove__15emWeaponManagerFv
-
-// wnemSimple (Note: addresses are based on abridged sora_enemy_vs)
-41,1,0002BE50:__ct__10wnemSimpleFv
-41,1,0002EEAC:__dt__10wnemSimpleFv
-
+41,1,0000D42C:isCompArchiveAll__9emManagerFv
+41,1,0000CE84:getEnemyPtrFromId__9emManagerFi
 
 //gfFileIO
 8001bf0c:readFile__8gfFileIOFP15gfFileIORequest
 8001cbf4:readSDFile__8gfFileIOFP15gfFileIORequest
+8001f5a0:checkFileSD__8gfFileIOFP15gfFileIORequest
+
+// gfFileIOHandle
 80020b38:__dt__14gfFileIOHandleFv
-80020b98:setNotify__14gfFileIOHandleFv
-80020bec:createDirRequest__14gfFileIOHandleFv
-80020c88:checkFileRequest__14gfFileIOHandleFv
-80020d20:findfirstRequest__14gfFileIOHandleFv
-80020dc8:findFileCountRequest__14gfFileIOHandleFv
-80020e54:checkDirRequest__14gfFileIOHandleFv
-80020ef0:createVFSystemFile__14gfFileIOHandleFv
-80020f90:mountVF__14gfFileIOHandleFv
-80021038:unmountVF__14gfFileIOHandleFv
-800210d4:formatVF__14gfFileIOHandleFv
+80020b98:setNotify__14gfFileIOHandleFPv
+80020bec:createDirRequest__14gfFileIOHandleFPCc
+80020c88:checkFileRequest__14gfFileIOHandleFPCc
+80020d20:findfirstRequest__14gfFileIOHandleFPCcQ25Heaps8HeapType
+80020dc8:findFileCountRequest__14gfFileIOHandleFPCc
+80020e54:checkDirRequest__14gfFileIOHandleFPCc
+80020ef0:createVFSystemFile__14gfFileIOHandleFPCci
+80020f90:mountVF__14gfFileIOHandleFUcPCc
+80021038:unmountVF__14gfFileIOHandleFUc
+800210d4:formatVF__14gfFileIOHandleFi
 80021170:mountSD__14gfFileIOHandleFv
 80021210:unmountSD__14gfFileIOHandleFv
 800212b0:checkFreeSize__14gfFileIOHandleFv
 8002134c:del__14gfFileIOHandleFv
 800213e8:writeNAND__14gfFileIOHandleFv
+800212b0:checkFreeSize__14gfFileIOHandleFPCc
+8002134c:del__14gfFileIOHandleFPCc
+800213e8:writeNAND__14gfFileIOHandleFPviPCc
+800219e0:read__14gfFileIOHandleFPCcQ25Heaps8HeapTypei
+80021b0c:read__14gfFileIOHandleFPCcPvi
+80021c30:read2__14gfFileIOHandleFv
 800215e0:readRequest__14gfFileIOHandleFPCcPvii
 80021498:readRequest__14gfFileIOHandleFPCcQ25Heaps8HeapTypeii
 80021540:readRequest1__14gfFileIOHandleFv
-80021680:readRequestCached__14gfFileIOHandleFv
-80021738:readRequestCached1__14gfFileIOHandleFv
+80021680:readRequestCached__14gfFileIOHandleFPCcQ25Heaps8HeapTypeii
+80021738:readRequestCached__14gfFileIOHandleFPCcPvii
 800217e8:readRequestCached2__14gfFileIOHandleFv
-80021898:readRequestNoSync__14gfFileIOHandleFv
-80021940:readRequestNoSync1__14gfFileIOHandleFv
-800219e0:read__14gfFileIOHandleFv
-80021b0c:read1__14gfFileIOHandleFv
-80021c30:read2__14gfFileIOHandleFv
-80021d54:writeRequest__14gfFileIOHandleFv
+80021898:readRequestNoSync__14gfFileIOHandleFPCcQ25Heaps8HeapTypeii
+80021940:readRequestNoSync__14gfFileIOHandleFPCcPvii
+80021d54:writeRequest__14gfFileIOHandleFPCcPvii
 80021de4:cancelRequest__14gfFileIOHandleFv
 80021ef8:isCancelRequested__14gfFileIOHandleFv
 80021f1c:isCanceled__14gfFileIOHandleFv
@@ -1314,6 +1432,7 @@ CC008000:WGPIPE
 80021fac:release__14gfFileIOHandleFv
 8002239c:setReadParam__15gfFileIORequestFP15gfFileIORequestPcPvii
 800219e0:read__14gfFileIOHandleFPCcQ25Heaps8HeapTypei
+8002239c:setReadParam__15gfFileIORequestFP15gfFileIORequestPCcPvii
 8001be00:gfFACreateDir__8gfFileIOFPCc
 
 // gameGlobal
@@ -1347,6 +1466,7 @@ CC008000:WGPIPE
 80024544:createHeap__13gfHeapManagerFiPCcii
 80024430:getMEMAllocator__13gfHeapManagerFQ25Heaps8HeapType
 800249cc:getHeap__13gfHeapManagerFQ25Heaps8HeapType
+800249e4:alloc__13gfHeapManagerFQ25Heaps8HeapTypeUl
 
 // gfKeepFrameBuffer
 80024d6c:update__17gfKeepFrameBufferFv
@@ -1498,6 +1618,7 @@ CC008000:WGPIPE
 80069d40:printf__7MessageFPCce
 800b9230:printf__5MuMsgFUlPCce
 8006b134:getPrintIndexData__7MessageFPvUlPPcPUl
+8006bc10:utf8to16__7MessageFPwPCc
 
 // grTenganEvent
 27,1,0027BBD8:__ct__13grTenganEventFv
@@ -1611,6 +1732,34 @@ CC008000:WGPIPE
 803e18b0:PFFAT_FreeChain
 803ddd60:PFENT_getcurrentDateTimeForEnt
 //message
+
+// NHTTP
+80396248:NHTTPStartup
+80396510:NHTTPCreateRequest
+80396774:NHTTPSendRequestAsync
+80396860:NHTTPDestroyResponse
+803969b8:NHTTPGetResultCode
+80396950:NHTTPGetBodyAll
+
+// DWC
+80335264:DWC_Init
+803557a0:DWCi_NdAlloc
+803557b0:DWCi_NdFree
+
+// muWifiInterfaceTask
+800c7410:create__19muWifiInterfaceTaskFv
+800c9b44:connect__19muWifiInterfaceTaskFb
+
+// dNetConnect
+8014cc4c:dNetConnect_Start__Fv
+
+// Network
+801462c0:create__7NetworkFb
+
+// nteDWC
+80150ba8:AllocEx__6nteDWCFiUli
+80150c20:FreeEx__6nteDWCFiPv
+
 // sora_men_sel_char
 805a0174:_FONT_THING1
 10,1,00014b68:setCharPic__19muSelCharPlayerAreaFiiibii
@@ -1628,13 +1777,15 @@ CC008000:WGPIPE
 801f136c:GXSetCullMode
 27,5,736B0:g_commonSndGroupHeapLevels
 80069AF0:setMessageLocation__F7Messagedddd
+10,1,0000FEDC:dispHighScore__13muSelCharTaskFiii
+
 // gfMemoryPool
 80025c58:alloc__12gfMemoryPoolFPvUli
 800259a4:create__12gfMemoryPoolFPvUlPCc
 8002606c:getMaxFreeBlockSize__12gfMemoryPoolFv
 
-// Compression
-80206018:CXUncompressLZ__FPvPv
+// OpenRVL CX (Compression) functions.
+80206018:CXUncompressLZ
 
 // OpenRVL GX functions.
 801f1088:GXBegin
@@ -1648,7 +1799,7 @@ CC008000:WGPIPE
 // gf/gf_draw
 8001abbc:gfDrawSetupCoord2D__Fv
 8001a5c0:gfDrawSetVtxPosColorPrimEnvironment__Fv
-8001a7b0:gfDrawSetVtxPosColorTexPrimEnvironment__Fv
+8001a7ac:gfDrawSetVtxPosColorTexPrimEnvironment__Fv
 8001a980:gfDrawResetLight__Fv
 
 
@@ -1688,3 +1839,20 @@ CC008000:WGPIPE
 8006fc78:GetScaleH__Q22ms10CharWriterCFv
 8006fc80:GetScaleV__Q22ms10CharWriterCFv
 8006fc3c:GetTextColor__Q22ms10CharWriterCFv
+
+// CUSTOM
+27,5,73648:g_commonSndGroupOverrideName
+27,5,736B0:g_commonSndGroupHeapLevels
+80406920:MOD_PATCH_DIR
+27,1,00224AF4:getItemPac__5StageFPP9gfArchivePP9gfArchive6itKindiPP9gfArchivePP21itCustomizerInterface
+27,1,002A904C:getRandBasicItemSheet__9itManagerF7itGenId
+27,1,002A4FF8:preloadAssist__9itManagerF6itKindi
+
+// emWeaponManager (Note: addresses are based on abridged sora_enemy_vs)
+41,1,0002A7A4:create__15emWeaponManagerFv
+41,1,0002A798:getInstance__15emWeaponManagerFv
+41,1,0002A744:remove__15emWeaponManagerFv
+
+// wnemSimple (Note: addresses are based on abridged sora_enemy_vs)
+41,1,0002BE50:__ct__10wnemSimpleFv
+41,1,0002EEAC:__dt__10wnemSimpleFv

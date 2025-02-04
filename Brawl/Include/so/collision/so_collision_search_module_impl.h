@@ -6,8 +6,9 @@
 #include <so/collision/so_collision.h>
 #include <so/collision/so_collision_log.h>
 #include <so/collision/so_collision_group.h>
-#include <so/event/so_event_observer.h>
 #include <so/event/so_event_presenter.h>
+#include <so/event/so_event_presenter.h>
+#include <so/collision/so_collision_search_event_presenter.h>
 #include <so/so_array.h>
 
 class soModuleAccesser;
@@ -26,7 +27,7 @@ public:
     virtual void setSize(u32 partIndex, float size);
     virtual void setPos(int nodeIndex, Vec3f* startOffsetPos, Vec3f* endOffsetPos);
     virtual soCollisionSearchData* getData(u32 partIndex);
-    virtual void update(float posX, float);
+    virtual void update(float posX, float scale);
     virtual void checkLog();
     virtual bool check();
     virtual int isInflict();
@@ -62,7 +63,7 @@ public:
     virtual void setSize(u32 partIndex, float size);
     virtual void setPos(int nodeIndex, Vec3f* startOffsetPos, Vec3f* endOffsetPos);
     virtual soCollisionSearchData* getData(u32 partIndex);
-    virtual void update(float posX, float);
+    virtual void update(float posX, float scale);
     virtual void checkLog();
     virtual bool check();
     virtual int isInflict();

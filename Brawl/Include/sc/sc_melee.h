@@ -3,7 +3,8 @@
 #include <StaticAssert.h>
 #include <gf/gf_scene.h>
 #include <st/operator/st_operator_rule_melee.h>
-#include <st/operator/st_operator_ready_go.h>
+#include <st/operator/st_operator_drop_item.h>
+
 #include <types.h>
 
 class scMelee : public gfScene {
@@ -15,9 +16,9 @@ public:
     char _56[8];
     void* m_operatorBgm;
     void* m_operatorAppearanceFighter;
-    stOperatorReadyGo* m_operatorReadyGo;
-    stOperatorReadyGo* m_operatorReadyGoSuddenDeath;
-    char _76[4];
+    void* m_operatorReadyGo;
+    void* m_operatorReadyGoSuddenDeath;
+    stOperatorDropItemMelee* m_operatorDropItem;
     stOperatorRule* m_operatorRuleGameMode;
     stOperatorRuleMelee* m_operatorRuleMelee;
     void* m_operatorNoContest;
@@ -36,7 +37,9 @@ public:
     void* m_eventRule;
     char _176[36];
     int m_endNum;
-    char _216[40];
+    char _216[12];
+    GameRule m_gameRule;
+    char _232[24];
 
     virtual void start();
     virtual void process();

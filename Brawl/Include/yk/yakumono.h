@@ -9,25 +9,32 @@
 
 class grYakumono;
 
-struct ykHitGroupInfo {
-    char _0[8];
-    soCollisionHitPartsInfo* m_hitPartsInfo;
+struct ykDataGroup {
+    u32 m_hitGroupIndex;
+    soSet<soCollisionHitData::Simple>* m_hitDataSimpleSet;
+    soSet<soCollisionHitData>* m_hitDataSet;
 };
 
 struct ykData {
-    int m_numHitGroups;
-    ykHitGroupInfo* m_hitGroupsInfo;
+    int m_dataGroupNum;
+    ykDataGroup* m_dataGroups;
+
+    ykData();
+    inline ykData(int numDataGroups, ykDataGroup* dataGroups) {
+        m_dataGroupNum = numDataGroups;
+        m_dataGroups = dataGroups;
+    }
 };
 
 struct ykAreaData : ykData {
-    soAreaInit* m_areaInit;
+    soSet<soAreaData>* m_areaDataSet;
 };
 
 class Yakumono : public StageObject, public soCollisionAttackEventObserver {
 public:
-    void setSituationKind(int situationKind);
+    void setSituationKind(SituationKind situationKind);
     void setCollisionHitOpponentCategory(int unk1, bool unk2);
-    void setCollisionHitSelfCatagory(int category);
+    void setCollisionHitSelfCatagory(soCollision::Category);
     void setReactionFrame(int reactionFrame);
     void setTeamOwnerId(int teamOwnerId);
     void setTeam(int teamId);

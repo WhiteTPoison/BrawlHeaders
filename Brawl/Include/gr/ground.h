@@ -4,13 +4,14 @@
 #include <gf/gf_archive.h>
 #include <gf/gf_model.h>
 #include <gf/gf_task.h>
-#include <gr/gr_collision_status.h>
+#include <gr/collision/gr_collision_status.h>
 #include <memory.h>
 #include <mt/mt_matrix.h>
 #include <mt/mt_vector.h>
 #include <nw4r/g3d/g3d_resfile.h>
 #include <nw4r/g3d/g3d_scnmdl.h>
 #include <so/so_array.h>
+#include <st/st_trigger.h>
 #include <types.h>
 
 class Stage;
@@ -84,7 +85,7 @@ public:
     virtual int getModelCount();
     virtual void startup(gfArchive* data, u32 unk1, u32 unk2);
     virtual bool setNode();
-    virtual void setStageData(void* stageData);
+    virtual void setStageData(void* stageData) { m_stageData = stageData; }
     virtual void* getStageData();
     virtual void initStageData();
     virtual void setMdlIndex(int mdlIndex);
@@ -118,7 +119,7 @@ public:
     virtual void setMatAlpha(u32 unk1, u32 sceneModelIndex);    // TODO
     virtual void updateG3dProcCalcWorld();
     virtual void preExit();
-    virtual bool adventureEventGetItem(int unk1, int* unk2);
+    virtual bool adventureEventGetItem(int genParamId, stTriggerData* triggerData);
     virtual void invalidatedByCameraClipping();
     virtual void setTransparencyFlag(char flag);
 

@@ -5,8 +5,13 @@
 #include <mt/mt_vector.h>
 #include <so/anim/so_anim_chr.h>
 #include <so/so_array.h>
-#include <so/event/so_event_observer.h>
 #include <so/event/so_event_presenter.h>
+#include <so/event/so_event_presenter.h>
+#include <so/status/so_status_event_presenter.h>
+#include <so/motion/so_motion_event_presenter.h>
+#include <so/model/so_model_event_presenter.h>
+#include <so/anim/so_anim_cmd_event_presenter.h>
+#include <so/transition/so_transition_module_impl.h>
 #include <types.h>
 
 class soModuleAccesser;
@@ -173,7 +178,7 @@ public:
     char _spacer3[100];
 
     // 240
-    void* m_transitionModuleEntity;
+    soTransitionModule* m_transitionModule;
 
     // 244
     soArrayVector<soMotionChangeParam, 4> m_motionChangeParamArray;
@@ -297,7 +302,7 @@ public:
     virtual void changeMotion(soMotionChangeParam* changeParam);
 
     virtual void* getResFileData(int);
-    virtual u32 isObserv(char unk1);
+    virtual bool isObserv(char unk1);
     virtual bool notifyEventAnimCmd(acAnimCmd* acmd, soModuleAccesser* moduleAccesser, int unk3);
     virtual void notifyEventChangeStatus(int statusKind, int prevStatusKind, soStatusData* statusData, soModuleAccesser* moduleAccesser);
     virtual void notifyEventConstructInstance(bool, soModuleAccesser* moduleAccesser);

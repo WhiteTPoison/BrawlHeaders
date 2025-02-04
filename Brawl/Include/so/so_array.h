@@ -1,17 +1,24 @@
 #pragma once
 
+#include <so/so_general_flag.h>
 #include <so/so_null.h>
 #include <types.h>
 #include <so/so_array_vector_calculator.h>
+#include <bitset>
 
-template <size_t N>
-struct bit_width {
-    u8 bits[1 + sizeof(bit_width<N / 2>)];
-};
+template <class T>
+class soSet {
+    T* m_elements;
+    size_t m_size;
 
-template <>
-struct bit_width<1> {
-    u8 bits[1];
+public:
+    T* elements() {
+        return m_elements;
+    }
+
+    u32 size() {
+        return m_size;
+    }
 };
 
 template <class T>
@@ -261,4 +268,6 @@ public:
     inline soArrayVector(u32 size, const T& element, u32 unk) : soArrayNull<T>(size, element, unk) { };
 };
 
-
+extern soArrayNull<s32> g_s32ArrayNull;
+extern soArrayNull<float> g_floatArrayNull;
+extern soArrayNull<soGeneralFlag<s32> > g_s32GeneralFlagArrayNull;

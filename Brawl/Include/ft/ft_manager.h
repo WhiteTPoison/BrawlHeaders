@@ -2,33 +2,37 @@
 
 #include <StaticAssert.h>
 #include <ft/fighter.h>
+#include <ft/ft_owner.h>
 #include <gm/gm_result_info.h>
 #include <mt/mt_vector.h>
 #include <so/damage/so_damage_attacker_info.h>
 #include <so/so_dispose_instance_manager.h>
-#include <so/event/so_event_observer.h>
-#include <so/so_log_event_presenter.h>
+#include <so/event/so_event_presenter.h>
+#include <so/event/so_log_event_presenter.h>
 #include <ft/ft_entry_manager.h>
 #include <ft/ft_slot_manager.h>
+#include <it/item.h>
 #include <so/so_null.h>
+#include <so/ground/so_ground_util.h>
 #include <types.h>
 
 class ftOutsideEventObserver : public soEventObserver<ftOutsideEventObserver> {
 public:
+    ftOutsideEventObserver() : soEventObserver<ftOutsideEventObserver>(0) {};
     ftOutsideEventObserver(short unitID) : soEventObserver<ftOutsideEventObserver>(unitID) {};
 
-    virtual void addObserver(int param1, int param2);
+    virtual void addObserver(short param1, s8 param2);
     // TODO: Verify params
     virtual void notifyEventOnDamage(int entryId, u32 hp, soDamage* damage);
-    virtual void notifyEventSetDamage(int entryId, float, int, bool, bool);
+    virtual void notifyEventSetDamage(int entryId, float, u32 percent, bool, bool);
     virtual void notifyEventRecover(int entryId, int);
-    virtual void notifyEventOutsideDeadArea(int entryId, int, bool*);
+    virtual void notifyEventOutsideDeadArea(int entryId, soGroundUtil::DeadAreaCheckResult, bool*);
     virtual void notifyEventAppeal(int entryId, int);
     virtual void notifyEventDead(int entryId, int deadCount, int, int);
     virtual void notifyEventBeat(int entryId1, int entryId2);
     virtual void notifyEventSuicide(int entryId);
-    virtual void notifyEventChangeStart(int, int playerNo);
-    virtual void notifyEventChangeEnd(int entryId, u32 index, int, int);
+    virtual void notifyEventChangeStart(int entryId, int playerNo, int activeInstanceIndex, ftKind);
+    virtual void notifyEventChangeEnd(int entryId, int playerNo, int activeInstanceIndex, ftKind);
     virtual void notifyEventChangeAppear();
     virtual void notifyEventAddDragoonParts(int entryId, int);
     virtual void notifyEventCompDragoonParts(int entryId);
@@ -38,27 +42,27 @@ public:
     virtual void notifyEventSetCursor(int entryId, u32 index);
     virtual void notifyEventSetNameCursor(int entryId, u32 index);
     virtual void notifyEventSetLoupe(int entryId, u32 index);
-    virtual void notifyEventStartFinal();
-    virtual void notifyEventEndFinal();
+    virtual void notifyEventStartFinal(int entryId);
+    virtual void notifyEventEndFinal(int entryId);
     virtual void notifyEventRemoveEntry(int entryId);
-    virtual void notifyEventFinalSlow(float, int, u32);
-    virtual void notifyEventFinalSlowCancel();
-    virtual void notifyEventFinalStop();
-    virtual void notifyEventFinalStopCancel();
+    virtual void notifyEventFinalSlow(int entryId, float, int);
+    virtual void notifyEventFinalSlowCancel(int entryId);
+    virtual void notifyEventFinalStop(int entryId);
+    virtual void notifyEventFinalStopCancel(int entryId);
     virtual void notifyEventEntryEnd(int entryId);
     virtual void notifyEventResultEnd(int entryId);
-    virtual void notifyEventGetItem(int, int, int, int, int);
+    virtual void notifyEventGetItem(int entryId, itKind kind, int itVariation, int genParamId, int instanceId);
     virtual void notifyEventSucceedHit(int entryId, u32 consecutiveHits, float totalDamage);
     virtual void notifyEventResultWin(int entryId, int);
     virtual void notifyEventYoshiEggStart(int entryId);
     virtual void notifyEventYoshiEggEnd(int entryId);
     virtual void notifyEventOnInput(int entryId);
-    virtual void notifyEventPikminMakeBloomAll();
+    virtual void notifyEventPikminMakeBloomAll(int entryId);
     virtual void notifyEventKirbyCopySetup(int entryId, int);
     virtual void notifyEventKirbyCopyCancel(int entryId, int);
     virtual void notifyEventKnockout(int entryId);
     virtual void notifyEventHeartSwapStart(int entryId1, int entryId2);
-    virtual void notifyEventHeartSwapEnd();
+    virtual void notifyEventHeartSwapEnd(int, int);
 
     char _spacer1[2];
 };
@@ -75,7 +79,13 @@ public:
     GameRule m_gameRule : 8;
     char _107[2];
     bool m_isStamina;
-    char _110[70];
+    char _110[2];
+    int m_finalStatus;
+    int m_finalEntryId;
+    int m_noDiscretionFinalCount;
+    char _122[21];
+    s8 m_parasitePlayerNo;    // custom
+    char _146[34];
     soEventManageModuleImpl m_eventManageModule;
     char m_200[4];
     short m_manageID;
@@ -125,11 +135,13 @@ public:
     void setSuperStar(int entryId);
     void setSlow(int inflictingTeam, bool setStatus, int slowStrength, int slowDuration);
     void setTimerSlow(int inflictingEntryId, bool setStatus, int slowStrength, int slowDuration);
-    void setScaling(int entryId, int unk1, int unk2);
-    void setInfiniteScaling(int entryId, int unk1, int unk2);
+    void setScaling(int entryId, Fighter::ScalingKind, Fighter::ScalingType);
+    void setInfiniteScaling(int entryId, Fighter::ScalingKind, Fighter::ScalingType);
     void setThunder(int inflictingEntryId, int unk2);
-    void setWarpFighter(int entryId, Vec3f* pos, float lr, bool showEffect);
+    void setWarpFighter(int entryId, Vec3f* pos, float lr, u32 flags);
     void setFighterOperationStatus(int entryId, int fighterOperationStatus);
+    void setFinal(int entryId, bool isDiscretion);
+    bool addDragoon(int entryId, u32 variation);
 
     void pickupCoin(int entryId, int amount);
     void setDead(int entryId, int unk1, int unk2);
@@ -137,6 +149,8 @@ public:
     void setSuicide(int entryId);
     bool isProcessHeartSwap(int entryId);
     void toKnockOutHeartSwapOpposite(int entryId, soDamageAttackerInfo* attackerInfo);
+
+
 };
 
 extern ftManager* g_ftManager;

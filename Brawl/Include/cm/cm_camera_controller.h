@@ -43,12 +43,17 @@ public:
     gfCameraController* m_techController;
     void* m_quake;
     gfCameraController* m_demoController;
-    cmStageParam m_stageCameraParam;
-    cmStageParamPaused m_stageCameraParamPaused;
-    cmStageParamFixed m_stageCameraParamFixed;
-    stRange m_stageCameraRange;
-    stRange m_stageDeadRange;
-    char _328[92];
+    cmStageParam m_stageCameraParam; // 0x84
+    cmStageParamPaused m_stageCameraParamPaused; // 0xC4
+    cmStageParamFixed m_stageCameraParamFixed; // 0x110
+    Rect2D m_stageCameraRange; // 0x128
+    Rect2D m_stageDeadRange; // 0x138
+    char _328[16]; // 0x148
+    float unk158;
+    float unk15C;
+    float unk160;
+    float unk164;
+    char unk168[60];
 
     virtual void processCamera();
     virtual void processDebug();
@@ -57,6 +62,7 @@ public:
     virtual ~CameraController();
 
     void changeInput(Kind cameraControllerKind);
+    gfCameraController* getCameraController(Kind kind);
     static CameraController* getInstance();
 };
 static_assert(sizeof(CameraController) == 420, "Class is wrong size!");

@@ -2,8 +2,8 @@
 
 #include <StaticAssert.h>
 #include <so/controller/so_controller_impl.h>
-#include <so/event/so_event_observer.h>
-#include <ip/Input.h>
+#include <so/event/so_event_presenter.h>
+#include <so/anim/so_anim_cmd_event_presenter.h>
 #include <types.h>
 
 class soControllerModule {
@@ -21,7 +21,7 @@ public:
     virtual void resetSubStickX();
     virtual void resetSubStickY();
     virtual void resetSubStick();
-    virtual void update(void*, bool);
+    virtual void update(Input*, bool);
     virtual void resetFlickX();
     virtual void resetFlickY();
     virtual float getStickX();
@@ -46,11 +46,11 @@ public:
     virtual float getSubStickPrevY();
     virtual float getSubStickDir();
     virtual bool isSubStickSide();
-    virtual int getTrigger();
+    virtual ipPadButton getTrigger();
     virtual u8 getTriggerCount(u8 index);
     virtual u8 getTriggerCountPrev(u8 index);
-    virtual ipButton getButton();
-    virtual int getRelease();
+    virtual ipPadButton getButton();
+    virtual ipPadButton getRelease();
     virtual void setOff(bool);
     virtual void setPrev(int);
     virtual void clearLog();
@@ -110,7 +110,7 @@ public:
     virtual void resetFlickBonus();
     virtual void resetFlickBonusLr();
 
-    virtual u32 isObserv(char unk1);
+    virtual bool isObserv(char unk1);
     virtual bool notifyEventAnimCmd(acAnimCmd* acmd, soModuleAccesser* moduleAccesser, int unk3);
 };
 static_assert(sizeof(soControllerModuleImpl) == 20, "Class is wrong size!");
