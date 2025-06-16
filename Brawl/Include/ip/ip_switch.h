@@ -8,6 +8,9 @@ public:
     char _0[24];
     ipKeyRecorder* m_keyRecorder;
     char _28[12];
+
+    static ipSwitch* getInstance();
+    bool isBreakGameProcLoop();
 };
 static_assert(sizeof(ipSwitch) == 0x28, "Class is wrong size!");
 

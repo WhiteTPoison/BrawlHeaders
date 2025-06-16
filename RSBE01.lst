@@ -27,11 +27,17 @@
 
 //gfPadSystem
 800293dc:consumeFrameCounter__11gfPadSystemFi
+800177d4:setSkipLowEffect__FPvUi
 80029438:updateLow__11gfPadSystemFv
 8002a210:updateSystem__11gfPadSystemFv
+8002b62c:clearPadEdgeRepert__11gfPadSystemFv
 
 // Pad Config
 80048548:getInstance__11ipPadConfigFv
+
+// ipSwitch
+8004a750:getInstance__8ipSwitchFv
+8004add0:isBreakGameProcLoop__8ipSwitchFv
 
 // Hardware
 CC008000:WGPIPE
@@ -1689,3 +1695,6 @@ CC008000:WGPIPE
 8006fc78:GetScaleH__Q22ms10CharWriterCFv
 8006fc80:GetScaleV__Q22ms10CharWriterCFv
 8006fc3c:GetTextColor__Q22ms10CharWriterCFv
+
+80017618:gameProc__FPvUi
+800171b4:startOfGameLoop__Fv

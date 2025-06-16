@@ -17,6 +17,7 @@ public:
 	void updateLow();
 	void updateSystem();
 	void clearPadQueue();
+	void clearPadEdgeRepert();
 };
 
 extern gfPadSystem g_PadSystem;
