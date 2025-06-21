@@ -1,7 +1,7 @@
 #pragma once
 
-#include <GX.h>
 #include <StaticAssert.h>
+#include <GX.h>
 #include <cm/cm_camera_controller.h>
 #include <em/em_create.h>
 #include <gf/gf_archive.h>
@@ -14,13 +14,21 @@
 #include <mt/mt_matrix.h>
 #include <mt/mt_vector.h>
 #include <snd/snd_3d_generator.h>
-#include <snd/snd_id.h>
 #include <st/st_collision_attr_param.h>
 #include <st/st_positions.h>
 #include <st/st_trigger.h>
+#include <st/st_shadow.h>
 #include <types.h>
 
-class StageParam { // STPM
+struct stGameFrame {
+    float m_frameDelta;
+    bool m_isJust;
+    char _[3];
+};
+
+extern stGameFrame g_stGameFrame;
+
+class stParam { // STPM
 public:
     u8 m_echo;
     u8 m_id1;
@@ -94,7 +102,12 @@ public:
     u16 m_delayTime;
     char _244[16];
 };
-static_assert(sizeof(StageParam) == 260, "Class is wrong size!");
+static_assert(sizeof(stParam) == 260, "Class is wrong size!");
+
+struct stDestroyBossParamCommon {
+    char _[0x18];
+};
+static_assert(sizeof(stDestroyBossParamCommon) == 0x18, "Class is wrong size!");
 
 class Stage : public gfTask {
 public:
@@ -105,9 +118,9 @@ public:
     // 8
     char _spacer1[0x10];
     // 18
-    stRange m_deadRange;
+    Rect2D m_deadRange;
     // 28
-    stRange m_aiRange;
+    Rect2D m_aiRange;
     // 38
     cmStageParam* m_cameraParam1;
     // 3c
@@ -125,7 +138,7 @@ public:
     // 54
     char _spacer3[4];
     // 58
-    StageParam* m_stageParam;
+    stParam* m_stageParam;
     // 5C
     void* m_stageData;
     // 60
@@ -133,13 +146,29 @@ public:
     // 64
     char _spacer4[0x18];
     // 7C
-    u32 m_unk;
+    Vec3f* m_pokeTrainerPos;
     // 80
-    char _spacer5[0x38];
+    char _0x80[1];
+    // 81
+    u8 m_pokeTrainerPosCount;
+    // 82
+    u8 m_pokeTrainerPosType;
+    // 83
+    char _0x83[1];
+    // 84
+    stShadow* m_shadow;
+    // 88
+    float _0x88[6];
+    // A0
+    char _0xA0[11];
+    // AB
+    bool m_isDevil;
+    // AC
+    char _0xAC[12];
     // B8
     char collisionAttrs[0xC];
     // C4
-    gfArchive m_archive;
+    gfArchive m_itemSheetArchive;
     // 144
     bool m_unk2;
     // 145
@@ -180,13 +209,17 @@ public:
     virtual ~Stage();
 
     virtual void createObj();
-    virtual void createObjPokeTrainer(gfArchive* filedata, int fileindex, const char* name, int unk1, int unk2);
+    virtual void createObjPokeTrainer(gfArchive* filedata, int fileindex, const char* name, Vec3f* pokeTrainerPos, int unk2);
     virtual int getPokeTrainerPointNum() { return 0; }
     virtual void getPokeTrainerPointData(int* unk1, int unk2) {}
     virtual float getPokeTrainerPositionZ() { return 0.0f; }
     virtual int getPokeTrainerDrawLayer() { return 0; }
     virtual bool isAdventureStage() { return false; }
+#ifdef MATCHING
+    virtual void getItemPac(gfArchive** brres, gfArchive** param, itKind itemID, int variantID);
+#else
     virtual void getItemPac(gfArchive** brres, gfArchive** param, itKind itemID, int variantID, gfArchive** commonParam = NULL, itCustomizerInterface** customizer = NULL); // Note: Optional parameters for modding purposes to use custom itmParams and customizers
+#endif
     virtual void getItemGenPac(gfArchive** archive);
     virtual void getItemPacEnemyFigure(gfArchive** archive);
     virtual void getEnemyPac(gfArchive** brres, gfArchive** param, gfArchive** enmCommon, gfArchive** primFaceBrres, EnemyKind enemyKind);
@@ -198,7 +231,7 @@ public:
     virtual void process();
     virtual void updateStagePositions();
     virtual void debugCollision();
-    virtual stRange* getAIRange() { return &m_aiRange; }
+    virtual Rect2D* getAIRange() { return &m_aiRange; }
     virtual int getDefaultLightSetIndex() { return 0x14; }
     virtual int getZoneLightSetIndex();
     virtual int getScrollDir(Vec3f* unk1)
@@ -265,7 +298,7 @@ public:
     virtual void endAppear();                                // TODO
     virtual IfSmashAppearTask* getAppearTask();              // TODO
     virtual void forceStopAppear();                          // TODO
-    virtual int getFinalTechniqColor();                      // TODO
+    virtual GXColor getFinalTechniqColor();
     virtual void setMotionRatio(float unk1, float unk2);     // TODO
     virtual void saveMotionRatio(int unk1);                  // TODO
     virtual void restoreMotionRatio(int unk1);               // TODO
@@ -276,14 +309,18 @@ public:
     virtual bool isBossBattleMode() { return false; }
     virtual bool isSimpleBossBattleMode() { return false; }
     virtual bool isAppear();             // TODO
-    virtual s32 isStartAppearTimming();  // TODO
-    virtual void getMadeinAiData();      // TODO
+    virtual bool isStartAppearTimming();  // TODO
+    virtual void* getMadeinAiData();      // TODO
     virtual bool isBamperVector();       // TODO
-    virtual void getBamperVector(int unk1);
+    virtual void getBamperVector(Vec3f*);
     virtual void notifyEventInfoReady();                           // TODO
     virtual void notifyEventInfoGo();                              // TODO
-    virtual void getDestroyBossParamCommon();                      // TODO
-    virtual void stAdventureEventGetItem(int, int, int, int, int); // TODO
+#ifdef MATCHING
+    virtual stDestroyBossParamCommon getDestroyBossParamCommon(u32);
+#else
+    virtual stDestroyBossParamCommon getDestroyBossParamCommon(u32, int enemyCreateId = -1, int enemyMessageKind = -1);
+#endif
+    virtual void stAdventureEventGetItem(int entryId, itKind kind, int itVariation, int genParamId, int instanceId);
     virtual void setStageOutEffectInit();                          // TODO
     virtual void setStageInEffectInit();                           // TODO
     virtual int helperStarWarp() { return 0; }
@@ -293,10 +330,10 @@ public:
     virtual void getZonePos(Vec3f* pos);
     virtual float getMagmaHeight();   // TODO
     virtual float getAcidHeight();    // TODO
-    virtual int getIteamDropStatus(); // TODO
+    virtual u8 getIteamDropStatus();
     virtual bool createWind2ndOnly();
     virtual grGimmickWindData2nd* getWind2ndOnlyData(); // TODO
-    virtual void updateWind2ndOnly();                   // TODO
+    virtual void updateWind2ndOnly();
     virtual void setVision(u8);
 };
 

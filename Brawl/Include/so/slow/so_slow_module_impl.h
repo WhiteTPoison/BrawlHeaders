@@ -2,7 +2,8 @@
 
 #include <StaticAssert.h>
 #include <so/slow/so_slow_module_simple.h>
-#include <so/event/so_event_observer.h>
+#include <so/event/so_event_presenter.h>
+#include <so/anim/so_anim_cmd_event_presenter.h>
 #include <so/so_null.h>
 #include <types.h>
 
@@ -32,7 +33,7 @@ public:
     virtual void setWholeFrame(int wholeFrame);
     virtual int getWholeFrame();
 
-    virtual u32 isObserv(char unk1);
+    virtual bool isObserv(char unk1);
     virtual bool notifyEventAnimCmd(acAnimCmd* acmd, soModuleAccesser* moduleAccesser, int unk3);
 };
 //static_assert(sizeof(soSlowModuleImpl) == 56, "Class is wrong size!");

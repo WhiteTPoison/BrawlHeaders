@@ -8,8 +8,12 @@
 #include <so/damage/so_damage_no_reaction_module.h>
 #include <so/damage/so_damage_transactor_actor.h>
 #include <so/so_array.h>
-#include <so/event/so_event_observer.h>
 #include <so/event/so_event_presenter.h>
+#include <so/event/so_event_presenter.h>
+#include <so/damage/so_damage_event_presenter.h>
+#include <so/status/so_status_event_presenter.h>
+#include <so/collision/so_collision_hit_event_presenter.h>
+#include <so/anim/so_anim_cmd_event_presenter.h>
 #include <so/so_null.h>
 #include <types.h>
 
@@ -47,7 +51,7 @@ public:
     virtual bool isNoReactionModePerfect();
     virtual void toTurnDamage();
     virtual void leaveTurnDamage();
-    virtual void* getDamageLog();
+    virtual soDamageLog* getDamageLog();
     virtual void clearDamageLog();
     virtual void getAttackerInfo(soDamageAttackerInfo* attackerInfo);
     virtual soDamageAttackerInfo* getAttackerInfo();
@@ -116,7 +120,7 @@ public:
     virtual bool isNoReactionModePerfect();
     virtual void toTurnDamage();
     virtual void leaveTurnDamage();
-    virtual void* getDamageLog();
+    virtual soDamageLog* getDamageLog();
     virtual void clearDamageLog();
     virtual void getAttackerInfo(soDamageAttackerInfo* attackerInfo);
     virtual soDamageAttackerInfo* getAttackerInfo();
@@ -149,10 +153,10 @@ public:
     virtual float getDamageMul();
     virtual void reqDamageEffect();
 
-    virtual u32 isObserv(char unk1);
+    virtual bool isObserv(char unk1);
     virtual bool notifyEventAnimCmd(acAnimCmd* acmd, soModuleAccesser* moduleAccesser, int unk3);
-    virtual void notifyEventCollisionHit(float, int, int index, int, soModuleAccesser* moduleAccesser, void*);
-    virtual void notifyEventCollisionHit2nd(float, float, void*, void*, int index, int, bool);
+    virtual void notifyEventCollisionHit(float power, soCollisionAttackData*, u32 index, int, soModuleAccesser* moduleAccesser, soCollisionLog*);
+    virtual void notifyEventCollisionHit2nd(float posX, float collisionLr, soCollisionAttackModule*, soCollisionLog*, u32 groupIndex, soModuleAccesser* moduleAccesser, bool);
     virtual void notifyEventChangeStatus(int statusKind, int prevStatusKind, soStatusData* statusData, soModuleAccesser* moduleAccesser);
 };
 //static_assert(sizeof(soDamageModuleImpl) == 172, "Class is wrong size!");

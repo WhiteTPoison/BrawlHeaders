@@ -30,6 +30,7 @@ class emManager {
     virtual ~emManager();
 
 public:
+    bool isCompArchiveAll();
     int getPreloadArchiveCountFromKind(EnemyKind enemyKind);
     int preloadArchive(gfArchive* param, gfArchive* brres, gfArchive* enmCommon, gfArchive* primFaceBrres, EnemyKind enemyKind, bool isSoundRequest);
     int createEnemy(emCreate* create);
@@ -39,6 +40,7 @@ public:
     static void remove();
     u32 getEnemyCount();
     u32 getEnemyCountFromKind(EnemyKind enemyKind);
+    Enemy* getEnemyPtrFromId(int createId);
     static emManager* getInstance();
 };
 static_assert(sizeof(emManager) == 32, "Class is wrong size!");

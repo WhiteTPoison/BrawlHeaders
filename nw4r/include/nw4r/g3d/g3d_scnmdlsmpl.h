@@ -1,5 +1,6 @@
 #pragma once
 
+#include <StaticAssert.h>
 #include <nw4r/g3d/g3d_calcworldcallback.h>
 #include <nw4r/g3d/g3d_resmdl.h>
 #include <nw4r/g3d/g3d_scnobj.h>
@@ -25,6 +26,7 @@ namespace nw4r {
             char _spacer4[20];
 
             void EnableScnMdlCallbackTiming(u32 flags);
+            void UpdateFrame();
         };
     }
 }

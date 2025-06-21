@@ -1,5 +1,6 @@
 #pragma once
 
+#include <StaticAssert.h>
 #include <gm/gm_lib.h>
 #include <types.h>
 
@@ -16,9 +17,9 @@ class stClassInfoImpl : public stClassInfo {
 private:
 public:
     stClassInfoImpl() : stClassInfo() { setClassInfo(I, this); };
+    virtual ~stClassInfoImpl();
     virtual T* create();
     virtual void preload();
-    virtual ~stClassInfoImpl();
 };
 
 #define ST_CLASS_INFO                              \

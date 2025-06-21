@@ -16,8 +16,8 @@
 class GameGlobal {
 public:
     /* data */
-    GameFrame* g_GameFrame;
-    char _0[0x4];                       // 0x00
+    gmAppData* m_appData;               // 0x00
+    char _0[0x4];                       // 0x04
     gmGlobalModeMelee* m_modeMelee;     // 0x08
     char _1[0x04];                      // 0x0C
     gmSelCharData* m_selCharData;       // 0x10
@@ -28,7 +28,7 @@ public:
     gmGlobalRecord* m_record;         // 0x24
     gmGlobalRecord::NameData* m_nameRecords;         // 0x28
     gmTournamentData* m_tournamentData; // 0x2C
-    gmAdventure* m_adventure;           // 0x30
+    gmAdvData* m_advData;           // 0x30
     nteGlobalData* m_nteData;           // 0x34
     char _4[0x04];                      // 0x38
     gmGlobalCorps* m_corps;             // 0x3C
@@ -37,9 +37,10 @@ public:
     char _6[0x8];                       // 0x48
 
     gmGlobalRecord::MenuData* getGlobalRecordMenuDatap();
+    float getGameFrame() const;
 
     static int getLanguage();
 };
-STATIC_CHECK(sizeof(GameGlobal) == 0x50);
+static_assert(sizeof(GameGlobal) == 0x50, "Class is wrong size!");
 
 extern GameGlobal* g_GameGlobal;

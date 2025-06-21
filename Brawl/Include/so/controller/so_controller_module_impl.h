@@ -2,8 +2,8 @@
 
 #include <StaticAssert.h>
 #include <so/controller/so_controller_impl.h>
-#include <so/event/so_event_observer.h>
-#include <ip/Input.h>
+#include <so/event/so_event_presenter.h>
+#include <so/anim/so_anim_cmd_event_presenter.h>
 #include <types.h>
 
 class soControllerModule {
@@ -21,7 +21,7 @@ public:
     virtual void resetSubStickX();
     virtual void resetSubStickY();
     virtual void resetSubStick();
-    virtual void update(void*, bool);
+    virtual void update(Input*, bool);
     virtual void resetFlickX();
     virtual void resetFlickY();
     virtual float getStickX();
@@ -32,13 +32,13 @@ public:
     virtual float getStickDir();
     virtual bool isStickSide();
     virtual u8 getFlickX();
-    virtual u8 getFlickXDir();
+    virtual s8 getFlickXDir();
     virtual u8 getFlickY();
-    virtual u8 getFlickYDir();
+    virtual s8 getFlickYDir();
     virtual u8 getFlickNoResetX();
     virtual u8 getFlickNoResetY();
     virtual u8 getFlickAfterX();
-    virtual u8 getFlickAfterXDir();
+    virtual s8 getFlickAfterXDir();
     virtual u8 getFlickAfterY();
     virtual float getSubStickX();
     virtual float getSubStickPrevX();
@@ -46,15 +46,15 @@ public:
     virtual float getSubStickPrevY();
     virtual float getSubStickDir();
     virtual bool isSubStickSide();
-    virtual int getTrigger();
+    virtual ipPadButton getTrigger();
     virtual u8 getTriggerCount(u8 index);
     virtual u8 getTriggerCountPrev(u8 index);
-    virtual ipButton getButton();
-    virtual int getRelease();
+    virtual ipPadButton getButton();
+    virtual ipPadButton getRelease();
     virtual void setOff(bool);
-    virtual void setPrev(int);
+    virtual void setPrev(s32);
     virtual void clearLog();
-    virtual int getLogNum();
+    virtual s32 getLogNum();
     virtual void setLogActive(bool);
     virtual void startClatter(float, float, float, u8, u8, u32 index, bool);
     virtual void setClatterTime(float clatterTime, u32 index);
@@ -63,12 +63,12 @@ public:
     virtual void endClatter(u32 index);
     virtual float getClatterThreshold();
     virtual soController* getController();
-    virtual void setRumble(int, int, bool, int);
-    virtual void stopRumbleKind(int, int);
+    virtual void setRumble(s32, s32, bool, s32);
+    virtual void stopRumbleKind(s32, s32);
     virtual void stopRumble(bool);
-    virtual void setRumbleAll(int, int, int);
-    virtual void stopRumbleAll(int, int);
-    virtual void setReverseXFrame(int, bool);
+    virtual void setRumbleAll(s32, s32, s32);
+    virtual void stopRumbleAll(s32, s32);
+    virtual void setReverseXFrame(s32, bool);
     virtual float getLr();
     virtual u8 getFlickBonus();
     virtual u8 getFlickBonusLr();
@@ -98,19 +98,21 @@ public:
     virtual float getClatterTime(u32 index);
     virtual void endClatter(u32 index);
 
-    virtual void setRumble(int, int, bool, int);
-    virtual void stopRumbleKind(int, int);
+    virtual void setRumble(s32, s32, bool, s32);
+    virtual void stopRumbleKind(s32, s32);
     virtual void stopRumble(bool);
-    virtual void setRumbleAll(int, int, int);
-    virtual void stopRumbleAll(int, int);
-    virtual void setReverseXFrame(int, bool);
+    virtual void setRumbleAll(s32, s32, s32);
+    virtual void stopRumbleAll(s32, s32);
+    virtual void setReverseXFrame(s32, bool);
     virtual float getLr();
     virtual u8 getFlickBonus();
     virtual u8 getFlickBonusLr();
     virtual void resetFlickBonus();
     virtual void resetFlickBonusLr();
 
-    virtual u32 isObserv(char unk1);
-    virtual bool notifyEventAnimCmd(acAnimCmd* acmd, soModuleAccesser* moduleAccesser, int unk3);
+    virtual bool isObserv(char unk1);
+    virtual bool notifyEventAnimCmd(acAnimCmd* acmd, soModuleAccesser* moduleAccesser, s32 unk3);
+
+    void updateClatter(soController* linkController);
 };
 static_assert(sizeof(soControllerModuleImpl) == 20, "Class is wrong size!");

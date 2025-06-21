@@ -3,6 +3,9 @@
 #include <StaticAssert.h>
 #include <types.h>
 
+// Note: The name of this class is hypothesized and does not appear in the
+// compiled code files. Its existence is inferred from the use of multiple
+// inheritance in its derived classes.
 class soNull {
 // fix for bug in Clang fork not producing empty vtable.
 // This is technically incorrect as it will make soNull
@@ -15,12 +18,15 @@ class soNull {
 };
 
 class soNullableInterface {
-    virtual bool isNull();
+    virtual bool isNull() const = 0;
 };
 
 class soNullable {
 public:
-    virtual bool isNull();
+    soNullable() { m_isNull = false; }
+    soNullable(bool isNull) { m_isNull = isNull; }
+    virtual bool isNull() const { return m_isNull; }
+    void setNull(bool is_null) { m_isNull = is_null; }
 
     bool m_isNull;
 };

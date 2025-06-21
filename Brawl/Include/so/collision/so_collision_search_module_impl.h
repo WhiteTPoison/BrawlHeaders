@@ -1,13 +1,15 @@
 #pragma once
 
+#include <StaticAssert.h>
 #include <types.h>
 #include <mt/mt_vector.h>
 #include <so/collision/so_collision_search_part.h>
 #include <so/collision/so_collision.h>
 #include <so/collision/so_collision_log.h>
 #include <so/collision/so_collision_group.h>
-#include <so/event/so_event_observer.h>
 #include <so/event/so_event_presenter.h>
+#include <so/event/so_event_presenter.h>
+#include <so/collision/so_collision_search_event_presenter.h>
 #include <so/so_array.h>
 
 class soModuleAccesser;
@@ -26,7 +28,7 @@ public:
     virtual void setSize(u32 partIndex, float size);
     virtual void setPos(int nodeIndex, Vec3f* startOffsetPos, Vec3f* endOffsetPos);
     virtual soCollisionSearchData* getData(u32 partIndex);
-    virtual void update(float posX, float);
+    virtual void update(float posX, float scale);
     virtual void checkLog();
     virtual bool check();
     virtual int isInflict();
@@ -62,13 +64,17 @@ public:
     virtual void setSize(u32 partIndex, float size);
     virtual void setPos(int nodeIndex, Vec3f* startOffsetPos, Vec3f* endOffsetPos);
     virtual soCollisionSearchData* getData(u32 partIndex);
-    virtual void update(float posX, float);
+    virtual void update(float posX, float scale);
     virtual void checkLog();
     virtual bool check();
     virtual int isInflict();
     virtual void invalidLog(soCollisionLog* collisionLog, u32 groupIndex);
     virtual void setCheckInterval(int);
     virtual void renderDebug();
+
+    virtual bool isObserv(char unk1);
+    virtual bool notifyEventAnimCmd(acAnimCmd* acmd, soModuleAccesser* moduleAccesser, int unk3);
+    virtual void notifyEventChangeStatus(int statusKind, int prevStatusKind, soStatusData* statusData, soModuleAccesser* moduleAccesser);
 };
 static_assert(sizeof(soCollisionSearchModuleImpl) == 264, "Class is wrong size!");
 

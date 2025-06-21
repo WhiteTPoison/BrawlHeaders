@@ -2,7 +2,12 @@
 
 #include <StaticAssert.h>
 #include <mt/mt_vector.h>
-#include <so/event/so_event_observer.h>
+#include <ec/ec_mgr.h>
+#include <so/event/so_event_presenter.h>
+#include <so/status/so_status_event_presenter.h>
+#include <so/collision/so_collision_attack_event_presenter.h>
+#include <so/collision/so_collision_shield_event_presenter_shield.h>
+#include <so/anim/so_anim_cmd_event_presenter.h>
 #include <so/so_null.h>
 #include <types.h>
 
@@ -15,26 +20,26 @@ public:
     virtual void deactivate();
     virtual void begin();
     virtual void update(bool);
-    virtual bool req(float scale, u32 effectID, Vec3f* pos, Vec3f* rot, u32, int);
-    virtual bool req2D(float scale, u32 effectID, Vec3f* pos, Vec3f* rot, u32);
-    virtual bool req(float scale, u32 effectID, int, Vec3f* pos, Vec3f* rot, Vec3f* posRange, Vec3f* rotRange, bool, u32);
-    virtual bool req(float scale, u32 effectID, int, int*, Vec3f* pos, Vec3f* rot, Vec3f* posRange, Vec3f* rotRange, bool, u32);
-    virtual bool reqAttachGround(float scale, u32 effectID, int*, Vec3f* pos, Vec3f* rot, Vec3f* rotRange, u32);
-    virtual bool reqFollow(float scale, u32 effectID, int, Vec3f*, Vec3f*, bool, u32, u32 effectIDAdd, int);
-    virtual bool reqContinual(float, u32 effectID, int, bool, u32 index);
+    virtual u32 req(EfID effectID, Vec3f* pos, Vec3f* rot, float scale, u32, int);
+    virtual u32 req2D(EfID effectID, Vec3f* pos, Vec3f* rot, float scale, u32);
+    virtual u32 req(EfID effectID, int, Vec3f* pos, Vec3f* rot, float scale, Vec3f* posRange, Vec3f* rotRange, bool, u32);
+    virtual bool req(EfID effectID, int, int*, Vec3f* pos, Vec3f* rot, float scale, Vec3f* posRange, Vec3f* rotRange, bool, u32);
+    virtual u32 reqAttachGround(EfID effectID, int*, Vec3f* pos, Vec3f* rot, float scale, Vec3f* rotRange, u32);
+    virtual u32 reqFollow(EfID effectID, int, Vec3f*, Vec3f*, float scale, bool, u32, u32 effectIDAdd, int);
+    virtual int reqContinual(EfID effectID, float, int, bool, u32 index);
     virtual void removeContinual(u32 index);
     virtual void removeAllContinual();
-    virtual void reqTime(float scale, u32 effectID, int, Vec3f* pos, Vec3f* rot, u32);
-    virtual void reqTimeFollow(float scale, u32 effectID, int, int, Vec3f*, Vec3f*, u32);
+    virtual void reqTime(EfID effectID, int, Vec3f* pos, Vec3f* rot, float scale, u32);
+    virtual void reqTimeFollow(EfID effectID, int, int, Vec3f*, Vec3f*, float scale, u32);
     virtual void removeTime(int);
     virtual void removeAllTime();
-    virtual void reqEmit(u32 effectID, u32);
+    virtual void reqEmit(EfID effectID, u32);
     virtual void remove(int);
     virtual void removeAll(u32);
     virtual void kill(int, bool, bool);
     virtual void killKind(bool, bool, int);
     virtual void killAll(u32, bool, bool);
-    virtual bool reqAfterImage(float scale, float, int nodeID1, int nodeID2, int, short, Vec3f*, Vec3f*, u32, u32 effectId, int, Vec3f* pos, Vec3f*, u8, u8);
+    virtual int reqAfterImage(int nodeID1, int nodeID2, int, short, Vec3f*, Vec3f*, u32, EfID effectId, int, Vec3f* pos, Vec3f*, float scale, u8, u8, float);
     virtual bool removeAfterImage(int, int);
     virtual void removeAllAfterImage(u32, int);
     virtual void setPos(int, Vec3f* pos);
@@ -73,26 +78,26 @@ public:
     virtual void deactivate();
     virtual void begin();
     virtual void update(bool);
-    virtual bool req(float scale, u32 effectID, Vec3f* pos, Vec3f* rot, u32, int);
-    virtual bool req2D(float scale, u32 effectID, Vec3f* pos, Vec3f* rot, u32);
-    virtual bool req(float scale, u32 effectID, int, Vec3f* pos, Vec3f* rot, Vec3f* posRange, Vec3f* rotRange, bool, u32);
-    virtual bool req(float scale, u32 effectID, int, int*, Vec3f* pos, Vec3f* rot, Vec3f* posRange, Vec3f* rotRange, bool, u32);
-    virtual bool reqAttachGround(float scale, u32 effectID, int*, Vec3f* pos, Vec3f* rot, Vec3f* rotRange, u32);
-    virtual bool reqFollow(float scale, u32 effectID, int, Vec3f*, Vec3f*, bool, u32, u32 effectIDAdd, int);
-    virtual bool reqContinual(float, u32 effectID, int, bool, u32 index);
+    virtual u32 req(EfID effectID, Vec3f* pos, Vec3f* rot, float scale, u32, int);
+    virtual u32 req2D(EfID effectID, Vec3f* pos, Vec3f* rot, float scale, u32);
+    virtual u32 req(EfID effectID, int, Vec3f* pos, Vec3f* rot, float scale, Vec3f* posRange, Vec3f* rotRange, bool, u32);
+    virtual bool req(EfID effectID, int, int*, Vec3f* pos, Vec3f* rot, float scale, Vec3f* posRange, Vec3f* rotRange, bool, u32);
+    virtual u32 reqAttachGround(EfID effectID, int*, Vec3f* pos, Vec3f* rot, float scale, Vec3f* rotRange, u32);
+    virtual u32 reqFollow(EfID effectID, int, Vec3f*, Vec3f*, float scale, bool, u32, u32 effectIDAdd, int);
+    virtual int reqContinual(EfID effectID, float, int, bool, u32 index);
     virtual void removeContinual(u32 index);
     virtual void removeAllContinual();
-    virtual void reqTime(float scale, u32 effectID, int, Vec3f* pos, Vec3f* rot, u32);
-    virtual void reqTimeFollow(float scale, u32 effectID, int, int, Vec3f*, Vec3f*, u32);
+    virtual void reqTime(EfID effectID, int, Vec3f* pos, Vec3f* rot, float scale, u32);
+    virtual void reqTimeFollow(EfID effectID, int, int, Vec3f*, Vec3f*, float scale, u32);
     virtual void removeTime(int);
     virtual void removeAllTime();
-    virtual void reqEmit(u32 effectID, u32);
+    virtual void reqEmit(EfID effectID, u32);
     virtual void remove(int);
     virtual void removeAll(u32);
     virtual void kill(int, bool, bool);
     virtual void killKind(bool, bool, int);
     virtual void killAll(u32, bool, bool);
-    virtual bool reqAfterImage(float scale, float, int nodeID1, int nodeID2, int, short, Vec3f*, Vec3f*, u32, u32 effectId, int, Vec3f* pos, Vec3f*, u8, u8);
+    virtual int reqAfterImage(int nodeID1, int nodeID2, int, short, Vec3f*, Vec3f*, u32, EfID effectId, int, Vec3f* pos, Vec3f*, float scale, u8, u8, float);
     virtual bool removeAfterImage(int, int);
     virtual void removeAllAfterImage(u32, int);
     virtual void setPos(int, Vec3f* pos);
@@ -126,6 +131,6 @@ public:
     virtual void notifyEventCollisionAttack(float power, soCollisionLog* collisionLog, soModuleAccesser* moduleAccesser);
     virtual void notifyEventCollisionShield(soCollisionAttackModule* attackModule, soCollisionLog* collisionLog, u32 groupIndex, soModuleAccesser* moduleAccesser, float power, float posX, float);
     virtual void notifyEventCollisionShieldSearch(soCollisionSearchModule* searchModule, soCollisionLog* collisionLog, u32 groupIndex, soModuleAccesser* moduleAccesser);
-    virtual u32 isObserv(char unk1);
+    virtual bool isObserv(char unk1);
 };
 static_assert(sizeof(soEffectModuleImpl) == 312, "Class is wrong size!");

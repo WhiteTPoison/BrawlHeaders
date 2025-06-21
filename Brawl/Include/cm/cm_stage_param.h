@@ -1,11 +1,12 @@
 #pragma once
 
+#include <StaticAssert.h>
 #include <mt/mt_vector.h>
 #include <st/st_positions.h>
 #include <types.h>
 
 struct cmStageParam {
-    stRange m_range;
+    Rect2D m_range;
     float m_verticalRotationFactor;
     float m_horizontalRotationFactor;
     float m_minZ;
@@ -32,6 +33,7 @@ struct cmStageParamPausedOffsetRange {
     float m_4;
     float m_8;
     float m_12;
+    cmStageParamPausedOffsetRange();
 };
 static_assert(sizeof(cmStageParamPausedOffsetRange) == 16, "Class is wrong size!");
 

@@ -10,11 +10,16 @@ public:
     gmResultInfo* m_resultInfo;
     char _144[2];
     u8 m_146;
-    char _147[13];
-    unsigned int m_remainingFrameTime;
-    unsigned int m_time;
-    unsigned int m_frameCounter;
-    char _172[368];
+    char _147[12];
+    bool m_isStart;
+    u32 m_remainingFrameTime;
+    u32 m_framesElapsed;
+    u32 m_frameCounter;
+    char _0xAC[0x18];
+    int m_numPlayers;
+    char _0xC8[0x14C];
+    DecisionKind m_decisionKind;
+    char _0x218[4];
 
     virtual void processBegin();
     virtual ~stOperatorRuleMelee();

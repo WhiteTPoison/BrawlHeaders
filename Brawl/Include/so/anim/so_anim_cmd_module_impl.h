@@ -1,8 +1,14 @@
 #pragma once
+
+#include <StaticAssert.h>
 #include <so/anim/so_anim_cmd.h>
 #include <so/event/so_event_presenter.h>
-#include <so/event/so_event_observer.h>
+#include <so/event/so_event_presenter.h>
+#include <so/anim/so_anim_cmd_event_presenter.h>
+#include <so/status/so_status_event_presenter.h>
 #include <so/so_instance_manager.h>
+
+class soModuleAccesser;
 
 /*
  * This class is weird, it has a bunch of data before the event presenter vtable and info,
@@ -87,6 +93,7 @@ static_assert(sizeof(animCmdControlUnitVectorHelper)
     == sizeof(soInstanceManagerFullPropertyVector<soAnimCmdControlUnit, 11>), "Class is the wrong size!");
 
 class soAnimCmdModule: public soNullable {
+public:
     virtual void registInterpreter();
     virtual void interpretCmd();
     virtual void interpretCmdAdjust();
@@ -104,6 +111,9 @@ class soAnimCmdModule: public soNullable {
     virtual void getInterpreterNum();
     virtual void activate();
     virtual void deactivate();
+    virtual ~soAnimCmdModule();
+    virtual void activate(soModuleAccesser*);
+    virtual void deactivate(soModuleAccesser*);
 };
 
 class soAnimCmdModuleImpl:

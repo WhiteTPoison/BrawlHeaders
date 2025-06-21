@@ -4,19 +4,39 @@
 #include <gf/gf_archive.h>
 #include <gf/gf_model.h>
 #include <gf/gf_task.h>
-#include <gr/gr_collision_status.h>
+#include <gr/collision/gr_collision_status.h>
 #include <memory.h>
 #include <mt/mt_matrix.h>
 #include <mt/mt_vector.h>
 #include <nw4r/g3d/g3d_resfile.h>
 #include <nw4r/g3d/g3d_scnmdl.h>
 #include <so/so_array.h>
+#include <st/st_trigger.h>
 #include <types.h>
+
+#define GROUND_COLL_STATUS_OWNER_TASK_CATEGORY_MASK_ITEM 0x4
+#define GROUND_COLL_STATUS_OWNER_TASK_CATEGORY_MASK_ENEMY 0x2
+#define GROUND_COLL_STATUS_OWNER_TASK_CATEGORY_MASK_FIGHTER 0x1
+#define GROUND_COLL_STATUS_OWNER_TASK_CATEGORY_MASK_ALL 0x7
 
 class Stage;
 
 class Ground : public gfTask {
 public:
+    struct CategoryFlag {
+        union {
+            struct {
+                u32 : 29;
+                bool m_item : 1;
+                bool m_enemy : 1;
+                bool m_fighter : 1;
+            };
+            u32 m_mask;
+        };
+        inline CategoryFlag() {}
+        inline CategoryFlag(u32 bits) : m_mask(bits) {}
+    };
+
     // 0
     nw4r::g3d::ResFile m_resFile;
     // 4
@@ -28,7 +48,9 @@ public:
     // 10
     Ground* m_nextGround;
     // 14
-    char _spacer2[0x8];
+    char _spacer2[0x4];
+    // 18
+    u32 m_modelAnimNum;
     // 1C
     u16 m_mdlIndex;
     // 1E
@@ -40,21 +62,25 @@ public:
     // 28
     char _align[4];
     // 2c
-    union {
-        struct {
-            bool m_visibilityFlag7 : 1;
-            bool m_visibilityFlag6 : 1;
-            bool m_visibilityFlag5 : 1;
-            bool m_visibilityFlag4 : 1;
-            bool m_visibilityFlag3 : 1;
-            bool m_visibilityFlag2 : 1;
-            bool m_visibilityFlag1 : 1;
-            bool m_visibilityFlag0 : 1;
-        };
-        u8 m_visibilityFlags;
-    };
+    bool m_isVisible : 1;
+    bool m_isVisibleByClipping : 1;
+    bool m_isEnableCollisionStatus : 1;
+    bool m_isEnableCollisionStatusByClipping : 1;
+    bool m_isEnableCalcCollision : 1;
+    bool m_hasBindedData : 1;
+    bool m_hasUpdatedG3dCalcWorld : 1;
+    bool m_isUseMdlNameForStartAnim : 1;
     // 2d
-    char _spacer[3];
+    bool m_isCopyVisibility : 1;
+    bool m_isValid : 1;
+    bool m_noUpdateAnim : 1;
+    bool m_isPauseAnim : 1;
+    bool m_isUpdateG3dCalcWorld : 1;
+    bool m_isGr2 : 1;
+    bool m_isEnableBlendColor : 1;
+    bool m_isSetup : 1;
+    // 2e
+    char _spacer[2];
     // 30
     HeapType m_heapType;
     // 34
@@ -81,17 +107,22 @@ public:
     virtual void receiveCollMsg_Wall(grCollStatus* collStatus, grCollisionJoint* collisionJoint);
     virtual void receiveCollMsg_Attack(grCollStatus* collStatus, grCollisionJoint* collisionJoint);
     virtual void unloadData();
-    virtual int getModelCount();
+    virtual int getModelCount() {
+        if (m_resFile.ptr()) {
+            return m_resFile.GetResMdlNumEntries();
+        }
+        return 0;
+    };
     virtual void startup(gfArchive* data, u32 unk1, u32 unk2);
     virtual bool setNode();
-    virtual void setStageData(void* stageData);
-    virtual void* getStageData();
-    virtual void initStageData();
-    virtual void setMdlIndex(int mdlIndex);
-    virtual short getMdlIndex();
-    virtual bool isEnableCalcCollision();
-    virtual void enableCalcCollision();
-    virtual void disableCalcCollision();
+    virtual void setStageData(void* stageData) { m_stageData = stageData; }
+    virtual void* getStageData() { return m_stageData; }
+    virtual void initStageData() { }
+    virtual void setMdlIndex(int mdlIndex) { m_mdlIndex = mdlIndex; }
+    virtual short getMdlIndex() { return m_mdlIndex; }
+    virtual bool isEnableCalcCollision() { return m_isEnableCalcCollision; }
+    virtual void enableCalcCollision() { m_isEnableCalcCollision = 1; }
+    virtual void disableCalcCollision() { m_isEnableCalcCollision = 0; }
     virtual u32 getNodeIndex(u32 sceneModelIndex, const char* nodeName);
     virtual bool getNodePosition(Vec3f* nodePos, u32 sceneModelIndex, u32 nodeIndex);
     virtual bool getNodePosition(Vec3f* nodePos, u32 sceneModelIndex, const char* nodeName);
@@ -107,9 +138,9 @@ public:
     virtual bool getNodeScale(Vec3f* nodeScale, u32 sceneModelIndex, const char* nodeName);
     virtual void setValid(u32 unk1);
     virtual void setValidAttachedEffect(u32 unk1);
-    virtual void setInitializeFlag();
-    virtual void setInitializeInfo(int initializeInfo);
-    virtual bool getInitializeInfo(int initializeInfo);
+    virtual void setInitializeFlag() { }
+    virtual void setInitializeInfo(int initializeInfo) { }
+    virtual bool getInitializeInfo(int initializeInfo) { return false; }
     virtual void setMotionRatio(float ratio);
     virtual void setMotionFrame(float frame, u32 animIndex);
     virtual float getMotionFrame(u32 anim);
@@ -118,13 +149,13 @@ public:
     virtual void setMatAlpha(u32 unk1, u32 sceneModelIndex);    // TODO
     virtual void updateG3dProcCalcWorld();
     virtual void preExit();
-    virtual bool adventureEventGetItem(int unk1, int* unk2);
+    virtual bool adventureEventGetItem(int genParamId, stTriggerData* triggerData) { return false; }
     virtual void invalidatedByCameraClipping();
     virtual void setTransparencyFlag(char flag);
 
     bool getNodeIndex(u32* nodeIndex, u32 sceneModelIndex, const char* nodeName);
     void addSceneRoot(nw4r::g3d::ScnMdl* sceneModel, int unk2);
-    bool isCollisionStatusOwnerTask(grCollStatus* collStatus, int* unk2);
+    bool isCollisionStatusOwnerTask(grCollStatus* collStatus, CategoryFlag* unk2);
     bool searchNode(const char* unk1, const char* nodeName, int* unk3, u32* nodeIndex);
     void setBlendColorDisable();
     void setBlendColorEnable();

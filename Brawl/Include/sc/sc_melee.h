@@ -2,7 +2,11 @@
 
 #include <StaticAssert.h>
 #include <gf/gf_scene.h>
+#include <st/operator/st_operator_rule_targetbreak.h>
 #include <st/operator/st_operator_rule_melee.h>
+#include <st/operator/st_operator_drop_item.h>
+#include <st/operator/st_operator_info.h>
+
 #include <st/operator/st_operator_ready_go.h>
 #include <types.h>
 
@@ -17,13 +21,13 @@ public:
     void* m_operatorAppearanceFighter;
     stOperatorReadyGo* m_operatorReadyGo;
     stOperatorReadyGo* m_operatorReadyGoSuddenDeath;
-    char _76[4];
+    stOperatorDropItemMelee* m_operatorDropItem;
     stOperatorRule* m_operatorRuleGameMode;
     stOperatorRuleMelee* m_operatorRuleMelee;
     void* m_operatorNoContest;
     void* m_operatorNetwork;
     void* m_operatorController;
-    void* m_operatorInfoMelee;
+    stOperatorInfo* m_operatorInfo;
     void* m_operatorFighterRebirths[7];
     void* m_operatorFighterChange;
     void* m_operatorDefeatBoss;
@@ -36,7 +40,9 @@ public:
     void* m_eventRule;
     char _176[36];
     int m_endNum;
-    char _216[40];
+    char _216[12];
+    GameRule m_gameRule;
+    char _232[24];
 
     virtual void start();
     virtual void process();

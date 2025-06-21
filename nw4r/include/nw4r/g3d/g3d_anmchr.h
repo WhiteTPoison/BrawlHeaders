@@ -1,5 +1,6 @@
 #pragma once
 
+#include <StaticAssert.h>
 #include <MEM.h>
 #include <nw4r/g3d/g3d_obj.h>
 #include <nw4r/g3d/g3d_resmdl.h>
@@ -8,16 +9,17 @@
 namespace nw4r {
     namespace g3d {
         struct ResAnmChrData {
-            char _spacer[0x14];
-            unsigned int m_stringOffset;
-            char _spacer2[0x1C - 0x14 - 4];
-            unsigned short m_animLength;
+            u8 _spacer[0x14];
+            u32 m_stringOffset;
+            u8 _spacer2[0x4];
+            u16 m_animLength;
         };
         class ResAnmChr : public ResCommon<ResAnmChrData> {
         public:
             inline ResAnmChr() : ResCommon() {}
             inline ResAnmChr(void* data) : ResCommon(data) {}
         };
+        static_assert(sizeof(ResAnmChr) == 4, "Class is wrong size!");
 
         class AnmObjChrRes : public G3dObj {
         public:
@@ -41,6 +43,7 @@ namespace nw4r {
             virtual float GetWeight(int unk1);             // TODO
             virtual int Bind(int* unk1, u32 unk2, int unk3);
             virtual void Release(int* unk1, u32 unk2, int unk3);
+            void DisableID(u32 id);
 
             static AnmObjChrRes* Construct(MEMAllocator* allocator, int* size, ResAnmChr anim, ResMdl mdl, bool hasCache);
 

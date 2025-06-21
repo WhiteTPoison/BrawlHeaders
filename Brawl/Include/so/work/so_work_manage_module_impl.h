@@ -4,7 +4,8 @@
 #include <so/so_lock.h>
 #include <so/so_null.h>
 #include <so/work/so_general_work_simple.h>
-#include <so/event/so_event_observer.h>
+#include <so/event/so_event_presenter.h>
+#include <so/anim/so_anim_cmd_event_presenter.h>
 #include <types.h>
 
 class soWorkManageModule : public soNullable {
@@ -66,7 +67,7 @@ public:
     virtual void clearAll(u32 index);
     virtual void* getParamAccesser();
 
-    virtual u32 isObserv(char unk1);
+    virtual bool isObserv(char unk1);
     virtual bool notifyEventAnimCmd(acAnimCmd* acmd, soModuleAccesser* moduleAccesser, int unk3);
 };
 static_assert(sizeof(soWorkManageModuleImpl) == 48, "Class is wrong size!");
