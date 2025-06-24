@@ -4,6 +4,8 @@
 #include <gm/gm_lib.h>
 #include <types.h>
 
+#define MATCHING
+
 class gmItSwitch {
 public:
     enum Frequency {
@@ -351,7 +353,7 @@ public:
     s8 m_startPointIdx;                  // 0x08
     char _0x9[0x02];                       // 0x09
     s8 m_teamNo;                         // 0x0B
-    wchar_t m_name[5];                   // 0x0c
+    s16 m_name[5];                   // 0x0c
     char _0x16[2];                          // 0x16
     u8 m_nameIndex;                       // 0x18
     char _0x17;
@@ -403,7 +405,6 @@ public:
     char _0x4C[0x10];                       // 0x4C
 };
 static_assert(sizeof(gmPlayerInitData) == 0x5C, "Class is wrong size!");
-
 class gmGlobalModeMelee {
 public:
     char _0[0x08];                         // 0x00
@@ -412,7 +413,6 @@ public:
     char _1[4];
 };
 static_assert(sizeof(gmGlobalModeMelee) == 0x320, "Class is wrong size!");
-
 void gmSetRuleToGlobalModeMelee(gmGlobalModeMelee *globalModeMelee);
 
 extern gmGlobalModeMelee g_globalMelee;

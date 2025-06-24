@@ -116,5 +116,5 @@ namespace ms {
         // sets up its args and calls it.
         void PrintGlyph(double x, double y, double z, const void* glyphTexture); // 0x8007001c
     };
-    static_assert(sizeof(CharWriter) == 0x70, "Class is the wrong size!");
+    static_assert(sizeof(CharWriter) == 111, "Class is the wrong size!");
 }

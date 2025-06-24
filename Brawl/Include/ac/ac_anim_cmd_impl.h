@@ -117,8 +117,9 @@ public:
     // get emitted earlier
     acCmdArgList getEmptyArgList();
 };
+#ifdef __MWERKS__
 static_assert(sizeof(acAnimCmdImpl) == 0xC, "Class is the wrong size!");
-
+#endif
 class acAnimCmdNull : public acAnimCmd {
 public:
     acAnimCmdNull() : acAnimCmd(true) { }

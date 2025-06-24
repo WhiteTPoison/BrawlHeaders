@@ -7,7 +7,9 @@
 namespace nw4r {
 namespace ut {
 
-struct Color : public GXColor {
+struct Color {
+private:
+    GXColor color;
 public:
     Color() {
         *this = WHITE;
@@ -25,10 +27,10 @@ public:
     ~Color() {}
 
     void Set(int red, int green, int blue, int alpha) {
-        r = red;
-        g = green;
-        b = blue;
-        a = alpha;
+        color.r = red;
+        color.g = green;
+        color.b = blue;
+        color.a = alpha;
     }
 
     Color& operator=(u32 color) {

@@ -106,4 +106,6 @@ struct gfPadStatus {
     void convSysStatusToMenuStatus(gfPadStatus* destination);
 
 };
+#ifdef __MWERKS__
 static_assert(sizeof(gfPadStatus) == 0x40, "Class is the wrong size!");
+#endif

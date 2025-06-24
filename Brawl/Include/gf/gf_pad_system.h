@@ -203,6 +203,7 @@ public:
     int m_gameData;
     char _0xb70[8];
 };
+#ifdef __MWERKS__
 static_assert(sizeof(gfPadSystem) == 0xb78, "gfPadSystem is the wrong size!");
-
+#endif
 extern gfPadSystem* g_gfPadSystem;
