@@ -40,9 +40,10 @@ public:
     char _spacer4[148];
 
     gfScene* searchScene(const char* sceneName);
+    gfSequence* searchSequence(const char* sequenceName);
     static gfSceneManager* getInstance();
-    void setNextScene(gfSceneManager* gfSceneManager, const char* name, int unk);
-    void changeNextScene(gfSceneManager* gfSceneManager);
-    void setNextSequence(gfSceneManager* gfSceneManager, const char* name, int unk);
+    void setNextScene(const char* name, int unk);
+    void changeNextScene();
+    void setNextSequence(const char* name, int unk);
 };
 static_assert(sizeof(gfSceneManager) == 800, "Class is wrong size!");
