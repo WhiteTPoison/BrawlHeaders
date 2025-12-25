@@ -13,9 +13,14 @@ namespace nw4r {
 
             virtual void G3dProc(int unk1, int unk2, int unk3);
 
+            void SetPriorityDrawOpa(int unk1);
+            void SetPriorityDrawXlu(int unk1);
+
             virtual ~ScnObj();
 
-            char _spacer[216];
+            char _0x0[0x8];
+            void* _0x8;
+            char _spacer[214 - 0x8];
         };
     }
 }

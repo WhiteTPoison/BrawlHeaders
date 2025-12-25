@@ -69,6 +69,9 @@ public:
     nw4r::g3d::LightObj* getLightObj(u8 p1);
     void updateZoneLightSet(u8 p1, u8 p2);
     void setUseCopyFB(u8 p1);
+    void setInfoCamResAnm(void* param1);
+    int add(int unk1, void* unk2);
+    void layerUpdateFrame(int unk1);
 };
 static_assert(sizeof(gfSceneRoot) == 1292, "Class is wrong size!");
 

@@ -1,7 +1,7 @@
 #pragma once
 
 namespace Modules {
-    enum _modules {
+    enum _modules : u32 {
         SORA_SCENE = 1,
         SORA_MENU_MAIN = 2,
         SORA_MENU_TOUR = 3,

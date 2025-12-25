@@ -18,7 +18,7 @@ namespace nw4r {
             char magic[4];
             u16 endian;
             u16 version;
-            u32 fileSize;
+            unsigned int fileSize;
             u16 headerSize;
             u16 dataBlocks;
         };
@@ -44,7 +44,7 @@ namespace nw4r {
             inline ResFile(ResFileData* data) : ResCommon(data) {}
             inline ResFile(void* data) : ResCommon(data) {}
 
-            static void Init(void* arg);
+            void Init();
 
             u32 GetResMdlNumEntries() const;
             u32 GetResAnmChrNumEntries();
@@ -61,7 +61,7 @@ namespace nw4r {
             ResAnmTexPat GetResAnmTexPat(int index);
             ResAnmTexSrt GetResAnmTexSrt(int index);
             ResAnmShp GetResAnmShp(int index);
-            ResAnmScn GetResAnmScn(int index);
+            ResAnmScn* GetResAnmScn(int index);
         };
     } // namespace g3d
 } // namespace nw4r

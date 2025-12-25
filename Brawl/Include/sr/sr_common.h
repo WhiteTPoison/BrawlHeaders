@@ -3,7 +3,7 @@
 #include <types.h>
 
 namespace Heaps {
-    enum HeapType {
+    enum HeapType : u32 {
         SystemFW = 0x1,
         System = 0x2,
         Effect = 0x3,
@@ -68,7 +68,8 @@ namespace Heaps {
         CodeMenu = 0x3d,
         FudgeAI = 0x3e,
         StockFaceResource = 0x3f,
-        RetroMode = 0x40
+        RetroMode = 0x40,
+        PauseMenu = 0x41
     };
 } // namespace HeapType
 

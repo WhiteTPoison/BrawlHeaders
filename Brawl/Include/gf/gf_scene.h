@@ -32,11 +32,11 @@ public:
     gfSequence* m_nextSequence;
     gfScene* m_scenes[100];
     gfSequence* m_sequences[50];
-    int m_sceneCount;
-    int m_sequenceCount;
+    s32 m_sceneCount;
+    s32 m_sequenceCount;
     char _spacer3[12];
-    int unk1;
-    int processStep;
+    s32 unk1;
+    s32 processStep;
     char _spacer4[148];
 
     gfScene* searchScene(const char* sceneName);

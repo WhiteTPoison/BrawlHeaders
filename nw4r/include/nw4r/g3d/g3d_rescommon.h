@@ -7,7 +7,7 @@ namespace nw4r {
     namespace g3d {
         struct ResBlockHeaderData {
             char kind[4];
-            u32 size;
+            unsigned int size;
         };
 
         template <typename T>

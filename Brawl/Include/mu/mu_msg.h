@@ -40,6 +40,7 @@ public:
     void initWindowSetting(WindowSetting* windowSetting);
     void attachScnMdlSimple(u32 msgIndex, nw4r::g3d::ScnMdlSimple* sceneModel, u32 boneTextIndex, float fontSize);
     void setFontWidthModeAuto(u32 msgIndex);
+    void setFontWidthModeFixed(u32 msgIndex, u32 unk1);
     void setAlignMode(u32 msgIndex, AlignMode alignMode);
     void setFontColor(u32 msgIndex, u8 r, u8 g, u8 b, u8 a);
     void setHSpace(u32 msgIndex, float);

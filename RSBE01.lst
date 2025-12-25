@@ -5,6 +5,7 @@
 805A01D0: g_sndSystem
 805A0140: g_efScreen
 805A02D0: g_IfMngr
+81734ac0: g_ScnGroupMelee
 27,6,58D8: g_stTriggerMng
 27,6,2E68: g_ftManager
 27,6,2E88: g_ftEntryManager
@@ -336,8 +337,7 @@ CC008000:WGPIPE
 
 // gfArchive
 8001370c:__ct__9gfArchiveFv
-80015ddc:getData__9gfArchiveF11ARCNodeTypeiUs
-80015e14:getData__9gfArchiveF11ARCNodeTypeiPiUl
+80015ddc:getData__9gfArchiveF11ARCNodeTypeiUi
 80013b1c:__dt__9gfArchiveFv
 
 //NMWException
@@ -421,6 +421,10 @@ CC008000:WGPIPE
 // gfSceneRoot
 8000d818:setCurrentFrame__11gfSceneRootFf
 8000d56c:removeResAnmScn__11gfSceneRootFv
+8000d090:add__11gfSceneRootFiPv
+8000d090:add__11gfSceneRootFiQ34nw4r3g3d6ScnObj
+8000d090:add__11gfSceneRootFiPQ34nw4r3g3d6ScnObj
+8000cf28:__dt__Q34nw4r3g3d6ScnObjFv
 
 // gfPadSystem
 80028c58:__ct__11gfPadSystemFv
@@ -1512,6 +1516,7 @@ CC008000:WGPIPE
 // MuMsg
 800b8930:create__5MuMsgFUlQ25Heaps8HeapTypeUl
 800b8b08:allocMsgBuf__5MuMsgFUlUl
+800b8b08:allocMsgBuf__5MuMsgFUiUi
 800b8c7c:setMsgData__5MuMsgFPv
 800b8c90:attachScnMdlSimple__5MuMsgFUlPQ34nw4r3g3d12ScnMdlSimpleUlf
 800b93f4:setFontWidthModeAuto__5MuMsgFUl
@@ -1520,6 +1525,7 @@ CC008000:WGPIPE
 800b9448:FUN_800b9448__5MuMsgFUlb
 800b9460:FUN_800b9460__5MuMsgFUlUcUcUcf
 800b9230:printf__5MuMsgFUlPCce
+800b9230:printf__5MuMsgFUiPCce
 800b91b8:printIndex__5MuMsgFUlUlPv
 800b9348:getMsgData__5MuMsgFUlPPv
 800b8be0:initWindowSetting__5MuMsgFPQ25MuMsg13WindowSetting
@@ -1532,6 +1538,15 @@ CC008000:WGPIPE
 800b9524:isEndDelayPrint__5MuMsgFUl
 800b8ee8:beginPrint__5MuMsgFUl
 800b938c:setWindowRectVisible__5MuMsgFUlb
+800b8c90:attachScnMdlSimple__5MuMsgFUiPQ34nw4r3g3d12ScnMdlSimpleUif
+8006b660:setObjZCompare__7MessageFib
+800b93a4:setFontColor__5MuMsgFUiUcUcUcUc
+800b9428:setFontWidthModeFixed__5MuMsgFUiUi
+800b94dc:setHScale__5MuMsgFUif
+800b94f0:getHScale__5MuMsgFUif
+800b8930:create__5MuMsgFUiQ25Heaps8HeapTypeUi
+800b93c4:setAlignMode__5MuMsgFUiQ25MuMsg9AlignMode
+800b91b8:printIndex__5MuMsgFUiUiPv
 
 // MuObject
 800b534c:changeAnimN__8MuObjectFPCc
@@ -1549,8 +1564,8 @@ CC008000:WGPIPE
 800b784c:setFrameVisible__8MuObjectFf
 800b7a18:setFrameMatCol__8MuObjectFf
 800b7900:setFrameTex__8MuObjectFf
-800b2394:create__8MuObjectFPPQ34nw4r3g3d7ResFilePcciQ25Heaps8HeapType
-800b2404:create__8MuObjectFPPQ34nw4r3g3d7ResFileiciQ25Heaps8HeapType
+800b2394:create__8MuObjectFPQ34nw4r3g3d7ResFilePCciPQ34nw4r3g3d7ResFileQ25Heaps8HeapType
+800b2404:create__8MuObjectFPQ34nw4r3g3d7ResFileiiPQ34nw4r3g3d7ResFileQ25Heaps8HeapType
 
 //gfModelAnimation
 80027c40:__ct__16gfModelAnimationFd
@@ -1617,6 +1632,7 @@ CC008000:WGPIPE
 800afb80:loadMenuSound__6muMenuFv
 800afb88:isLoadFinishMenuSound__6muMenuFv
 8018ea08:Init__Q34nw4r3g3d7ResFileFPv
+8018ea08:Init__Q34nw4r3g3d7ResFileFv
 800af8a0:exchangeSelCharVoice2SelCharVoiceLengthE__6muMenuFi
 800AF8B8:exchangeSelCharVoice2SelCharVoiceLengthJ__6muMenuFi
 800af600:exchangeGmCharacterKind2Something__6muMenuFi
@@ -1807,6 +1823,9 @@ CC008000:WGPIPE
 80025c58:alloc__12gfMemoryPoolFPvUli
 800259a4:create__12gfMemoryPoolFPvUlPCc
 8002606c:getMaxFreeBlockSize__12gfMemoryPoolFv
+8002632c:gfPoolFree__12gfMemoryPoolFUi
+800262fc:createMEMAllocator__12gfMemoryPoolFii
+800262fc:createMEMAllocator__12gfMemoryPoolFP12gfMemoryPoolii
 
 // OpenRVL CX (Compression) functions.
 80206018:CXUncompressLZ
@@ -1876,4 +1895,7 @@ CC008000:WGPIPE
 27,1,002A4FF8:preloadAssist__9itManagerF6itKindi
 27,1,00224B08:getDestroyBossParamCommon__5StageFUlii
 
-
+8000db40:layerUpdateFrame__11gfSceneRootFi
+801abe70:Insert__8ScnGroupFiPQ34nw4r3g3d6ScnObj
+801aaff0:SetPriorityDrawOpa__Q34nw4r3g3d6ScnObjFi
+801ab014:SetPriorityDrawXlu__Q34nw4r3g3d6ScnObjFi

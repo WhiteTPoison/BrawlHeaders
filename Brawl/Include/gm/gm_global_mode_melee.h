@@ -309,7 +309,7 @@ public:
     char _0xA[0x1];                            // 0x0A
     bool m_isTeams;                            // 0x0B
     gmCorpsKind m_corpsKind : 8;               // 0x0C
-    char _0xd[0x1];                            // 0x09
+    char _0xd[0x1];                            // 0x0D
     gmItSwitch::Frequency m_itemFrequency : 8; // 0x0E
     s8 m_suicideScoreMultiplier;               // 0x0F
     char _0x10[0x02];                          // 0x10

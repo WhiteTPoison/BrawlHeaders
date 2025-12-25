@@ -17,6 +17,8 @@ namespace nw4r {
         public:
             inline ResAnmScn() : ResCommon() {}
             inline ResAnmScn(void* data) : ResCommon(data) {}
+
+            
         };
 
         class AnmScnRes : public G3dObj {

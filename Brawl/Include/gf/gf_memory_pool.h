@@ -19,6 +19,8 @@ public:
 
     static void* alloc(void* heapAddr, size_t size, int align);
     static gfMemoryPool* create(void* heapAddr, size_t size, const char* heapName);
+    static void gfPoolFree(u32 unk1);
+    static void createMEMAllocator(gfMemoryPool* heap, int unk2, int unk3);
 
     /**
      * @brief Custom function to create a memory pool at a specific address

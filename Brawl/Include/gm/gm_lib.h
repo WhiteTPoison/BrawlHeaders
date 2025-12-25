@@ -63,7 +63,7 @@ enum gmCorpsKind {
     Corps_Kumite_Cruel = 0xA,
 };
 
-enum gmCharacterKind {
+enum gmCharacterKind : u32 {
     Character_Mario = 0x0,
     Character_DonkeyKong = 0x1, Character_Donkey = 0x1,
     Character_Link = 0x2,

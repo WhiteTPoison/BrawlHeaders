@@ -24,4 +24,6 @@ public:
     char spacer2[0xE0];
     int sceneItemsCount;
 };
-// Size: 220
+// Size: 232
+
+extern ScnGroup g_ScnGroupMelee;

@@ -9,9 +9,7 @@ struct gmSelCharData {
     gmPlayerInitData m_playersInitData[7];
     char _0x33c[4];
 };
-#ifdef __MWERKS__
 static_assert(sizeof(gmSelCharData) == 0x340, "Class is wrong size!");
-#endif
 namespace static_checks {
 
 } // namespace static_checks

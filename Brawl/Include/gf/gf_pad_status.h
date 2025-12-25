@@ -20,7 +20,7 @@
 #pragma push
 #pragma enumsalwaysint off // These are char enums.
 namespace gfPadError {
-    enum PadError {
+    enum PadError : s8 {
         NONE = 0,
         NO_CONTROLLER = -1,
         NOT_READY =  -2,
@@ -30,7 +30,7 @@ namespace gfPadError {
 #pragma pop
 
 namespace gfPadType {
-    enum PadType {
+    enum PadType : u8 {
         GCC = 0,
         WII_CLASSIC = 1,
         WIIMOTE = 2,
@@ -106,6 +106,4 @@ struct gfPadStatus {
     void convSysStatusToMenuStatus(gfPadStatus* destination);
 
 };
-#ifdef __MWERKS__
 static_assert(sizeof(gfPadStatus) == 0x40, "Class is the wrong size!");
-#endif

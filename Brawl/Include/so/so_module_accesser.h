@@ -90,9 +90,7 @@ public:
     soParamCustomizeModule* m_paramCustomizeModule;
     void* m_glowModule;
 };
-#ifdef __MWERKS__
 static_assert(sizeof(soModuleEnumeration) == 204, "Class is wrong size!");
-#endif
 class soModuleAccesser {
 public:
     void* vtable2;

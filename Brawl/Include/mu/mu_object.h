@@ -29,9 +29,11 @@ public:
     void changeClrAnimNIf(const char* animName);
     void changeVisAnimNIf(const char* animName);
     void changeTexPatAnimNIf(const char* animName);
+    void setActionNo(void* param_2, bu32 param_3, int param_4,int param_5);
     void setFrameVisible(float frame);
     void setFrameMatCol(float frame);
     void setFrameTex(float frame);
+    void setFrame(float frame);
     virtual ~MuObject();
 };
 static_assert(sizeof(MuObject) == 0x60, "Class is wrong size!");

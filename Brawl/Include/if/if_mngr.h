@@ -6,7 +6,12 @@
 
 class IfMngr {
 public:
-    char _0x0[0x44];
+    char _0x0[0x8];
+    void* m_sceneGroupMelee;
+    void* m_field_0xC;
+    char _0x10[0x8];
+    void* m_field_0x18;
+    char _0x22[0x28];
     void* m_ifCenter;
     char _0x48[4];
     IfPlayer* m_ifPlayers[7];

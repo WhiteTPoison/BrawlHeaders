@@ -55,9 +55,7 @@ public:
     char _0x1379[11];
     int m_framesElapsed;
 };
-#ifdef __MWERKS__
 static_assert(sizeof(gmResultInfo) == 0x1388, "Class is wrong size!");
-#endif
 namespace static_checks {
 
 } // namespace static_checks
