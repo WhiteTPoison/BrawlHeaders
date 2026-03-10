@@ -157,7 +157,7 @@ public:
     void setSuicide(int entryId);
     bool isProcessHeartSwap(int entryId);
     void toKnockOutHeartSwapOpposite(int entryId, soDamageAttackerInfo* attackerInfo);
-
+    int getSlotNo(u32 entryId);
 };
 
 extern ftManager* g_ftManager;

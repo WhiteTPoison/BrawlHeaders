@@ -69,7 +69,7 @@ namespace Heaps {
         FudgeAI = 0x3e,
         StockFaceResource = 0x3f,
         RetroMode = 0x40,
-        PauseMenu = 0x41
+        FixTransforms = 0x41
     };
 } // namespace HeapType
 

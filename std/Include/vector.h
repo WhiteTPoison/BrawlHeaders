@@ -2,6 +2,7 @@
 
 #include <stddef.h>
 #include <types.h>
+#include <sr/sr_common.h>
 
 template <typename T>
 class Vector {
@@ -21,7 +22,7 @@ class Vector {
 public:
     Vector()
     {
-        arr = new T[1];
+        arr = new(Heaps::Syringe) T[1];
         capacity = 1;
         current = 0;
     }
@@ -34,7 +35,7 @@ public:
     void clear()
     {
         delete[] arr;
-        arr = new T[1];
+        arr = new(Heaps::Syringe) T[1];
         current = 0;
     }
 
@@ -48,7 +49,7 @@ public:
         // capacity
         if (current == capacity)
         {
-            T* temp = new T[2 * capacity];
+            T* temp = new(Heaps::Syringe) T[2 * capacity];
 
             // copying old array elements to new array
             for (int i = 0; i < capacity; i++)
