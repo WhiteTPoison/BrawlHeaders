@@ -2,6 +2,7 @@
 
 #include <stddef.h>
 #include <types.h>
+#include <memory.h>
 #include <sr/sr_common.h>
 
 template <typename T>
@@ -18,11 +19,13 @@ class Vector {
     // current is the number of elements
     // currently present in the vector
     int current;
+    HeapType heap;
 
 public:
-    Vector()
+    Vector(HeapType heap = Heaps::Syringe)
+        : heap(heap)
     {
-        arr = new(Heaps::Syringe) T[1];
+        arr = new T[heap, 1];
         capacity = 1;
         current = 0;
     }
@@ -35,7 +38,7 @@ public:
     void clear()
     {
         delete[] arr;
-        arr = new(Heaps::Syringe) T[1];
+        arr = new T[heap, 1];
         current = 0;
     }
 
@@ -49,12 +52,12 @@ public:
         // capacity
         if (current == capacity)
         {
-            T* temp = new(Heaps::Syringe) T[2 * capacity];
+            T* temp = new T[heap, 2 * capacity];
 
             // copying old array elements to new array
             for (int i = 0; i < capacity; i++)
             {
-                temp[i] = arr[i];
+                memmove(&temp[i], &arr[i], sizeof(T));
             }
 
             // deleting previous array
@@ -64,7 +67,7 @@ public:
         }
 
         // Inserting data
-        arr[current] = data;
+        memmove(&arr[current], &data, sizeof(T));
         current++;
     }
 
@@ -89,7 +92,7 @@ public:
         {
             return;
         }
-        arr[index] = NULL;
+        arr[index];
         for (int i = index; i < current - 1; ++i)
         {
             arr[i] = arr[i + 1];
@@ -114,6 +117,17 @@ public:
 
     // function to get capacity of the vector
     int getcapacity() { return capacity; }
+
+    void setsize(int new_size)
+    {
+        if(new_size > capacity)
+        {
+            return;
+        }
+        current = new_size;
+    }
+
+    T* data() { return arr; }
 
     T& operator[](int index)
     {

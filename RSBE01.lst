@@ -1899,3 +1899,4 @@ CC008000:WGPIPE
 801abe70:Insert__8ScnGroupFiPQ34nw4r3g3d6ScnObj
 801aaff0:SetPriorityDrawOpa__Q34nw4r3g3d6ScnObjFi
 801ab014:SetPriorityDrawXlu__Q34nw4r3g3d6ScnObjFi
+80024a4c:free__13gfHeapManagerFPv

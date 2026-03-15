@@ -35,7 +35,7 @@ public:
     {
         gfMemoryPool* pool = create(heapAddr, size, heapName);
         g_HeapInfos[heapID].m_name = heapName;
-        g_HeapInfos[heapID].m_memoryPool = pool;
+        g_HeapInfos[heapID].m_memoryPool = static_cast<gfMemoryPool*>(pool);
         g_HeapInfos[heapID].m_size = size;
         g_HeapInfos[heapID].m_arena = arena;
         return pool;
