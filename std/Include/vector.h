@@ -19,13 +19,11 @@ class Vector {
     // current is the number of elements
     // currently present in the vector
     int current;
-    HeapType heap;
 
 public:
-    Vector(HeapType heap = Heaps::Syringe)
-        : heap(heap)
+    Vector()
     {
-        arr = new T[heap, 1];
+        arr = new T[1];
         capacity = 1;
         current = 0;
     }
@@ -38,7 +36,7 @@ public:
     void clear()
     {
         delete[] arr;
-        arr = new T[heap, 1];
+        arr = new T[1];
         current = 0;
     }
 
@@ -52,7 +50,7 @@ public:
         // capacity
         if (current == capacity)
         {
-            T* temp = new T[heap, 2 * capacity];
+            T* temp = new T[2 * capacity];
 
             // copying old array elements to new array
             for (int i = 0; i < capacity; i++)
@@ -125,6 +123,19 @@ public:
             return;
         }
         current = new_size;
+    }
+
+    void assign(size_t count, const T& value) {
+        clear(); // Clear existing
+        if (count > capacity) {
+            delete[] arr;
+            arr = new T[count];
+            capacity = count;
+        }
+        for (size_t i = 0; i < count; ++i) {
+            arr[i] = value;
+        }
+        current = count;
     }
 
     T* data() { return arr; }

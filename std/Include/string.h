@@ -29,7 +29,11 @@ public:
     inline int length()
     {
         return strlen(m_string);
-    }
+    };
+    inline int size()
+    {
+        return strlen(m_string);
+    };
     inline int stoi()
     {
         return atoi(m_string);
@@ -43,6 +47,40 @@ public:
         String scoreStr(ss);
         return scoreStr;
     };
+
+    inline String& operator+=(const String& rhs) {
+        unsigned int newLength = this->length() + ((String)rhs).length();
+        char* newData = new char[newLength + 1]; // +1 for null terminator
+
+        strcpy(newData, m_string);        // Copy current content
+        strcat(newData, (char*)rhs.m_string);         // Append new content
+
+        delete[] this->m_string;                     // Clean up old memory
+        this->m_string = newData;
+
+        return *this;                            // Return self for chaining
+    };
+
+    // Overload for C-style strings (const char*)
+    inline String& operator+=(const char* rhs) {
+        if (!rhs) return *this;
+        
+        unsigned int rhsLen = strlen(rhs);
+        unsigned int newLength = this->length() + rhsLen;
+        char* newData = new char[newLength + 1];
+
+        strcpy(newData, m_string);
+        strcat(newData, (char*)rhs);
+
+        delete[] this->m_string;
+        this->m_string = newData;
+
+        return *this;
+    };
+
+    inline const char* data() const {
+        return m_string;
+    }
 };
 
 int strcmp(const char* str1, const char* str2);

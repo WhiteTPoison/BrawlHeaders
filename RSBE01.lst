@@ -120,7 +120,8 @@ CC008000:WGPIPE
 801d77cc:ICInvalidateRange
 80028b20:_alarmCallback
 803f0f44:__dynamic_cast
-8002632c:free__FPv
+8002632c:sysFree__FPv
+8002632c:sysFree
 // IOS
 802123a8:IOS_Open
 80212d40:IOS_Ioctl
@@ -1824,6 +1825,7 @@ CC008000:WGPIPE
 800259a4:create__12gfMemoryPoolFPvUlPCc
 8002606c:getMaxFreeBlockSize__12gfMemoryPoolFv
 8002632c:gfPoolFree__12gfMemoryPoolFUi
+80025f2c:free__12gfMemoryPoolFPvPv
 800262fc:createMEMAllocator__12gfMemoryPoolFii
 800262fc:createMEMAllocator__12gfMemoryPoolFP12gfMemoryPoolii
 

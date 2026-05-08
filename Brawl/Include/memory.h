@@ -8,7 +8,7 @@
 
 #define MEMINIT( p) __memfill( p, 0, sizeof( *p ) )
 
-void* free(void* ptr);
+void* sysFree(void* ptr);
 
 
 
