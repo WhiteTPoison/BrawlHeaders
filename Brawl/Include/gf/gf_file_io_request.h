@@ -63,8 +63,10 @@ public:
 
 class gfFileIORequestQueue {
     char _[0x18];
-    utQueueInterface<gfFileIORequest*>* m_queue;
+    utQueue<gfFileIORequest*, 128>* m_queue;
 public:
     inline u32 getSize() { return m_queue->size(); };
+    inline u16 getCount() { return m_queue->getCount(); };
+    inline gfFileIORequest* getRequest(u32 index) { return m_queue->m_elements[index]; };
 };
 static_assert(sizeof(gfFileIORequestQueue) == 0x1c, "Wrong size for class!");

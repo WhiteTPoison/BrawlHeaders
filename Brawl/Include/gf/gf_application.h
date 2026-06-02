@@ -24,6 +24,7 @@ public:
     gfApplication();
     ~gfApplication();
     void init();
+    void frameStartInit();
     void mainLoop();
     void exit();
 };

@@ -12,7 +12,13 @@ class gfFileIOManager {
     gfFileIORequestQueue* m_queue2;
     char _0x10[0x8C];
 public:
-    inline u32 getNumActiveRequests() { return m_queue1->getSize(); };
+    inline u32 getNumActiveRequests() { return m_queue1->getCount(); };
+    inline u32 getNumQueuedRequests() { return m_queue2->getCount(); };
+    inline gfFileIORequestQueue* getQueue1() { return m_queue1; };
+    inline gfFileIORequestQueue* getQueue2() { return m_queue2; };
+    inline u32 getNumTotalRequests() { return getNumActiveRequests() + getNumQueuedRequests(); };
+    u8 update();
+    bool freeRequest(gfFileIORequest* request);
 };
 static_assert(sizeof(gfFileIOManager) == 0x9c, "Wrong size for class!");
 
